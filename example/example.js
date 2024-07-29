@@ -21,7 +21,7 @@ function generateQRCode() {
 
 function encodeData(data) {
     // Simplified alphanumeric encoding
-    const alphanumeric = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:';
+    const alphanumeric = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz $%*+-./:';
     let binary = '';
     for (let i = 0; i < data.length; i++) {
         const index = alphanumeric.indexOf(data[i]);
