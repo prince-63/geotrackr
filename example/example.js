@@ -90,19 +90,18 @@ function addTimingPatterns(matrix) {
 } */
 
 const QRCode = require("../lib");
-    
+
 QRCode.toFile(
-    "example.png",
-    "https://github.com",
-    {
-      color: {
-        dark: "#ffffff", // Blue dots
-        light: "#0000", // Transparent background
-      },
+  "example.png",
+  "https://github.com",
+  {
+    color: {
+      dark: "#ffffff", // Blue dots
+      light: "#0000", // Transparent background
     },
-    function (err) {
-      if (err) throw err;
-      console.log("done");
-    }
-  );
-  
+  },
+  function (err) {
+    if (err) throw err;
+    console.log("done");
+  }
+);
