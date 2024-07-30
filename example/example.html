@@ -5,8 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
     <style>
+        body {
+            background-color: #f7fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 16px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        input {
+            border: 1px solid #d1d5db;
+            padding: 8px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+        }
+        button {
+            background-color: #3b82f6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
         canvas {
             border: 1px solid black;
+            margin-top: 16px;
         }
     </style>
 </head>
@@ -17,5 +50,7 @@
     <br><br>
     <canvas id="qrcode" width="200" height="200"></canvas>
     <script src="./example.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script src="./example2.js"></script>
 </body>
 </html>

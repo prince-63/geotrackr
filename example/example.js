@@ -1,22 +1,11 @@
-/* function generateQRCode() {
+function generateQRCode() {
     const data = document.getElementById('data').value;
     const canvas = document.getElementById('qrcode');
-    const ctx = canvas.getContext('2d');
-    const size = 200; // Size of the QR code
-    const qrData = encodeData(data);
-    const qrMatrix = generateMatrix(qrData);
 
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw the QR code
-    const cellSize = size / qrMatrix.length;
-    for (let row = 0; row < qrMatrix.length; row++) {
-        for (let col = 0; col < qrMatrix[row].length; col++) {
-            ctx.fillStyle = qrMatrix[row][col] ? 'black' : 'white';
-            ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-        }
-    }
+    QRCode.toCanvas(canvas, data, function (error) {
+        if (error) console.error(error);
+        console.log('QR code generated!');
+    });
 }
 
 function encodeData(data) {
@@ -39,18 +28,23 @@ function generateMatrix(data) {
     const matrix = Array.from({ length: size }, () => Array(size).fill(0));
 
     // Add finder patterns
-    addFinderPattern(matrix, 0, 0);
-    addFinderPattern(matrix, size - 7, 0);
-    addFinderPattern(matrix, 0, size - 7);
+    addPositionDetectionPattern(matrix, 0, 0);
+    addPositionDetectionPattern(matrix, size - 7, 0);
+    addPositionDetectionPattern(matrix, 0, size - 7);
 
     // Add timing patterns
     addTimingPatterns(matrix);
 
     // Add data (simplified, no error correction)
+    addData(matrix, data);
+    return matrix;
+}
+
+function addData(matrix, data) {
     let dataIndex = 0;
-    for (let row = size - 1; row >= 0; row--) {
-        for (let col = size - 1; col >= 0; col--) {
-            if ((row < 9 && col < 9) || (row < 9 && col >= size - 8) || (row >= size - 8 && col < 9)) {
+    for (let row = matrix.length - 1; row >= 0; row--) {
+        for (let col = matrix.length - 1; col >= 0; col--) {
+            if ((row < 9 && col < 9) || (row < 9 && col >= matrix.length - 8) || (row >= matrix.length - 8 && col < 9)) {
                 // Skip finder patterns
                 continue;
             }
@@ -60,11 +54,9 @@ function generateMatrix(data) {
             }
         }
     }
-
-    return matrix;
 }
 
-function addFinderPattern(matrix, row, col) {
+function addPositionDetectionPattern(matrix, row, col) {
     const pattern = [
         [1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 1],
@@ -87,22 +79,4 @@ function addTimingPatterns(matrix) {
         matrix[6][i] = i % 2 === 0 ? 1 : 0;
         matrix[i][6] = i % 2 === 0 ? 1 : 0;
     }
-} */
-
-const QRCode = require("../lib");
-    
-QRCode.toFile(
-    "example.png",
-    "https://github.com",
-    {
-      color: {
-        dark: "#ffffff", // Blue dots
-        light: "#0000", // Transparent background
-      },
-    },
-    function (err) {
-      if (err) throw err;
-      console.log("done");
-    }
-  );
-  
+}
