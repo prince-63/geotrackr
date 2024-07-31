@@ -1,4 +1,4 @@
-function generateQRCode() {
+/* function generateQRCode() {
     const data = document.getElementById('data').value;
     const canvas = document.getElementById('qrcode');
 
@@ -79,4 +79,21 @@ function addTimingPatterns(matrix) {
         matrix[6][i] = i % 2 === 0 ? 1 : 0;
         matrix[i][6] = i % 2 === 0 ? 1 : 0;
     }
-}
+} */
+
+const QRCode = require("../lib");
+
+QRCode.toFile(
+  "example.png",
+  "https://github.com",
+  {
+    color: {
+      dark: "#ffffff", // Blue dots
+      light: "#0000", // Transparent background
+    },
+  },
+  function (err) {
+    if (err) throw err;
+    console.log("done");
+  }
+);
