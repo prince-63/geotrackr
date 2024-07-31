@@ -1,12 +1,5 @@
-/* function generateQRCode() {
-    const data = document.getElementById('data').value;
-    const canvas = document.getElementById('qrcode');
 
-    QRCode.toCanvas(canvas, data, function (error) {
-        if (error) console.error(error);
-        console.log('QR code generated!');
-    });
-}
+/*
 
 function encodeData(data) {
     // Simplified alphanumeric encoding
