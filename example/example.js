@@ -1,6 +1,4 @@
-
 /*
-
 function encodeData(data) {
     // Simplified alphanumeric encoding
     const alphanumeric = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz $%*+-./:';
