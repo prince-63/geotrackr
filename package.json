@@ -11,8 +11,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "canvas": "^2.11.2",
     "dijkstrajs": "^1.0.1",
     "pngjs": "^5.0.0",
+    "qrcode": "^1.5.3",
     "yargs": "^15.3.1"
   }
 }
