@@ -3,6 +3,3 @@ node_modules
 coverage
 .nyc_output
 build
-libs
-core
-version-1
