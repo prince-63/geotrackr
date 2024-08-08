@@ -1,19 +1,26 @@
 # USE FOR `.env` file
 
 ### PORT
+```.env
 PORT='8000'
+```
 
 ### Database Configuration
+```.env
 MONGO_URI='mongodb+srv://admin:admin@cluster0.wunnp8w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-
+```
 ### JWT Configuration
+```.env
 JWT_SECRET='quantum-qrcode'
 JWT_EXPIRES_IN='90d'
+```
 
 ### Email Configuration
+```.env
 EMAIL_USERNAME='prince08833@gmail.com'
 EMAIL_PASSWORD='nxrr sash okmn opcl'
 EMAIL_FROM='prince08833@gmail.com'
+```
 
 ## Installation
 1. Clone the repository.
