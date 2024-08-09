@@ -1,163 +1,161 @@
 {
-	"info": {
-		"_postman_id": "8cee8512-aaaa-4abc-8d75-d110638c770b",
-		"name": "quantum-qrcode",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "32674342"
-	},
-	"item": [
-		{
-			"name": "signup",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"12345\",\r\n  \"email\": \"test@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "/api/v1/auth/signup"
-			},
-			"response": []
-		},
-		{
-			"name": "login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"54321\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "/api/v1/auth/login"
-			},
-			"response": []
-		},
-		{
-			"name": "getUser",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjRjNDE1YWYwMjY4MjkwMDliODdhZiIsImlhdCI6MTcyMzEyMjcxNCwiZXhwIjoxNzMwODk4NzE0fQ.HfM5Ob_fZGI0xEKyVy3EM5inT3mKv1ZEOO0EM6cFkVs"
-					}
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"1234\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "/api/v1/auth/me"
-			},
-			"response": []
-		},
-		{
-			"name": "verifyUser",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjRkN2MzMjVlMTUyN2E0OGNhNzExNyIsImlhdCI6MTcyMzEyNzc1MiwiZXhwIjoxNzMwOTAzNzUyfQ.JT6TETam_b8sKTPdmN-Vk7kF7G1ShLu9OOmYT6qQp9A"
-					}
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"code\": \"749965\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "/api/v1/auth/verify-email"
-			},
-			"response": []
-		},
-		{
-			"name": "forgotPassword",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjRkN2MzMjVlMTUyN2E0OGNhNzExNyIsImlhdCI6MTcyMzEyNzc1MiwiZXhwIjoxNzMwOTAzNzUyfQ.JT6TETam_b8sKTPdmN-Vk7kF7G1ShLu9OOmYT6qQp9A"
-					}
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"test@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "/api/v1/auth/forgotPassword"
-			},
-			"response": []
-		},
-		{
-			"name": "reset-password",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"54321\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "/api/v1/auth/resetPassword/b8683a134153a8b4ad0971a81cef78b8bb8cc0eb956c47390376c7e9f85e9fd4"
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					"pm.request.url.protocol=\"http\";\r",
-					"pm.request.url.host=\"localhost\";\r",
-					"pm.request.url.port=\"8000\";"
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	]
+  "info": {
+    "_postman_id": "8cee8512-aaaa-4abc-8d75-d110638c770b",
+    "name": "quantum-qrcode",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "32674342"
+  },
+  "item": [
+    {
+      "name": "signup",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"12345\",\r\n  \"email\": \"test@gmail.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "/api/v1/auth/signup"
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"54321\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "/api/v1/auth/login"
+      },
+      "response": []
+    },
+    {
+      "name": "getUser",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjRjNDE1YWYwMjY4MjkwMDliODdhZiIsImlhdCI6MTcyMzEyMjcxNCwiZXhwIjoxNzMwODk4NzE0fQ.HfM5Ob_fZGI0xEKyVy3EM5inT3mKv1ZEOO0EM6cFkVs"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "/api/v1/auth/me"
+      },
+      "response": []
+    },
+    {
+      "name": "verifyUser",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjRkN2MzMjVlMTUyN2E0OGNhNzExNyIsImlhdCI6MTcyMzEyNzc1MiwiZXhwIjoxNzMwOTAzNzUyfQ.JT6TETam_b8sKTPdmN-Vk7kF7G1ShLu9OOmYT6qQp9A"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"code\": \"749965\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "/api/v1/auth/verify-email"
+      },
+      "response": []
+    },
+    {
+      "name": "forgotPassword",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjRkN2MzMjVlMTUyN2E0OGNhNzExNyIsImlhdCI6MTcyMzEyNzc1MiwiZXhwIjoxNzMwOTAzNzUyfQ.JT6TETam_b8sKTPdmN-Vk7kF7G1ShLu9OOmYT6qQp9A"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"test@gmail.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "/api/v1/auth/forgotPassword"
+      },
+      "response": []
+    },
+    {
+      "name": "reset-password",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"password\": \"54321\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "/api/v1/auth/resetPassword/b8683a134153a8b4ad0971a81cef78b8bb8cc0eb956c47390376c7e9f85e9fd4"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          "pm.request.url.protocol=\"http\";\r",
+          "pm.request.url.host=\"localhost\";\r",
+          "pm.request.url.port=\"8000\";"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ]
 }

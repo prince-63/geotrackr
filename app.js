@@ -1,8 +1,8 @@
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const morgan = require('morgan');
-const authRoutes = require('./routes/authRoutes');
+import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
+import morgan from 'morgan';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 
@@ -17,7 +17,10 @@ app.use('/api/v1/auth', authRoutes);
 
 // Error handling
 app.all('*', (req, res, next) => {
-  res.status(404).json({ status: 'fail', message: `Can't find ${req.originalUrl} on this server!` });
+  res.status(404).json({
+    status: 'fail',
+    message: `Can't find ${req.originalUrl} on this server!`,
+  });
 });
 
-module.exports = app;
+export { app as default };

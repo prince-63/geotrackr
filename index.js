@@ -1,11 +1,7 @@
-const dotenv = require('dotenv');
-const app = require('./app');
-const connectWithRetry = require('./config/db');
+import dotenv from 'dotenv';
+import app from './app.js';
 
 dotenv.config({ path: './.env' });
-
-// Database connection initiated
-connectWithRetry();
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
