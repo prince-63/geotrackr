@@ -3,10 +3,10 @@ import { promisify } from 'util';
 import { createClient } from 'redis';
 
 const client = createClient({
-  password: 'dvAZ1h1Etoq5FFaIRdKrvshcwy1IoT7R',
+  password: process.env.REDIS_PASSWORD,
   socket: {
-    host: 'redis-11122.c301.ap-south-1-1.ec2.redns.redis-cloud.com',
-    port: 11122,
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
   },
 });
 
