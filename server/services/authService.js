@@ -26,6 +26,16 @@ export const signup = async (req, res) => {
 
     const { name, password, email } = req.body;
 
+    // Check if user with the email already exists
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+
+    if (existingUser) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'User with that email already exists',
+      });
+    }
+    
     // Hash the user's password
     const hashedPassword = await hashPassword(password);
     // Generate a random email verification code
