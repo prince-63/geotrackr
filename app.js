@@ -2,8 +2,9 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
-import authRoutes from './routes/authRoutes.js';
 import session from 'express-session';
+import authRoutes from './routes/authRoutes.js';
+import idCardRoutes from './routes/idCardRoutes.js';
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(
 
 // Routes
 app.use('/api/v1/auth', authRoutes);
+app.use("/api/v1/id-card", idCardRoutes);
 
 // Error handling
 app.all('*', (req, res, next) => {

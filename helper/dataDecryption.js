@@ -7,7 +7,7 @@ const key = crypto
   .digest('base64')
   .substr(0, 32);
 
-const aesDecrypt = (encrypted) => {
+const dataDecryption = (encrypted) => {
   const [ivHex, encryptedData] = encrypted.split(':');
   const iv = Buffer.from(ivHex, 'hex');
   const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
@@ -16,4 +16,4 @@ const aesDecrypt = (encrypted) => {
   return decrypted;
 };
 
-export default aesDecrypt;
+export default dataDecryption;
