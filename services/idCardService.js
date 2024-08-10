@@ -15,7 +15,9 @@ export const generateIdCard = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({ status: 'fail', message: 'User not found' });
+      return res
+        .status(404)
+        .json({ status: 'fail', message: 'User not found' });
     }
 
     // Encrypt user ID
@@ -42,7 +44,9 @@ export const generateIdCard = async (req, res) => {
     //context.fillText(`ID: ${user.id}`, 15, 50);
 
     // Generate QR code
-    const qrCodeData = await QRCode.toDataURL(encryptedId, { scale: scaleFactor });
+    const qrCodeData = await QRCode.toDataURL(encryptedId, {
+      scale: scaleFactor,
+    });
 
     // Draw QR code on the canvas
     const qrImage = new Image();
@@ -55,7 +59,7 @@ export const generateIdCard = async (req, res) => {
       // write buffer to a file
       const doc = new PDFDocument({ size: [width, height] });
       let pdfBuffer = [];
-      doc.on('data', chunk => pdfBuffer.push(chunk));
+      doc.on('data', (chunk) => pdfBuffer.push(chunk));
       doc.on('end', () => {
         const pdfData = Buffer.concat(pdfBuffer);
         res.setHeader('Content-Type', 'application/pdf');
@@ -66,7 +70,9 @@ export const generateIdCard = async (req, res) => {
       doc.end();
     };
     qrImage.onerror = (error) => {
-      res.status(500).json({ status: 'fail', message: 'Failed to load QR code image' });
+      res
+        .status(500)
+        .json({ status: 'fail', message: 'Failed to load QR code image' });
     };
     qrImage.src = qrCodeData;
   } catch (error) {
@@ -82,7 +88,7 @@ export const encryptedIdCardKey = async (req, res) => {
   } catch (error) {
     res.status(400).json({ status: 'fail', message: error.message });
   }
-}
+};
 
 export const decryptedIdCardKey = async (req, res) => {
   try {
@@ -92,4 +98,4 @@ export const decryptedIdCardKey = async (req, res) => {
   } catch (error) {
     res.status(400).json({ status: 'fail', message: error.message });
   }
-}
+};

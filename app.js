@@ -24,7 +24,7 @@ app.use(
 
 // Routes
 app.use('/api/v1/auth', authRoutes);
-app.use("/api/v1/id-card", idCardRoutes);
+app.use('/api/v1/id-card', idCardRoutes);
 
 // Error handling
 app.all('*', (req, res, next) => {
