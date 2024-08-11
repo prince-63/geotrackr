@@ -10,7 +10,12 @@ const app = express();
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  // any origin can access this API
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
+  credentials: true,
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(

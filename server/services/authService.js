@@ -61,12 +61,13 @@ export const signup = async (req, res) => {
     // Sign a JWT token for the new user
     const token = signToken(newUser.id);
     res.status(201).json({
-      status: 'success',
+      status: 'created',
       token,
       data: {
         email: newUser.name,
         email: newUser.email,
       },
+      message: 'User created successfully. Check your email for verification code',
     });
   } catch (error) {
     res.status(400).json({ status: 'fail', message: error.message });
@@ -100,7 +101,7 @@ export const login = async (req, res) => {
 
     // Sign a JWT token for the authenticated user
     const token = signToken(user.id);
-    res.status(200).json({ status: 'success', token });
+    res.status(200).json({ status: 'success', token, message: 'Logged in' });
   } catch (error) {
     res.status(400).json({ status: 'fail', message: error.message });
   } finally {
