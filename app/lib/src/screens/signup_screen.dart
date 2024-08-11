@@ -1,7 +1,9 @@
-import 'package:app/config/app_config.dart';
+import 'package:app/api/api_service.dart';
+import 'package:app/src/utils/custom_color.dart';
+import 'package:app/src/utils/custom_media_query.dart';
+import 'package:app/src/widgets/custom_button.dart';
+import 'package:app/src/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';// Import AppConfig
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -22,30 +24,14 @@ class _SignupScreenState extends State<SignupScreen> {
       final email = _emailController.text;
       final password = _passwordController.text;
 
-      final url = Uri.parse(AppConfig.authSignup);
-      final response = await http.post(
-        url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'name': name,
-          'email': email,
-          'password': password,
-        }),
-      );
-
-      final responseData = jsonDecode(response.body);
-      if (response.statusCode == 201 && responseData['status'] == 'success') {
-        print('Signup successful: $responseData');
-
-        // Navigate to the home screen or show a success message
-        Navigator.pushNamed(context, '/home');
-      } else {
-        print('Failed to signup: ${response.body}');
-        // Show an error message to the user
+      try {
+        final response = await ApiService.signup(name, email, password);
+        if (response['status'] == 'created') {
+          Navigator.pushNamed(context, '/home');
+        }
+      } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Signup failed: ${responseData['message'] ?? 'Unknown error'}')),
+          SnackBar(content: Text('Signup failed: $e')),
         );
       }
     }
@@ -54,54 +40,74 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Signup'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
+            children: [
+              const SizedBox(height: 10.0),
+              Row(
+                children: [
+                  BackButton(color: Colors.black.withOpacity(0.7)),
+                ],
               ),
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                height: CustomMediaQuery.screenHeight(context) * 0.25,
+                width: CustomMediaQuery.screenWidth(context),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sign up',
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.9),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        'Sign up with your name, email and password that you use.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.85),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _signup,
-                child: const Text('Signup'),
+              Container(
+                padding: const EdgeInsets.all(22.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
+                        controller: _nameController,
+                        hintText: 'Name',
+                      ),
+                      CustomTextFormField(
+                        controller: _emailController,
+                        hintText: 'Email',
+                      ),
+                      CustomTextFormField(
+                        controller: _passwordController,
+                        hintText: 'Password',
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 20.0),
+                      CustomButton(
+                        onPressed: _signup,
+                        text: 'Sign up',
+                        color: CustomColor.primaryValue,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

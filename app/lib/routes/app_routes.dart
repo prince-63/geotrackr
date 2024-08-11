@@ -4,7 +4,7 @@ import '../src/screens/login_screen.dart';
 import '../src/screens/signup_screen.dart';
 
 class AppRoutes {
-  static const String home = '/';
+  static const String home = '/home';
   static const String scan = '/scan';
   static const String login = '/login';
   static const String signup = '/signup';
