@@ -4,4 +4,6 @@ class ApiConfig {
   static const String authSignup = '$baseUrl/auth/signup';
   static const String authLogout = '$baseUrl/auth/logout';
   static const String authForgotPassword = '$baseUrl/auth/forgot-password';
+
+  static const String setAttendence = '$baseUrl/attendance/set-attendance';
 }

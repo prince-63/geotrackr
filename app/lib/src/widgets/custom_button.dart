@@ -19,24 +19,48 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        padding: EdgeInsets.all(padding),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+      onTap: _handleOnPressed,
+      child: _buildButtonContainer(),
+    );
+  }
+
+  void _handleOnPressed() {
+    try {
+      onPressed();
+    } catch (e) {
+      _logError('Button press failed', e);
+    }
+  }
+
+  Widget _buildButtonContainer() {
+    return Container(
+      padding: EdgeInsets.all(padding),
+      decoration: _buildBoxDecoration(),
+      child: _buildButtonText(),
+    );
+  }
+
+  BoxDecoration _buildBoxDecoration() {
+    return BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(borderRadius),
+    );
+  }
+
+  Widget _buildButtonText() {
+    return Center(
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16.0,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );
+  }
+
+  void _logError(String message, Object error) {
+    print('$message: $error');
   }
 }

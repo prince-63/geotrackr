@@ -21,39 +21,55 @@ class CustomTextFormField extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16.0),
       child: Column(
         children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: const EdgeInsets.only(left: 4.0),
-            child: Text(
-              hintText,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.75),
-                fontSize: 15.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
+          _buildHintText(),
           const SizedBox(height: 6.0),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(4.0),
-              border: Border.all(
-                color: CustomColor.borderColor.withOpacity(0.9),
-              ),
-            ),
-            child: TextFormField(
-              controller: controller,
-              obscureText: obscureText,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-              ),
-            ),
-          ),
+          _buildTextFieldContainer(context),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHintText() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      margin: const EdgeInsets.only(left: 4.0),
+      child: Text(
+        hintText,
+        textAlign: TextAlign.left,
+        style: TextStyle(
+          color: Colors.black.withOpacity(0.75),
+          fontSize: 15.0,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldContainer(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      alignment: Alignment.center,
+      decoration: _buildBoxDecoration(),
+      child: _buildTextFormField(),
+    );
+  }
+
+  BoxDecoration _buildBoxDecoration() {
+    return BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(4.0),
+      border: Border.all(
+        color: CustomColor.borderColor.withOpacity(0.9),
+      ),
+    );
+  }
+
+  Widget _buildTextFormField() {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      decoration: const InputDecoration(
+        border: InputBorder.none,
       ),
     );
   }
