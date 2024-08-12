@@ -5,17 +5,23 @@ import morgan from 'morgan';
 import session from 'express-session';
 import authRoutes from './routes/authRoutes.js';
 import idCardRoutes from './routes/idCardRoutes.js';
+import attendanceRoutes from './routes/attendanceRoutes.js';
+import { EventEmitter } from 'events';
+
+EventEmitter.defaultMaxListeners = 20;
 
 const app = express();
 
 // Middleware
 app.use(helmet());
-app.use(cors({
-  // any origin can access this API
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
-  credentials: true,
-}));
+app.use(
+  cors({
+    // any origin can access this API
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
+    credentials: true,
+  })
+);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(
@@ -30,6 +36,7 @@ app.use(
 // Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/id-card', idCardRoutes);
+app.use('/api/v1/attendance', attendanceRoutes);
 
 // Error handling
 app.all('*', (req, res, next) => {

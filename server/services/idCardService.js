@@ -70,9 +70,7 @@ export const generateIdCard = async (req, res) => {
       doc.end();
     };
     qrImage.onerror = (error) => {
-      res
-        .status(500)
-        .json({ status: 'fail', message: 'Failed to load QR code image' });
+      res.status(500).json({ status: 'fail', message: error.message });
     };
     qrImage.src = qrCodeData;
   } catch (error) {

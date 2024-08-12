@@ -16,14 +16,14 @@ model User {
   emailVerificationCode String?
   passwordResetToken    String?
   passwordResetExpires  DateTime?
-  attendances           Attendance[]
+  attendances           Attendance[] @relation("UserAttendances")
 }
 
 model Attendance {
   id        String           @id @default(auto()) @map("_id") @db.ObjectId
-  user      User             @relation(fields: [userId], references: [id])
+  user      User             @relation(fields: [userId], references: [id], name: "UserAttendances")
   userId    String           @db.ObjectId
-  date      DateTime
+  date      DateTime         @default(now())
   status    AttendanceStatus
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt

@@ -35,7 +35,7 @@ export const signup = async (req, res) => {
         message: 'User with that email already exists',
       });
     }
-    
+
     // Hash the user's password
     const hashedPassword = await hashPassword(password);
     // Generate a random email verification code
@@ -67,7 +67,8 @@ export const signup = async (req, res) => {
         email: newUser.name,
         email: newUser.email,
       },
-      message: 'User created successfully. Check your email for verification code',
+      message:
+        'User created successfully. Check your email for verification code',
     });
   } catch (error) {
     res.status(400).json({ status: 'fail', message: error.message });
