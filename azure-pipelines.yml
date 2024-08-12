@@ -1,0 +1,57 @@
+trigger:
+- v1
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscription: 'quantum-qrcode'
+  appName: 'quantum-qrcode'
+  resourceGroup: 'appsvc_linux_centralus_premium'
+  keyVaultName: 'quantum-qrcode'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: '$(azureSubscription)'
+    KeyVaultName: '$(keyVaultName)'
+    SecretsFilter: '*'
+  displayName: 'Download secrets from Azure Key Vault'
+
+- script: |
+    cd server
+    echo "DB_CONNECTION_STRING=$(DB_CONNECTION_STRING)" >> .env
+    echo "API_KEY=$(API_KEY)" >> .env
+    npm install
+    npm run build
+  displayName: 'Set environment variables and build'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/server'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+  displayName: 'Archive build output'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'Publish build artifacts'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: '$(azureSubscription)'
+    appType: 'webApp'
+    appName: '$(appName)'
+    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    resourceGroupName: '$(resourceGroup)'
+  displayName: 'Deploy to Azure Web App'
