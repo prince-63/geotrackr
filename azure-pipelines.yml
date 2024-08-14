@@ -2,7 +2,6 @@ trigger:
 - main
 
 variables:
-
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: '03a7fe9e-0691-4b5f-9c69-cb5653bf4bc9'
 
@@ -46,8 +45,11 @@ stages:
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
 
-    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      artifact: drop
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Artifact'
+      inputs:
+        artifactName: 'drop'
+        path: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
 
 - stage: Deploy
   displayName: Deploy stage
