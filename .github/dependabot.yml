@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "weekly"
 
-  - package-ecosystem: "dart"
+  - package-ecosystem: "pub"
     directory: "/app/"
     schedule:
       interval: "weekly"
