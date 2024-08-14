@@ -8,7 +8,8 @@
     "test": "echo \"No tests specified\" && exit 0",
     "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md}\"",
     "dev": "nodemon ./server.js",
-    "start": "node ./server.js"
+    "start": "node ./server.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
