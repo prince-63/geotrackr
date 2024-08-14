@@ -1,6 +1,8 @@
+import 'package:app/src/screens/biometric.dart';
 import 'package:app/src/screens/home_screen.dart';
 import 'package:app/src/screens/login_screen.dart';
 import 'package:app/src/screens/signup_screen.dart';
+import 'package:app/src/screens/verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/';
+  String initialRoute = '/biometric';
 
   @override
   void initState() {
@@ -87,6 +89,8 @@ class _MyAppState extends State<MyApp> {
       '/': (context) => const LoginScreen(),
       '/home': (context) => const HomeScreen(),
       '/signup': (context) => const SignupScreen(),
+      '/verification': (context) => const VerificationScreen(),
+      '/biometric': (context) => BiometricAuth(),
     };
   }
 }

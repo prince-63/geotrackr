@@ -68,7 +68,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         border: InputBorder.none,
       ),
     );
