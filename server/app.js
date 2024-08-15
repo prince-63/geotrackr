@@ -39,8 +39,8 @@ app.use('/api/v1/id-card', idCardRoutes);
 app.use('/api/v1/attendance', attendanceRoutes);
 
 // testing
-app.get("/", (req, res) => {
-    res.send("Hello World")
+app.get('/', (req, res) => {
+  res.send('Hello World');
 });
 
 // Error handling

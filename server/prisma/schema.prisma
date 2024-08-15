@@ -9,13 +9,21 @@ generator client {
 
 model User {
   id                    String       @id @default(auto()) @map("_id") @db.ObjectId
-  password              String
+  username              String       @unique
   email                 String       @unique
-  name                  String
+  password              String
+  name                  String?
+  contactNumber         String?
+  dateOfBirth           DateTime?
+  bloodGroup            String?
+  address               String?
+  companyName           String?
+  companyAddress        String?
+  companyContactEmail   String?
+  companyContactNumber  String?
   emailVerified         Boolean?     @default(false)
   emailVerificationCode String?
-  passwordResetToken    String?
-  passwordResetExpires  DateTime?
+  passwordResetVerificationCode String?
   attendances           Attendance[] @relation("UserAttendances")
 }
 
