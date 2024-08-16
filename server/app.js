@@ -38,7 +38,7 @@ app.use(
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/id-card', idCardRoutes);
 app.use('/api/v1/attendance', attendanceRoutes);
-app.use('/api/v1/uploadProfilePicture', uploadProfilePictureRoute);
+app.use('/api/v1/upload', uploadProfilePictureRoute);
 
 // testing
 app.get('/', (req, res) => {
