@@ -19,12 +19,12 @@ class AuthApi {
   }
 
   static Future<Map<String, dynamic>> signup(
-      String name, String email, String password) async {
+      String username, String email, String password) async {
     final url = Uri.parse(ApiConfig.authSignup);
 
     try {
       final response = await _postRequest(
-          url, {'name': name, 'email': email, 'password': password});
+          url, {'username': username, 'email': email, 'password': password});
       return _handleSignupResponse(response);
     } catch (e) {
       _logError('Signup Failed', e);
@@ -46,7 +46,8 @@ class AuthApi {
     if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);
       final token = responseBody['token'];
-      await _storeToken(token);
+      final email = responseBody['email'];
+      await _storeToken(token, email);
       return responseBody;
     } else {
       throw Exception(
@@ -56,10 +57,11 @@ class AuthApi {
 
   static Future<Map<String, dynamic>> _handleSignupResponse(
       http.Response response) async {
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);
       final token = responseBody['token'];
-      await _storeToken(token);
+      final email = responseBody['email'];
+      await _storeToken(token, email);
       return responseBody;
     } else {
       throw Exception(
@@ -67,9 +69,10 @@ class AuthApi {
     }
   }
 
-  static Future<void> _storeToken(String token) async {
+  static Future<void> _storeToken(String token, String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('jwt_token', token);
+    await prefs.setString('user_email', email);
   }
 
   static void _logError(String message, Object error) {

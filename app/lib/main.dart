@@ -1,10 +1,12 @@
 import 'package:app/src/screens/biometric.dart';
-import 'package:app/src/screens/home_screen.dart';
-import 'package:app/src/screens/login_screen.dart';
-import 'package:app/src/screens/signup_screen.dart';
+import 'package:app/src/screens/forgot_password_screen.dart';
+import 'package:app/src/screens/home_screen/home_screen.dart';
+import 'package:app/src/screens/login_screen/login_screen.dart';
+import 'package:app/src/screens/singup_screen/signup_screen.dart';
 import 'package:app/src/screens/verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app/src/screens/welcome_screen/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/biometric';
+  String initialRoute = '/';
 
   @override
   void initState() {
@@ -86,11 +88,13 @@ class _MyAppState extends State<MyApp> {
 
   Map<String, WidgetBuilder> _buildRoutes() {
     return {
-      '/': (context) => const LoginScreen(),
+      '/': (context) => WelcomeScreen(),
+      '/login': (context) => const LoginScreen(),
       '/home': (context) => const HomeScreen(),
       '/signup': (context) => const SignupScreen(),
-      '/verification': (context) => const VerificationScreen(),
+      '/user-verification': (context) => const VerificationScreen(),
       '/biometric': (context) => BiometricAuth(),
+      '/forgot-password': (context) => ForgotPasswordScreen(),
     };
   }
 }

@@ -6,12 +6,14 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
+  final String errorMessage;
 
   const CustomTextFormField({
     super.key,
     required this.controller,
     required this.hintText,
     this.obscureText = false,
+    this.errorMessage = '',
   });
 
   @override
@@ -47,20 +49,8 @@ class CustomTextFormField extends StatelessWidget {
 
   Widget _buildTextFieldContainer(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       alignment: Alignment.center,
-      decoration: _buildBoxDecoration(),
       child: _buildTextFormField(),
-    );
-  }
-
-  BoxDecoration _buildBoxDecoration() {
-    return BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(4.0),
-      border: Border.all(
-        color: CustomColor.borderColor.withOpacity(0.9),
-      ),
     );
   }
 
@@ -69,8 +59,26 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
-        border: InputBorder.none,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4.0),
+          borderSide: BorderSide(
+            color: CustomColor.borderColor.withOpacity(0.9),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4.0),
+          borderSide: BorderSide(
+            color: CustomColor.primaryValue.withOpacity(0.5),
+          ),
+        ),
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return errorMessage;
+        }
+        return null;
+      },
     );
   }
 }

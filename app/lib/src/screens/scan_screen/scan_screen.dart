@@ -3,14 +3,14 @@ import 'package:app/src/utils/custom_media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ScanScreen extends StatefulWidget {
+  const ScanScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ScanScreenState createState() => _ScanScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ScanScreenState extends State<ScanScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   String? qrText;

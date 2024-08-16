@@ -103,7 +103,7 @@ export const signup = async (req, res) => {
     200,
     'success',
     'User created. Check your email for verification code',
-    { token: token }
+    { token: token, email: user.email }
   );
 };
 
@@ -161,7 +161,7 @@ export const login = async (req, res) => {
       expires: new Date(Date.now() + cookieExpiresInMs),
       httpOnly: true,
     });
-    return responseHandler(res, 200, 'success', 'Logged in', { token: token });
+    return responseHandler(res, 200, 'success', 'Logged in', { token: token, email: user.email });
   } else {
     return errorResponseHandler(res, 400, 'fail', 'Incorrect password');
   }
