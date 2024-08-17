@@ -1,6 +1,6 @@
-import 'package:app/src/utils/custom_media_query.dart';
 import 'package:flutter/material.dart';
-import 'package:app/src/utils/custom_color.dart';
+import 'package:idcard/src/utils/custom_color.dart';
+import 'package:idcard/src/utils/custom_media_query.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
