@@ -28,7 +28,7 @@ class _ForgotPasswordScreenState
             children: [
               const SizedBox(height: 10.0),
               BuildBackButton(),
-              const SizedBox(height: 15.0),
+              const SizedBox(height: 60.0),
               ForgotPasswordVerificationImage(),
               ForgotPasswordHeader(),
               const SizedBox(height: 20.0),

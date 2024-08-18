@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:idcard/src/screens/forgot_password/initial_screen/widgets/forgot_password_header.dart';
+import 'package:idcard/src/screens/forgot_password/verification_screen/widgets/forgot_password_verification_header.dart';
 import 'package:idcard/src/screens/forgot_password/verification_screen/widgets/forgot_password_verification_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:idcard/src/widgets/back_button.dart'; // Assuming you have a custom back button widget
@@ -37,9 +39,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordVerificationScreen>
             children: [
               const SizedBox(height: 10.0),
               BuildBackButton(),
-              const SizedBox(height: 7.0),
+              const SizedBox(height: 60.0),
               ForgotPasswordVerificationImage(),
-              // ForgotPasswordHeader(userEmail: userEmail),
+              ForgotPasswordVerificationHeader(userEmail: userEmail),
               ForgotPasswordForm(
                 controller: controller,
                 email: userEmail,

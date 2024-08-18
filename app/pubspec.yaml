@@ -67,6 +67,7 @@ flutter:
     - assets/images/welcome.png
     - assets/images/verification.png
     - assets/images/forgotpassword.png
+    - assets/images/set_new_password.png
 
     # icons
     - assets/icons/cloud.svg

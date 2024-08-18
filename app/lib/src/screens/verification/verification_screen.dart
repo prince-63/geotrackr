@@ -38,7 +38,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             children: [
               const SizedBox(height: 10.0),
               BuildBackButton(),
-              const SizedBox(height: 7.0),
+              const SizedBox(height: 60.0),
               VerificationImage(),
               VerificationHeader(userEmail: userEmail),
               VerificationForm(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ForgotPasswordVerificationImage extends StatelessWidget {
+class SetNewPasswordImage extends StatelessWidget {
+  const SetNewPasswordImage({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -8,7 +12,7 @@ class ForgotPasswordVerificationImage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/images/verification.png',
+            'assets/images/set_new_password.png',
             width: 225,
             height: 225,
           )

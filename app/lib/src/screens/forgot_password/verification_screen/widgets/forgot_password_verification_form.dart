@@ -1,3 +1,4 @@
+import 'package:idcard/src/screens/forgot_password/verification_screen/widgets/forgot_password_resend_code.dart';
 import 'package:idcard/src/screens/verification/widgets/verification_code_input.dart';
 import 'package:flutter/material.dart';
 import 'package:idcard/src/services/forgot_password/forgot_password_service.dart';
@@ -19,6 +20,11 @@ class ForgotPasswordForm extends StatefulWidget {
 }
 
 class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
+  Future<void> onResend() async {
+    ForgotPasswordService.resendForgotPasswordVerificationEmail(
+        context, widget.email);
+  }
+
   Future<void> _emailVerification() async {
     if (widget.formKey.currentState!.validate()) {
       String code = widget.controller.text;
@@ -42,10 +48,12 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                   hintText: "Enter 6 digit code",
                   errorMessage: "Please enter currect 6 digit code",
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 13),
+                ForgotPasswordResendCode(onResend: onResend),
+                const SizedBox(height: 15),
                 CustomButton(
                   onPressed: _emailVerification,
-                  text: 'Reset Password',
+                  text: 'Verify',
                   color: CustomColor.primaryValue,
                 ),
               ],
