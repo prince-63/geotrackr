@@ -1,7 +1,7 @@
 import express from 'express';
 import { login, signup, logout } from '../services/authService.js';
 import { protect } from '../middleware/authMiddleware.js';
-import { verifyEmail } from '../services/userVerificationService.js';
+import { verifyEmail, resendVerificationEmail } from '../services/userVerificationService.js';
 import {
   forgotPassword,
   resetPasswordVerification,
@@ -14,6 +14,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.post('/logout', logout);
 router.post('/verify-email', protect, verifyEmail);
+router.post('/resend-verification-email', protect, resendVerificationEmail);
 router.post('/forgot-password', forgotPassword);
 router.post('/forgot-password/verification', resetPasswordVerification);
 router.post('/forgot-password/set-new-password', setNewPassword);

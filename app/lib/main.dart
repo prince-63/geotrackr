@@ -1,13 +1,17 @@
-import 'package:app/src/screens/biometric.dart';
-import 'package:app/src/screens/home_screen.dart';
-import 'package:app/src/screens/login_screen.dart';
-import 'package:app/src/screens/signup_screen.dart';
-import 'package:app/src/screens/verification_screen.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:idcard/config/routes.dart';
+import 'package:idcard/src/utils/text_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(MyApp());
+  runZonedGuarded(() {
+    runApp(MyApp());
+  }, (Object error, StackTrace stackTrace) {
+    print('Uncaught error: $error');
+    print('Stack trace: $stackTrace');
+  });
 }
 
 class MyApp extends StatefulWidget {
@@ -16,7 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/biometric';
+  String initialRoute = '/';
 
   @override
   void initState() {
@@ -35,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> _checkLoginStatus() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('jwt_token');
+      final token = prefs.getString('token');
 
       if (token != null) {
         setState(() {
@@ -54,43 +58,20 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Quantum QR',
+      title: 'Id Card',
       debugShowCheckedModeBanner: false,
       theme: _buildThemeData(),
       initialRoute: initialRoute,
-      routes: _buildRoutes(),
+      routes: buildRoutes(),
     );
   }
 
   ThemeData _buildThemeData() {
     return ThemeData(
       fontFamily: 'Lato',
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontFamily: 'Lato'),
-        bodyMedium: TextStyle(fontFamily: 'Lato'),
-        displayLarge: TextStyle(fontFamily: 'Lato'),
-        displayMedium: TextStyle(fontFamily: 'Lato'),
-        displaySmall: TextStyle(fontFamily: 'Lato'),
-        headlineMedium: TextStyle(fontFamily: 'Lato'),
-        titleLarge: TextStyle(fontFamily: 'Lato'),
-        titleMedium: TextStyle(fontFamily: 'Lato'),
-        titleSmall: TextStyle(fontFamily: 'Lato'),
-        bodySmall: TextStyle(fontFamily: 'Lato'),
-        labelLarge: TextStyle(fontFamily: 'Lato'),
-        labelSmall: TextStyle(fontFamily: 'Lato'),
-      ),
+      textTheme: appTextTheme,
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       useMaterial3: true,
     );
-  }
-
-  Map<String, WidgetBuilder> _buildRoutes() {
-    return {
-      '/': (context) => const LoginScreen(),
-      '/home': (context) => const HomeScreen(),
-      '/signup': (context) => const SignupScreen(),
-      '/verification': (context) => const VerificationScreen(),
-      '/biometric': (context) => BiometricAuth(),
-    };
   }
 }

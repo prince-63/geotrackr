@@ -78,6 +78,8 @@ export const forgotPassword = async (req, res) => {
 export const resetPasswordVerification = async (req, res) => {
   const { email, username, verificationCode } = req.body;
 
+  console.log(email, username, verificationCode);
+
   if (!email && !username) {
     return errorResponseHandler(
       res,
