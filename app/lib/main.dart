@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/';
+  String initialRoute = '/upload/profile-details';
 
   @override
   void initState() {

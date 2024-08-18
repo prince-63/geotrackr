@@ -8,24 +8,25 @@ generator client {
 }
 
 model User {
-  id                    String       @id @default(auto()) @map("_id") @db.ObjectId
-  username              String       @unique
-  email                 String       @unique
-  profilePicture        String?     
-  password              String
-  name                  String?
-  contactNumber         String?
-  dateOfBirth           DateTime?
-  bloodGroup            String?
-  address               String?
-  companyName           String?
-  companyAddress        String?
-  companyContactEmail   String?
-  companyContactNumber  String?
-  emailVerified         Boolean?     @default(false)
-  emailVerificationCode String?
+  id                            String       @id @default(auto()) @map("_id") @db.ObjectId
+  username                      String       @unique
+  email                         String       @unique
+  profilePictureUrl             String?
+  password                      String
+  name                          String?
+  contactNumber                 String?
+  dateOfBirth                   String?
+  bloodGroup                    String?
+  address                       String?
+  organizationName              String?
+  organizationAddress           String?
+  organizationContactEmail      String?
+  organizationContactNumber     String?
+  organizationLocation          String?
+  emailVerified                 Boolean?     @default(false)
+  emailVerificationCode         String?
   passwordResetVerificationCode String?
-  attendances           Attendance[] @relation("UserAttendances")
+  attendances                   Attendance[] @relation("UserAttendances")
 }
 
 model Attendance {

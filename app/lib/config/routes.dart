@@ -5,21 +5,26 @@ import 'package:idcard/src/screens/forgot_password/set_new_password/set_new_pass
 import 'package:idcard/src/screens/forgot_password/verification_screen/forgot_password_verification_screen.dart';
 import 'package:idcard/src/screens/home/home_screen.dart';
 import 'package:idcard/src/screens/login/login_screen.dart';
+import 'package:idcard/src/screens/profile/profile_create/profile_details/profile_details_upload_screen.dart';
+import 'package:idcard/src/screens/profile/profile_create/profile_image/profile_image_upload_screen.dart';
 import 'package:idcard/src/screens/signup/signup_screen.dart';
 import 'package:idcard/src/screens/verification/verification_screen.dart';
 import 'package:idcard/src/screens/welcome/welcome_screen.dart';
 
 Map<String, WidgetBuilder> buildRoutes() {
   return {
-    '/': (context) => WelcomeScreen(),
+    '/': (context) => const WelcomeScreen(),
     '/login': (context) => const LoginScreen(),
     '/signup': (context) => const SignupScreen(),
     '/home': (context) => const HomeScreen(),
     '/user-verification': (context) => const VerificationScreen(),
-    '/forgot-password': (context) => ForgotPasswordScreen(),
+    '/upload/profile-image': (context) => ProfileImageUploadScreen(),
+    '/upload/profile-details': (context) => ProfileDetailsUploadScreen(),
+    '/forgot-password': (context) => const ForgotPasswordScreen(),
     '/forgot-password/verification': (context) =>
-        ForgotPasswordVerificationScreen(),
-    '/forgot-password/set-new-password': (context) => SetNewPasswordScreen(),
+        const ForgotPasswordVerificationScreen(),
+    '/forgot-password/set-new-password': (context) =>
+        const SetNewPasswordScreen(),
     '/biometric': (context) => BiometricAuth(),
   };
 }

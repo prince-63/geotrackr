@@ -41,7 +41,7 @@ class UserVerificationService {
         final message = responseBody['message'];
 
         if (status == 'success') {
-          Navigator.pushNamed(context, '/home');
+          Navigator.pushNamed(context, '/upload/profile-image');
         } else {
           throw Exception('Failed to verify user: $message');
         }

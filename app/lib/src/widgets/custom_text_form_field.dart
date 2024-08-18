@@ -7,6 +7,8 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final String errorMessage;
+  final TextInputType keyboardType;
+  final String placeholder;
 
   const CustomTextFormField({
     super.key,
@@ -14,6 +16,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     this.errorMessage = '',
+    this.keyboardType = TextInputType.text,
+    this.placeholder = '',
   });
 
   @override
@@ -58,8 +62,15 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
+        hintText: placeholder,
+        hintStyle: TextStyle(
+          color: const Color.fromARGB(255, 142, 142, 142).withOpacity(0.5),
+          fontSize: 14.0,
+          fontWeight: FontWeight.w400,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
           borderSide: BorderSide(
