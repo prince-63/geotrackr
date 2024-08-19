@@ -6,7 +6,7 @@ import session from 'express-session';
 import authRoutes from './routes/authRoutes.js';
 import idCardRoutes from './routes/idCardRoutes.js';
 import attendanceRoutes from './routes/attendanceRoutes.js';
-import uploadProfilePictureRoute from './routes/uploadProfilePictureRoute.js';
+import profileRioutes from './routes/profileRoutes.js';
 import { EventEmitter } from 'events';
 
 EventEmitter.defaultMaxListeners = 20;
@@ -38,7 +38,7 @@ app.use(
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/id-card', idCardRoutes);
 app.use('/api/v1/attendance', attendanceRoutes);
-app.use('/api/v1/upload', uploadProfilePictureRoute);
+app.use('/api/v1/profile', profileRioutes);
 
 // testing
 app.get('/', (req, res) => {

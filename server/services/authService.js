@@ -6,6 +6,7 @@ import { promisify } from 'util';
 import redisClient from '../redis/redisClient.js';
 import { errorResponseHandler, responseHandler } from '../helper/error.js';
 import { parseDuration } from '../helper/parseDuration.js';
+import { deleteImageFromCloudinary } from './cloudinaryService.js';
 
 const prisma = new PrismaClient();
 
@@ -205,4 +206,37 @@ export const logout = async (req, res) => {
   } catch (error) {
     return errorResponseHandler(res, 400, 'fail', error.message);
   }
+};
+
+export const closeAccount = async (req, res) => {
+  const user = req.user;
+
+  if (!user) {
+    return errorResponseHandler(res, 401, 'fail', 'You are not logged in');
+  }
+
+  try {
+    // Extract image ID from Cloudinary URL and delete image
+    if (user.imageUrl) {
+      const imageId = extractImageIdFromUrl(user.imageUrl);
+      await deleteImageFromCloudinary(imageId);
+    }
+
+    // Delete user from database
+    await prisma.user.delete({ where: { id: user.id } });
+
+    return responseHandler(res, 200, 'success', 'Account deleted', null);
+  } catch (error) {
+    return errorResponseHandler(res, 500, 'fail', error.message);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+// Utility function to extract image ID from Cloudinary URL
+const extractImageIdFromUrl = (url) => {
+  const parts = url.split('/');
+  const lastPart = parts[parts.length - 1];
+  const [imageId] = lastPart.split('.');
+  return imageId;
 };
