@@ -56,7 +56,7 @@ export const profilePictureUpload = async (req, res) => {
 
 export const profileDetailsUpload = async (req, res) => {
     const user = req.user;
-    
+
     const { name, contactNumber, dateOfBirth, bloodGroup, address, organizationName, organizationAddress, organizationContactNumber } = req.body;
 
     try {
@@ -117,7 +117,6 @@ export const profileDetailsUpload = async (req, res) => {
 export const getProfileDetails = async (req, res) => {
     const user = req.user;
 
-    console.log(user);
     try {
         if (!user) {
             return errorResponseHandler(res, 404, 'fail', 'User not found');

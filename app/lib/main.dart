@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:idcard/config/routes.dart';
+import 'package:idcard/src/utils/share_preferences.dart';
 import 'package:idcard/src/utils/text_theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runZonedGuarded(() {
@@ -20,39 +20,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/';
+  String initialRoute = '/home';
 
   @override
   void initState() {
-    super.initState();
-    _initializeApp();
-  }
-
-  Future<void> _initializeApp() async {
-    try {
-      await _checkLoginStatus();
-    } catch (e) {
-      _handleInitializationError(e);
-    }
-  }
-
-  Future<void> _checkLoginStatus() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('token');
-
-      if (token != null) {
+    SharePreferences.containsKey('token').then((value) {
+      if (value) {
         setState(() {
           initialRoute = '/home';
         });
       }
-    } catch (e) {
-      throw Exception('Failed to check login status: $e');
-    }
-  }
-
-  void _handleInitializationError(Object error) {
-    print('Initialization error: $error');
+    });
+    super.initState();
   }
 
   @override

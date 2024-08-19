@@ -8,15 +8,18 @@ class ApiConfig {
   // signup
   static const String authSignup = '$baseUrl/auth/signup';
 
+  // logout
+  static const String authLogout = '$baseUrl/auth/logout';
+
+  // close account
+  static const String authCloseAccount = '$baseUrl/auth/close-account';
+
   // verify email
   static const String verifyEmail = '$baseUrl/auth/verify-email';
 
   // resend verification email
   static const String resendVerificationEmail =
       '$baseUrl/auth/resend-verification-email';
-
-  // logout
-  static const String authLogout = '$baseUrl/auth/logout';
 
   // forgot password
   static const String authForgotPassword = '$baseUrl/auth/forgot-password';
@@ -42,4 +45,7 @@ class ApiConfig {
 
   // set attendence
   static const String setAttendence = '$baseUrl/attendance/set-attendance';
+
+  // download id card
+  static const String downloadIdCard = '$baseUrl/id-card/generate-id-card';
 }
