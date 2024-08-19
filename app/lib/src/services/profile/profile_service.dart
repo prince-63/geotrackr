@@ -78,4 +78,33 @@ class ProfileService {
       );
     }
   }
+
+  static Future<Map<String, dynamic>?> getUserProfile(
+      BuildContext context) async {
+    final url = ApiConfig.getUserProfile;
+    String? token = await SharePreferences.getString('token');
+
+    if (token == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to load user data!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return null;
+    }
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return null;
+    }
+  }
 }

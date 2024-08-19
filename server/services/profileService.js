@@ -117,6 +117,7 @@ export const profileDetailsUpload = async (req, res) => {
 export const getProfileDetails = async (req, res) => {
     const user = req.user;
 
+    console.log(user);
     try {
         if (!user) {
             return errorResponseHandler(res, 404, 'fail', 'User not found');

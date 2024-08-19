@@ -37,6 +37,9 @@ class ApiConfig {
   static const String uploadProfileDetails =
       '$baseUrl/profile/upload/profile-details';
 
+  // get user profile
+  static const String getUserProfile = '$baseUrl/profile/get-profile-details';
+
   // set attendence
   static const String setAttendence = '$baseUrl/attendance/set-attendance';
 }
