@@ -54,16 +54,13 @@ export const resendVerificationEmail = async (req, res) => {
   }
 
   if (user.emailVerified) {
-    return errorResponseHandler(
-      res,
-      400,
-      'fail',
-      'Email already verified'
-    );
+    return errorResponseHandler(res, 400, 'fail', 'Email already verified');
   }
 
   try {
-    const emailVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const emailVerificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
 
     console.log(emailVerificationCode);
 
@@ -72,8 +69,7 @@ export const resendVerificationEmail = async (req, res) => {
         where: { id: user.id },
         data: { emailVerificationCode: emailVerificationCode },
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error.message);
       return errorResponseHandler(
         res,
@@ -91,13 +87,17 @@ export const resendVerificationEmail = async (req, res) => {
 
     // Validate user email
     if (!user.email) {
-      return errorResponseHandler(res, 400, 'fail', 'User email is not defined');
+      return errorResponseHandler(
+        res,
+        400,
+        'fail',
+        'User email is not defined'
+      );
     }
 
     try {
       await sendEmail(user.email, subject, message);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error.message);
       return errorResponseHandler(res, 500, 'fail', 'Failed to send email');
     }
@@ -109,8 +109,7 @@ export const resendVerificationEmail = async (req, res) => {
       'Verification email sent',
       null
     );
-  }
-  catch (error) {
+  } catch (error) {
     return errorResponseHandler(res, 500, 'fail', 'Internal server error');
   } finally {
     await prisma.$disconnect();

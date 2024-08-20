@@ -162,7 +162,10 @@ export const login = async (req, res) => {
       expires: new Date(Date.now() + cookieExpiresInMs),
       httpOnly: true,
     });
-    return responseHandler(res, 200, 'success', 'Logged in', { token: token, email: user.email });
+    return responseHandler(res, 200, 'success', 'Logged in', {
+      token: token,
+      email: user.email,
+    });
   } else {
     return errorResponseHandler(res, 400, 'fail', 'Incorrect password');
   }

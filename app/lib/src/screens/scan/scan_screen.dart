@@ -2,7 +2,9 @@ import 'package:idcard/api/attendance_api.dart';
 import 'package:idcard/src/screens/scan/widgets/qr_view_container.dart';
 import 'package:idcard/src/screens/scan/widgets/scan_header.dart';
 import 'package:flutter/material.dart';
+import 'package:idcard/src/services/location/location_service.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:geolocator/geolocator.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
@@ -16,43 +18,36 @@ class _ScanScreenState extends State<ScanScreen> {
   QRViewController? controller;
   String? qrText;
   bool _isAttendanceMarked = false;
+  Position? _currentPosition;
 
   @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _initializeLocation();
+  }
+
+  // @override
+  // void dispose() {
+  //   controller?.dispose();
+  //   super.dispose();
+  // }
+  
+Future<void> _initializeLocation() async {
+    final position = await LocationService.getCurrentLocation();
+    setState(() {
+      _currentPosition = position;
+    });
   }
 
   Future<void> _markAttendance() async {
     if (qrText != null && !_isAttendanceMarked) {
       try {
         final response = await AttendanceApi.setAttendance(context, qrText!);
-        _handleAttendanceResponse(response);
+        print('Attendance marked: $response');
       } catch (e) {
-        _handleAttendanceError(e);
+        print('Error marking attendance: $e');
       }
     }
-  }
-
-  void _handleAttendanceResponse(String response) {
-    if (response == 'success') {
-      setState(() {
-        _isAttendanceMarked = true;
-      });
-      _showSnackBar('Attendance Marked');
-    } else {
-      _showSnackBar('Attendance Failed: $response');
-    }
-  }
-
-  void _handleAttendanceError(Object error) {
-    _showSnackBar('Attendance Failed: $error');
-  }
-
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
   }
 
   @override
@@ -69,6 +64,14 @@ class _ScanScreenState extends State<ScanScreen> {
               onQRViewCreated: _onQRViewCreated,
             ),
             const SizedBox(height: 20),
+            if (_currentPosition != null)
+              Text(
+                'Location: ${_currentPosition!.latitude}, ${_currentPosition!.longitude}',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
           ],
         ),
       ),
@@ -80,10 +83,12 @@ class _ScanScreenState extends State<ScanScreen> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        qrText = scanData.code;
-        _markAttendance();
-      });
+      if (!_isAttendanceMarked) {
+        setState(() {
+          qrText = scanData.code;
+          _markAttendance();
+        });
+      }
     });
   }
 }

@@ -9,7 +9,12 @@ class ProfileDetailsFormField extends StatelessWidget {
   final TextEditingController addressController;
   final TextEditingController organizationNameController;
   final TextEditingController organizationAddressController;
+  final TextEditingController organizationContactEmailController;
   final TextEditingController organizationContactNumberController;
+  final TextEditingController workingScheduleStart;
+  final TextEditingController workingScheduleEnd;
+  final TextEditingController organizationLocationLongitude;
+  final TextEditingController organizationLocationLatitude;
   // final TextEditingController organizationLatitudeController;
   // final TextEditingController organizationLongitudeController;
 
@@ -22,6 +27,11 @@ class ProfileDetailsFormField extends StatelessWidget {
     required this.organizationNameController,
     required this.organizationAddressController,
     required this.organizationContactNumberController,
+    required this.organizationContactEmailController,
+    required this.workingScheduleStart,
+    required this.workingScheduleEnd,
+    required this.organizationLocationLongitude,
+    required this.organizationLocationLatitude,
     // required this.organizationLatitudeController,
     // required this.organizationLongitudeController,
   });
@@ -80,11 +90,46 @@ class ProfileDetailsFormField extends StatelessWidget {
           placeholder: "Dhaka, Bangladesh",
         ),
         CustomTextFormField(
+          controller: organizationContactEmailController,
+          hintText: 'Organization Contact Email',
+          keyboardType: TextInputType.emailAddress,
+          errorMessage: 'Please enter your Organization Contact Email',
+          placeholder: "example@abc.com",
+        ),
+        CustomTextFormField(
           controller: organizationContactNumberController,
           hintText: 'Organization Contact Number',
           keyboardType: TextInputType.phone,
           errorMessage: 'Please enter your Organization Contact Number',
           placeholder: "+8801XXXXXXXXX",
+        ),
+        CustomTextFormField(
+          controller: workingScheduleStart,
+          hintText: 'Working Schedule Start',
+          keyboardType: TextInputType.datetime,
+          errorMessage: 'Please enter your Working Schedule Start',
+          placeholder: "HH:MM",
+        ),
+        CustomTextFormField(
+          controller: workingScheduleEnd,
+          hintText: 'Working Schedule End',
+          keyboardType: TextInputType.datetime,
+          errorMessage: 'Please enter your Working Schedule End',
+          placeholder: "HH:MM",
+        ),
+        CustomTextFormField(
+          controller: organizationLocationLongitude,
+          hintText: 'Organization Location Longitude',
+          keyboardType: TextInputType.number,
+          errorMessage: 'Please enter your Organization Location Logitude',
+          placeholder: "90.407143 [not updatable]",
+        ),
+        CustomTextFormField(
+          controller: organizationLocationLatitude,
+          hintText: 'Organization Location Latitude',
+          keyboardType: TextInputType.number,
+          errorMessage: 'Please enter your Organization Location Latitude',
+          placeholder: "23.585832 [not updatable]",
         ),
         // CustomTextFormField(
         //   controller: organizationLatitudeController,

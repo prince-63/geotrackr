@@ -1,7 +1,15 @@
 import express from 'express';
-import { login, signup, logout, closeAccount } from '../services/authService.js';
+import {
+  login,
+  signup,
+  logout,
+  closeAccount,
+} from '../services/authService.js';
 import { protect } from '../middleware/authMiddleware.js';
-import { verifyEmail, resendVerificationEmail } from '../services/userVerificationService.js';
+import {
+  verifyEmail,
+  resendVerificationEmail,
+} from '../services/userVerificationService.js';
 import {
   forgotPassword,
   resetPasswordVerification,
