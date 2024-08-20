@@ -1,8 +1,7 @@
+import 'package:idcard/src/screens/home/widgets/calender.dart';
 import 'package:idcard/src/screens/scan/scan_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:idcard/src/utils/share_preferences.dart';
-import 'package:local_auth/local_auth.dart';
-import 'widgets/home_content.dart';
+import 'package:idcard/src/services/biometric/biometric_service.dart';
 import 'widgets/bottom_navigation.dart';
 import 'package:idcard/src/screens/profile/profile_screen.dart';
 
@@ -16,82 +15,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
-  final LocalAuthentication auth = LocalAuthentication();
-  bool? _canCheckBiometrics;
-  List<BiometricType>? _availableBiometrics;
+  final BiometricService _biometricService = BiometricService();
   String? _authorized = 'Not Authorized';
 
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addObserver(this);
-    // _checkBiometrics();
-    // _getAvailableBiometrics();
-    _authenticate();
-    SharePreferences.getString('token').then((token) {
-      if (token == null) {
-        Navigator.pushNamed(context, '/login');
-      }
-    });
-  }
-
-  // @override
-  // void dispose() {
-  //   WidgetsBinding.instance.removeObserver(this);
-  //   super.dispose();
-  // }
-
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   if (state == AppLifecycleState.resumed) {
-  //     _authenticate();
-  //   }
-  // }
-
-  Future<void> _checkBiometrics() async {
-    bool canCheckBiometrics;
-    try {
-      canCheckBiometrics = await auth.canCheckBiometrics;
-    } catch (e) {
-      canCheckBiometrics = false;
-    }
-
-    if (!mounted) return;
-
-    setState(() {
-      _canCheckBiometrics = canCheckBiometrics;
-    });
-  }
-
-  Future<void> _getAvailableBiometrics() async {
-    List<BiometricType> availableBiometrics;
-    try {
-      availableBiometrics = await auth.getAvailableBiometrics();
-    } catch (e) {
-      availableBiometrics = <BiometricType>[];
-    }
-
-    if (!mounted) return;
-
-    setState(() {
-      _availableBiometrics = availableBiometrics;
-    });
+    // _authenticate();
   }
 
   Future<void> _authenticate() async {
-    bool authenticated = false;
-    try {
-      authenticated = await auth.authenticate(
-        localizedReason:
-            'Scan your fingerprint or use your biometric credentials to authenticate',
-        options: const AuthenticationOptions(
-          useErrorDialogs: true,
-          stickyAuth: true,
-        ),
-      );
-    } on Exception catch (e) {
-      print(e);
-    }
+    bool authenticated = await _biometricService.authenticate();
     if (!mounted) return;
 
     setState(() {
@@ -99,25 +33,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     });
 
     if (_authorized != 'Authorized') {
-      // If not authorized, exit the app or navigate to a different screen
-      Navigator.of(context).pop();
+      Navigator.pushNamed(context, "/login");
     }
   }
 
-  static List<Widget> _widgetOptions = <Widget>[
-    HomeContent(),
-    ScanScreen(),
-    ProfileScreen(),
-  ];
-
   void _onItemTapped(int index) {
-    FocusScope.of(context).unfocus(); // Unfocus any focused widget
+    FocusScope.of(context).unfocus();
     setState(() {
       _selectedIndex = index;
     });
     _pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   }
@@ -125,8 +52,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.white, // Set the background color of the whole screen
       body: SafeArea(
         child: PageView(
           controller: _pageController,
@@ -135,7 +60,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               _selectedIndex = index;
             });
           },
-          children: _widgetOptions,
+          children: [
+            Calender(),
+            ScanScreen(),
+            ProfileScreen(),
+          ],
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(

@@ -57,7 +57,7 @@ class ProfileButtons extends StatelessWidget {
                 leadingIcon: Icons.help,
                 trailingIcon: Icons.arrow_forward_ios,
                 onPressed: () {
-                  Navigator.pushNamed(context, '#');
+                  Navigator.pushNamed(context, '/help-and-support');
                 },
               ),
               CustomIconButton(
@@ -65,7 +65,7 @@ class ProfileButtons extends StatelessWidget {
                 leadingIcon: Icons.info,
                 trailingIcon: Icons.arrow_forward_ios,
                 onPressed: () {
-                  Navigator.pushNamed(context, '#');
+                  Navigator.pushNamed(context, '/about');
                 },
               ),
             ],

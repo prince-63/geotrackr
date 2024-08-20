@@ -22,10 +22,15 @@ model User {
   organizationAddress           String?
   organizationContactEmail      String?
   organizationContactNumber     String?
-  organizationLocation          String?
+  organizationLocationLongitude  String?
+  organizationLocationLatitude  String?
+  workingScheduleStart          String?
+  workingScheduleEnd            String?
   emailVerified                 Boolean?     @default(false)
   emailVerificationCode         String?
   passwordResetVerificationCode String?
+  createdAt                     DateTime     @default(now())
+  updatedAt                     DateTime     @updatedAt
   attendances                   Attendance[] @relation("UserAttendances")
 }
 

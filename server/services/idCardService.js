@@ -85,34 +85,46 @@ export const generateIdCard = async (req, res) => {
 
     // Draw ID
     context.font = '13px Arial';
-    context.fillText("Id: " + user.id, 15, 180);
+    context.fillText('Id: ' + user.id, 15, 180);
 
     // Draw date of birth
-    context.fillText("Date of Birth: " + user.dateOfBirth, 15, 200);
+    context.fillText('Date of Birth: ' + user.dateOfBirth, 15, 200);
 
     // Draw blood group
-    context.fillText("Blood Group: " + user.bloodGroup, 15, 220);
+    context.fillText('Blood Group: ' + user.bloodGroup, 15, 220);
 
     // Drow email
-    context.fillText("Email: " + user.email, 15, 240);
+    context.fillText('Email: ' + user.email, 15, 240);
 
     // Drow phone number
-    context.fillText("Phone: " + user.contactNumber, 15, 260);
+    context.fillText('Phone: ' + user.contactNumber, 15, 260);
 
     // Drow address
-    context.fillText("Address: " + user.address, 15, 280);
+    context.fillText('Address: ' + user.address, 15, 280);
 
     // organization name
-    context.fillText("Organization: " + user.organizationName, 15, 300);
+    context.fillText('Organization: ' + user.organizationName, 15, 300);
 
     // organization email
-    context.fillText("Organization Email: " + user.organizationContactEmail, 15, 320);
+    context.fillText(
+      'Organization Email: ' + user.organizationContactEmail,
+      15,
+      320
+    );
 
     // organization phone number
-    context.fillText("Organization Phone: " + user.organizationContactNumber, 15, 340);
+    context.fillText(
+      'Organization Phone: ' + user.organizationContactNumber,
+      15,
+      340
+    );
 
     // organization address
-    context.fillText("Organization Address: " + user.organizationAddress, 15, 360);
+    context.fillText(
+      'Organization Address: ' + user.organizationAddress,
+      15,
+      360
+    );
 
     // drow horizontal line
     context.beginPath();
@@ -126,7 +138,7 @@ export const generateIdCard = async (req, res) => {
     // website url link
     context.font = 'bold 12px Arial';
     context.fillStyle = 'rgba(0, 0, 0, 0.80)';
-    const url = "https://www.example.com";
+    const url = 'https://www.example.com';
     const urlPosition = (width - context.measureText(url).width) / 2;
     context.fillText(url, urlPosition, 390);
 

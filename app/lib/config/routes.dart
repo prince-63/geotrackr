@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:idcard/src/screens/about/about_screen.dart';
 import 'package:idcard/src/screens/account/account_screen.dart';
 import 'package:idcard/src/screens/biometric/biometric.dart';
 import 'package:idcard/src/screens/forgot_password/initial_screen/forgot_password_screen.dart';
 import 'package:idcard/src/screens/forgot_password/set_new_password/set_new_password_screen.dart';
 import 'package:idcard/src/screens/forgot_password/verification_screen/forgot_password_verification_screen.dart';
+import 'package:idcard/src/screens/help_and_support/help_and_support_screen.dart';
 import 'package:idcard/src/screens/home/home_screen.dart';
 import 'package:idcard/src/screens/login/login_screen.dart';
 import 'package:idcard/src/screens/profile/profile_create/profile_details/profile_details_upload_screen.dart';
@@ -30,5 +32,7 @@ Map<String, WidgetBuilder> buildRoutes() {
     '/biometric': (context) => BiometricAuth(),
     '/view-and-download': (context) => ViewAndDownloadScreen(),
     '/account': (context) => const AccountScreen(),
+    '/about': (context) => AboutScreen(),
+    '/help-and-support': (context) => HelpAndSupportScreen(),
   };
 }

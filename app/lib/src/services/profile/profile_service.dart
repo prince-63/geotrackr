@@ -49,8 +49,6 @@ class ProfileService {
 
     String? token = await SharePreferences.getString('token');
 
-    print(data);
-
     var response = await http.post(
       uri,
       headers: {
@@ -70,6 +68,7 @@ class ProfileService {
 
       Navigator.pushNamed(context, "/home");
     } else {
+      print(response.body);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Failed to upload profile details!'),

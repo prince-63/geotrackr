@@ -30,11 +30,15 @@ class _ProfileDetailsUploadScreenState
       TextEditingController();
   final TextEditingController _organizationContactNumberController =
       TextEditingController();
-  // final TextEditingController _organizationLatitudeController =
-  //     TextEditingController();
-  // final TextEditingController _organizationLongitudeController =
-  //     TextEditingController();
-
+  final TextEditingController _organizationContactEmailController =
+      TextEditingController();
+  final TextEditingController _workingScheduleStart = TextEditingController();
+  final TextEditingController _workingScheduleEnd = TextEditingController();
+  final TextEditingController _organizationLocationLongitude =
+      TextEditingController();
+  final TextEditingController _organizationLocationLatitude =
+      TextEditingController();
+      
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       Map<String, String> data = {
@@ -44,8 +48,13 @@ class _ProfileDetailsUploadScreenState
         'bloodGroup': _bloodGroupController.text,
         'address': _addressController.text,
         'organizationName': _organizationNameController.text,
+        'organizationContactEmail': _organizationContactEmailController.text,
         'organizationAddress': _organizationAddressController.text,
         'organizationContactNumber': _organizationContactNumberController.text,
+        'workingScheduleStart': _workingScheduleStart.text,
+        'workingScheduleEnd': _workingScheduleEnd.text,
+        'organizationLocationLongitude': _organizationLocationLongitude.text,
+        'organizationLocationLatitude': _organizationLocationLatitude.text,
         // 'organization_latitude': _organizationLatitudeController.text,
         // 'organization_longitude': _organizationLongitudeController.text,
       };
@@ -74,6 +83,12 @@ class _ProfileDetailsUploadScreenState
                 organizationAddressController: _organizationAddressController,
                 organizationContactNumberController:
                     _organizationContactNumberController,
+                organizationContactEmailController:
+                    _organizationContactEmailController,
+                workingScheduleStart: _workingScheduleStart,
+                workingScheduleEnd: _workingScheduleEnd,
+                organizationLocationLongitude: _organizationLocationLongitude,
+                organizationLocationLatitude: _organizationLocationLatitude,
                 // organizationLatitudeController: _organizationLatitudeController,
                 // organizationLongitudeController:
                 //     _organizationLongitudeController,

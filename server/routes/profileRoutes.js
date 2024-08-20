@@ -1,5 +1,9 @@
 import express from 'express';
-import { profilePictureUpload, profileDetailsUpload, getProfileDetails } from '../services/profileService.js';
+import {
+  profilePictureUpload,
+  profileDetailsUpload,
+  getProfileDetails,
+} from '../services/profileService.js';
 import { protect } from '../middleware/authMiddleware.js';
 import upload from '../multer/multerConfig.js';
 

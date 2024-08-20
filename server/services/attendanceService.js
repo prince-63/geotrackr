@@ -1,5 +1,5 @@
-import userDecryptedId from '../helper/userDecryptedId.js';
 import { PrismaClient } from '@prisma/client';
+import userDecryptedId from '../helper/userDecryptedId.js';
 
 const prisma = new PrismaClient();
 
@@ -16,8 +16,6 @@ export const SetAttendance = async (req, res) => {
   try {
     const decoded = userDecryptedId(encodedText);
 
-    console.log(decoded);
-
     const currentUser = await prisma.user.findUnique({
       where: { email: decoded },
     });
@@ -28,6 +26,16 @@ export const SetAttendance = async (req, res) => {
         message: 'The user belonging to this token does no longer exist.',
       });
     }
+
+    const today = new Date().getDate();
+
+    const existingAttendance = await prisma.attendance.findFirst({
+      where: {
+        userId: currentUser.id,
+      },
+    });
+
+    console.log(existingAttendance);
 
     const attendance = await prisma.attendance.create({
       data: {
