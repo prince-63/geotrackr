@@ -20,11 +20,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    // SharePreferences.containsKey('token').then((value) {
-    //   if (value) {
-    //     Navigator.pushNamed(context, '/home');
-    //   }
-    // });
+    SharePreferences.containsKey('token').then((value) {
+      if (value) {
+        Navigator.pushNamed(context, '/home');
+      }
+    });
   }
 
   @override

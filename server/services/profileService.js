@@ -189,7 +189,6 @@ export const profileDetailsUpload = async (req, res) => {
       );
     }
 
-
     const updateUser = await prisma.user.update({
       where: {
         id: user.id,

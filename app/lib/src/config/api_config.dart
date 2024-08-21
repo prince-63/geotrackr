@@ -1,6 +1,6 @@
 class ApiConfig {
   // Base URL
-  static const String baseUrl = 'http://192.168.250.167:8000/api/v1';
+  static const String baseUrl = 'http://192.168.0.186:8000/api/v1';
 
   // login
   static const String authLogin = '$baseUrl/auth/login';
@@ -48,4 +48,17 @@ class ApiConfig {
 
   // download id card
   static const String downloadIdCard = '$baseUrl/id-card/generate-id-card';
+
+  // get organization location
+  static const String getOrganizationLocation =
+      '$baseUrl/location/get-organization-location';
+
+  // check in attendance
+  static const String checkInAttendance = '$baseUrl/attendance/check-in';
+
+  // check out attendance
+  static const String checkOutAttendance = '$baseUrl/attendance/check-out';
+
+  // get attendance
+  static const String getUserAttendance = '$baseUrl/attendance/get-user-attendance';
 }

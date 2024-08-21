@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:idcard/config/api_config.dart';
+import 'package:idcard/src/config/api_config.dart';
+import 'package:idcard/src/services/biometric/biometric_service.dart';
 import 'package:idcard/src/utils/share_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class CloseAccountService {
   static Future<void> closeAccount(BuildContext context) async {
     String? token = await SharePreferences.getString('token');
+    BiometricService biometricService = BiometricService();
+    biometricService.authenticate();
 
     if (token != null) {
       Uri url = Uri.parse(ApiConfig.authCloseAccount);

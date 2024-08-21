@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:idcard/config/api_config.dart';
+import 'package:idcard/src/config/api_config.dart';
 import 'package:idcard/src/utils/share_preferences.dart';
 import 'package:idcard/src/utils/uri_parser.dart';
 import 'package:path/path.dart';

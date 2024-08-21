@@ -50,10 +50,9 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                 },
               ),
             ),
-            if (_pickedLocation != null)
-              Text(
-                'Latitude: ${_pickedLocation.latitude}, Longitude: ${_pickedLocation.longitude}',
-              ),
+            Text(
+              'Latitude: ${_pickedLocation.latitude}, Longitude: ${_pickedLocation.longitude}',
+            ),
           ],
         ),
       ),

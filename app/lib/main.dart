@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:idcard/config/routes.dart';
-import 'package:idcard/src/utils/share_preferences.dart';
+import 'package:idcard/src/config/routes.dart';
 import 'package:idcard/src/utils/text_theme.dart';
 
 void main() {
@@ -20,17 +19,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialRoute = '/home';
+  String initialRoute = '/';
 
   @override
   void initState() {
-    SharePreferences.containsKey('token').then((value) {
-      if (value) {
-        setState(() {
-          initialRoute = '/home';
-        });
-      }
-    });
     super.initState();
   }
 

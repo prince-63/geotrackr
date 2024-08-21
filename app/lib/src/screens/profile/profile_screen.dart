@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idcard/src/model/user.dart';
-import 'package:idcard/src/screens/profile/profile_create/profile_image/widgets/profile_action_button.dart';
 import 'package:idcard/src/screens/profile/widgets/action_button.dart';
-import 'package:idcard/src/screens/profile/widgets/custom_display_text_field.dart';
-import 'package:idcard/src/screens/profile/widgets/custom_icon_button.dart';
 import 'package:idcard/src/screens/profile/widgets/profile_header.dart';
 import 'package:idcard/src/screens/profile/widgets/profile_information.dart';
 import 'package:idcard/src/services/logout/logout_service.dart';
