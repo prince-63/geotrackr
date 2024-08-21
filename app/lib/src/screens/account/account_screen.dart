@@ -5,7 +5,7 @@ import 'package:idcard/src/widgets/custom_button.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
-
+  
   void _closeAccount(BuildContext context) {
     showDialog(
       context: context,

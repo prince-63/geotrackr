@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    // _authenticate();
+    _authenticate();
   }
 
   Future<void> _authenticate() async {

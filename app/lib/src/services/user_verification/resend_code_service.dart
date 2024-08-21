@@ -1,4 +1,4 @@
-import 'package:idcard/config/api_config.dart';
+import 'package:idcard/src/config/api_config.dart';
 import 'package:idcard/src/utils/share_preferences.dart';
 import 'package:idcard/src/utils/uri_parser.dart';
 import 'package:flutter/material.dart';

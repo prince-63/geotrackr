@@ -16,20 +16,17 @@ class QRViewContainer extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       width: CustomMediaQuery.screenWidth(context),
-      height: CustomMediaQuery.screenHeight(context) * 0.3,
+      height: CustomMediaQuery.screenHeight(context) * 0.4,
       padding: const EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: QRView(
-        key: qrKey,
-        onQRViewCreated: onQRViewCreated,
-        overlay: QrScannerOverlayShape(
-          borderColor: const Color.fromARGB(255, 255, 255, 255),
-          borderRadius: 10,
-          borderLength: 20,
-          borderWidth: 7,
-          cutOutSize: CustomMediaQuery.screenWidth(context) * 0.7,
+      child: ClipRRect(
+        borderRadius:
+            BorderRadius.circular(10), // Same border radius as the container
+        child: QRView(
+          key: qrKey,
+          onQRViewCreated: onQRViewCreated,
         ),
       ),
     );

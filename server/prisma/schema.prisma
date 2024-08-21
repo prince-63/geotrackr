@@ -22,7 +22,7 @@ model User {
   organizationAddress           String?
   organizationContactEmail      String?
   organizationContactNumber     String?
-  organizationLocationLongitude  String?
+  organizationLocationLongitude String?
   organizationLocationLatitude  String?
   workingScheduleStart          String?
   workingScheduleEnd            String?
@@ -35,13 +35,16 @@ model User {
 }
 
 model Attendance {
-  id        String           @id @default(auto()) @map("_id") @db.ObjectId
-  user      User             @relation(fields: [userId], references: [id], name: "UserAttendances")
-  userId    String           @db.ObjectId
-  date      DateTime         @default(now())
-  status    AttendanceStatus
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  id           String            @id @default(auto()) @map("_id") @db.ObjectId
+  user         User              @relation(fields: [userId], references: [id], name: "UserAttendances")
+  userId       String            @db.ObjectId
+  date         DateTime          @default(now())
+  status       AttendanceStatus?
+  totalHours   Int?
+  checkInTime  DateTime?
+  checkOutTime DateTime?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 }
 
 enum AttendanceStatus {

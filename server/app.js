@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js';
 import idCardRoutes from './routes/idCardRoutes.js';
 import attendanceRoutes from './routes/attendanceRoutes.js';
 import profileRioutes from './routes/profileRoutes.js';
+import locationRoutes from './routes/locationRoutes.js';
 import { EventEmitter } from 'events';
 
 EventEmitter.defaultMaxListeners = 20;
@@ -34,11 +35,15 @@ app.use(
   })
 );
 
+// version
+const version = process.env.VERSION || 'v1';
+
 // Routes
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/id-card', idCardRoutes);
-app.use('/api/v1/attendance', attendanceRoutes);
-app.use('/api/v1/profile', profileRioutes);
+app.use(`/api/${version}/auth`, authRoutes);
+app.use(`/api/${version}/id-card`, idCardRoutes);
+app.use(`/api/${version}/attendance`, attendanceRoutes);
+app.use(`/api/${version}/profile`, profileRioutes);
+app.use(`/api/${version}/location`, locationRoutes);
 
 // testing
 app.get('/', (req, res) => {

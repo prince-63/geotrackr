@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:http/http.dart' as http;
-import 'package:idcard/config/api_config.dart';
+import 'package:idcard/src/config/api_config.dart';
 import 'package:idcard/src/utils/custom_color.dart';
 import 'package:idcard/src/utils/share_preferences.dart';
 import 'package:idcard/src/widgets/back_button.dart';

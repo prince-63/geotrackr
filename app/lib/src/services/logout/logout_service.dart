@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:idcard/config/api_config.dart';
+import 'package:idcard/src/config/api_config.dart';
 import 'package:idcard/src/utils/share_preferences.dart';
 import 'package:http/http.dart' as http;
 
