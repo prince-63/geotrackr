@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Production-level authentication application",
+  "description": "",
   "main": "server.js",
   "type": "module",
   "scripts": {

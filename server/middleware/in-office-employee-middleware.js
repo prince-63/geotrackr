@@ -20,8 +20,8 @@ export const protect = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const currentUser = await prisma.user.findUnique({
-      where: { id: decoded.id },
+    const currentUser = await prisma.inOfficeEmployee.findUnique({
+      where: { employeeId: decoded.id },
     });
     if (!currentUser) {
       return res.status(401).json({
@@ -30,6 +30,7 @@ export const protect = async (req, res, next) => {
       });
     }
 
+    console.log(currentUser);
     req.user = currentUser;
     next();
   } catch (error) {
