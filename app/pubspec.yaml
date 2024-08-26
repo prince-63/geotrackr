@@ -37,7 +37,7 @@ dependencies:
   provider: ^6.1.2
   image_picker: ^1.1.2
   http_parser: ^4.0.2
-  geolocator: ^8.0.0
+  geolocator: ^13.0.1
   google_maps_flutter: ^2.0.0
   flutter_pdfview: ^1.0.4
   path_provider: ^2.0.2
