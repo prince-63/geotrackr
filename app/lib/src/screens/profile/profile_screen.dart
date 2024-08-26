@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:idcard/src/model/user.dart';
 import 'package:idcard/src/screens/profile/widgets/action_button.dart';
 import 'package:idcard/src/screens/profile/widgets/profile_header.dart';
 import 'package:idcard/src/screens/profile/widgets/profile_information.dart';
@@ -16,7 +15,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late User user;
   Map<String, dynamic>? userData;
   bool isLoading = true;
 

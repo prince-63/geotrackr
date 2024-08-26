@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 export const createNewOutOfficeEmployee = async (req, res) => {
   const { employeeName, employeeEmail, employeeContactNumber } = req.body;
 
-  const officeId = req.user.officeId;
+  const officeId = req.masterOfficeAdmin.officeId;
 
   if (!employeeName || !employeeEmail || !employeeContactNumber || !officeId) {
     return errorResponseHandler(

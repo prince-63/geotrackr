@@ -5,7 +5,7 @@ class CustomMessages {
     final snackBar = SnackBar(
       content: Text(
         message,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 16,
           fontWeight: FontWeight.bold,

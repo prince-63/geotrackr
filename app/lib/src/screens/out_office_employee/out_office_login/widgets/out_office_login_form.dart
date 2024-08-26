@@ -3,13 +3,13 @@ import 'package:idcard/src/utils/custom_color.dart';
 import 'package:idcard/src/widgets/custom_button.dart';
 import 'package:idcard/src/widgets/custom_text_form_field.dart';
 
-class LoginForm extends StatelessWidget {
+class OutOfficeLoginForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController textController;
   final TextEditingController passwordController;
   final VoidCallback onLogin;
 
-  const LoginForm({
+  const OutOfficeLoginForm({
     Key? key,
     required this.formKey,
     required this.textController,
@@ -27,8 +27,8 @@ class LoginForm extends StatelessWidget {
           children: [
             CustomTextFormField(
               controller: textController,
-              hintText: 'Email or Username',
-              errorMessage: "Please enter correct email or username",
+              hintText: 'Email',
+              errorMessage: "Please enter correct email",
             ),
             CustomTextFormField(
               controller: passwordController,

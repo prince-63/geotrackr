@@ -14,14 +14,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   int _selectedIndex = 0;
-  final PageController _pageController = PageController();
   final BiometricService _biometricService = BiometricService();
   String? _authorized = 'Not Authorized';
 
   @override
   void initState() {
     super.initState();
-    _authenticate();
+    // _authenticate();
   }
 
   Future<void> _authenticate() async {
@@ -38,34 +37,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 
   void _onItemTapped(int index) {
-    FocusScope.of(context).unfocus();
     setState(() {
       _selectedIndex = index;
     });
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
   }
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Calender(),
+    ScanScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          children: [
-            Calender(),
-            ScanScreen(),
-            ProfileScreen(),
-          ],
-        ),
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: _selectedIndex,

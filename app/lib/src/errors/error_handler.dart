@@ -15,7 +15,7 @@ class ErrorHandler {
           ),
           content: Text(
             error.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black87,
               fontSize: 16,
             ),

@@ -113,3 +113,76 @@ export const createOffice = async (req, res) => {
     token,
   });
 };
+
+export const getOfficeDetails = async (req, res) => {
+  const officeId = req.masterOfficeAdmin.officeId;
+
+  const office = await prisma.office.findFirst({
+    where: { id: officeId },
+  });
+
+  if (!office) {
+    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+  }
+
+  console.log(office);
+
+  const officeAddress = await prisma.officeAddress.findFirst({
+    where: { id: office.addressId },
+  });
+
+  if (!office) {
+    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+  }
+
+  return responseHandler(res, 200, 'success', "Office Details Fetch Successful.", {
+    office,
+    officeAddress,
+  });
+}
+
+export const getAllInOfficeEmployees = async (req, res) => {
+  const officeId = req.masterOfficeAdmin.officeId;
+
+  const inOfficeEmployees = await prisma.inOfficeEmployee.findMany({
+    where: { officeId },
+    select: {
+      employeeId: true,
+      employeeName: true,
+      employeeEmail: true,
+      employeeContactNumber: true,
+      role: true,
+    }
+  });
+
+  if (!inOfficeEmployees) {
+    return errorResponseHandler(res, 404, 'fail', 'No in-office employees found');
+  }
+
+  return responseHandler(res, 200, 'success', "In Office Employee Details Fetch Successful.", {
+    inOfficeEmployees,
+  });
+}
+
+export const getAllOutOfficeEmployees = async (req, res) => {
+  const officeId = req.masterOfficeAdmin.officeId;
+
+  const outOfficeEmployees = await prisma.outOfficeEmployee.findMany({
+    where: { officeId },
+    select: {
+      employeeId: true,
+      employeeName: true,
+      employeeEmail: true,
+      employeeContactNumber: true,
+      role: true,
+    }
+  });
+
+  if (!outOfficeEmployees) {
+    return errorResponseHandler(res, 404, 'fail', 'No out-office employees found');
+  }
+
+  return responseHandler(res, 200, 'success', "Out Office Employee Details Fetch Successful.", {
+    outOfficeEmployees,
+  });
+}

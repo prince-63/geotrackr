@@ -1,6 +1,14 @@
 class ApiConfig {
   // Base URL
-  static const String baseUrl = 'http://192.168.73.167:8000/api/v1';
+  static const String baseUrl = 'http://192.168.0.186:8000/api/v1';
+
+  // join as in office employee
+  static const String joinAsInOfficeEmployee =
+      '$baseUrl/office/in-office/employee-join';
+
+  // join as out office employee
+  static const String joinAsOutOfficeEmployee =
+      '$baseUrl/office/out-office/employee-join';
 
   // login
   static const String authLogin = '$baseUrl/auth/login';
@@ -60,5 +68,6 @@ class ApiConfig {
   static const String checkOutAttendance = '$baseUrl/attendance/check-out';
 
   // get attendance
-  static const String getUserAttendance = '$baseUrl/attendance/get-user-attendance';
+  static const String getUserAttendance =
+      '$baseUrl/attendance/get-user-attendance';
 }

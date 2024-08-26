@@ -43,7 +43,7 @@ const masterAdminMiddleware = async (req, res, next) => {
         });
     }
 
-    req.user = masterOfficeAdmin;
+    req.masterOfficeAdmin = masterOfficeAdmin;
     next();
   } catch (error) {
     next(error);

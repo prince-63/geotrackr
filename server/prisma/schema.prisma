@@ -54,6 +54,8 @@ model MasterOfficeAdmin {
 enum ROLE {
   MASTER_ADMIN
   ADMIN
+  IN_OFFICE_EMPLOYEE
+  OUT_OFFICE_EMPLOYEE
 }
 
 // This model is used to track the admin details
@@ -78,6 +80,7 @@ model InOfficeEmployee {
   employeeContactNumber String
   employeePassword      String?
   verificationCode      String?
+  role                  ROLE?                @default(IN_OFFICE_EMPLOYEE)
   inOfficeAttendance    InOfficeAttendance[] @relation("InOfficeEmployeeToAttendance")
   office                Office               @relation("OfficeToEmployee", fields: [officeId], references: [id])
   createdAt             DateTime             @default(now())
@@ -92,7 +95,7 @@ model InOfficeAttendance {
   employeeId   String            @db.ObjectId
   date         DateTime          @default(now())
   status       AttendanceStatus?
-  totalHours   Int?
+  totalHours   String?
   checkInTime  DateTime?
   checkOutTime DateTime?
   createdAt    DateTime          @default(now())
@@ -107,6 +110,7 @@ model OutOfficeEmployee {
   employeeContactNumber String
   employeePassword      String?
   verificationCode      String?
+  role                  ROLE                       @default(OUT_OFFICE_EMPLOYEE)
   outOfficeAttendance   OutOfficeAttendance[]      @relation("OutOfficeEmployeeToAttendance")
   outOfficeDayWork      OutOfficeEmployeeDayWork[]
   office                Office                     @relation("OfficeToOutEmployee", fields: [officeId], references: [id])
@@ -159,8 +163,9 @@ model WorkAddress {
 }
 
 enum AttendanceStatus {
-  PRESENT
+  CHECKED_IN
+  CHECKED_OUT
   ABSENT
-  LATE
   ON_LEAVE
+  HALF_DAY
 }
