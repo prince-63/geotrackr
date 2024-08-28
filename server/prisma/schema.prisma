@@ -121,13 +121,39 @@ model OutOfficeEmployee {
 
 // This model is used to track the attendance of the employees who are working out of the office
 model OutOfficeAttendance {
-  id         String            @id @default(auto()) @map("_id") @db.ObjectId
-  employee   OutOfficeEmployee @relation("OutOfficeEmployeeToAttendance", fields: [employeeId], references: [employeeId])
-  employeeId String            @db.ObjectId
-  date       DateTime          @default(now())
-  status     AttendanceStatus?
-  createdAt  DateTime          @default(now())
-  updatedAt  DateTime          @updatedAt
+  id         String                       @id @default(auto()) @map("_id") @db.ObjectId
+  employee   OutOfficeEmployee            @relation("OutOfficeEmployeeToAttendance", fields: [employeeId], references: [employeeId])
+  date       DateTime                     @default(now())
+  employeeId String                       @db.ObjectId
+  checkIn    outOfficeAttendanceCheckIn?  @relation("CheckInToOutOfficeAttendance")
+  checkOut   outOfficeAttendanceCheckOut? @relation("CheckOutToOutOfficeAttendance")
+  totalHours String?
+  createdAt  DateTime                     @default(now())
+  updatedAt  DateTime                     @updatedAt
+}
+
+model outOfficeAttendanceCheckIn {
+  id                    String               @id @default(auto()) @map("_id") @db.ObjectId
+  checkInTime           DateTime
+  outOfficeAttendance   OutOfficeAttendance? @relation("CheckInToOutOfficeAttendance", fields: [outOfficeAttendanceId], references: [id])
+  status                AttendanceStatus?
+  longitude             String
+  latitude              String
+  outOfficeAttendanceId String?              @unique @db.ObjectId
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+}
+
+model outOfficeAttendanceCheckOut {
+  id                    String               @id @default(auto()) @map("_id") @db.ObjectId
+  checkOutTime          DateTime
+  outOfficeAttendance   OutOfficeAttendance? @relation("CheckOutToOutOfficeAttendance", fields: [outOfficeAttendanceId], references: [id])
+  status                AttendanceStatus?
+  longitude             String
+  latitude              String
+  outOfficeAttendanceId String?              @unique @db.ObjectId
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
 }
 
 // This model is used to track the day work of the employees who are working out of the office

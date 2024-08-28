@@ -186,3 +186,27 @@ export const getAllOutOfficeEmployees = async (req, res) => {
     outOfficeEmployees,
   });
 }
+
+export const getOfficeAddress = async (req, res) => {
+  const officeId = req.body.officeId;
+
+  const office = await prisma.office.findFirst({
+    where: { id: officeId },
+  });
+
+  if (!office) {
+    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+  }
+
+  const officeAddress = await prisma.officeAddress.findFirst({
+    where: { id: office.addressId },
+  });
+
+  if (!office) {
+    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+  }
+
+  return responseHandler(res, 200, 'success', "Office Address Fetch Successful.", {
+    officeAddress,
+  });
+}

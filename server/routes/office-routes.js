@@ -1,4 +1,4 @@
-import { createOffice, getOfficeDetails, getAllInOfficeEmployees, getAllOutOfficeEmployees } from '../services/office-service/office-service.js';
+import { createOffice, getOfficeDetails, getAllInOfficeEmployees, getAllOutOfficeEmployees, getOfficeAddress } from '../services/office-service/office-service.js';
 import { masterAdminLogin } from '../services/master-admin-service/master-admin-service.js';
 import { createNewInOfficeEmployee } from '../services/in-office-employee-service/in-office-employee-service.js';
 import masterAdminMiddleware from '../middleware/master-admin-middleware.js';
@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/create-office', createOffice);
 router.get('/get-office-details', masterAdminMiddleware, getOfficeDetails);
+router.get('/get-office-address', getOfficeAddress);
 router.get('/get-all-in-office-employees', masterAdminMiddleware, getAllInOfficeEmployees);
 router.get('/get-all-out-office-employees', masterAdminMiddleware, getAllOutOfficeEmployees);
 router.post('/master-admin-login', masterAdminLogin);

@@ -2,13 +2,41 @@ class ApiConfig {
   // Base URL
   static const String baseUrl = 'http://192.168.0.186:8000/api/v1';
 
+  // get office location coordinates
+  static const String getOfficeLocationCoordinates =
+      '$baseUrl/office/get-office-location';
+
   // join as in office employee
   static const String joinAsInOfficeEmployee =
       '$baseUrl/office/in-office/employee-join';
 
+  // get in office employee detail
+  static const String getInOfficeEmployeeDetail =
+      '$baseUrl/office/in-office/get-employee-detail';
+
+  // check-in attendance for in office employee
+  static const String checkInAttendanceInOfficeEmployee =
+      '$baseUrl/office/in-office/attendance/check-in';
+
+  // check-out attendance for in office employee
+  static const String checkOutAttendanceInOfficeEmployee =
+      '$baseUrl/office/in-office/attendance/check-out';
+
   // join as out office employee
   static const String joinAsOutOfficeEmployee =
       '$baseUrl/office/out-office/employee-join';
+
+  // get out office employee detail
+  static const String getOutOfficeEmployeeDetail =
+      '$baseUrl/office/out-office/get-employee-detail';
+
+  // check-in attendance for out office employee
+  static const String checkInAttendanceOutOfficeEmployee =
+      '$baseUrl/office/out-office/attendance/check-in';
+
+  // check-out attendance for out office employee
+  static const String checkOutAttendanceOutOfficeEmployee =
+      '$baseUrl/office/out-office/attendance/check-out';
 
   // login
   static const String authLogin = '$baseUrl/auth/login';

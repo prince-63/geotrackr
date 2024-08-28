@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/employee-join', inOfficeEmployeeJoin);
 router.get('/get-employee-detail', inOfficeEmployeeMiddleware, getInOfficeEmployeeDetail);
 router.get('/get-office-location', inOfficeEmployeeMiddleware, getOfficeLocationCordinates);
-router.post('/check-in', inOfficeEmployeeMiddleware, checkInAttendanceForInOfficeEmployee);
-router.post('/check-out', inOfficeEmployeeMiddleware, checkOutAttendanceForInOfficeEmployee);
+router.post('/attendance/check-in', inOfficeEmployeeMiddleware, checkInAttendanceForInOfficeEmployee);
+router.post('/attendance/check-out', inOfficeEmployeeMiddleware, checkOutAttendanceForInOfficeEmployee);
 
 export default router;

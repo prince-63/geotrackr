@@ -331,3 +331,24 @@ export const addListOfWorkFromOutOfficeEmployee = async (req, res) => {
 
   return responseHandler(res, 200, 'success', 'Works added successfully', null);
 };
+
+export const getOutOfficeEmployeeDetail = async (req, res) => {
+  const employeeId = req.outOfficeEmployee.employeeId;
+
+  const employee = await prisma.outOfficeEmployee.findUnique({
+    where: { employeeId },
+  });
+
+  if (!employee) {
+    return errorResponseHandler(res, 400, 'fail', 'Invalid employee');
+  }
+
+  return responseHandler(res, 200, 'success', 'Employee details', {
+    employeeId: employee.employeeId,
+    employeeName: employee.employeeName,
+    employeeEmail: employee.employeeEmail,
+    employeeContactNumber: employee.employeeContactNumber,
+    outOfficeDayWork: employee.outOfficeDayWork,
+    OutOfficeAttendance: employee.OutOfficeAttendance,
+  });
+}
