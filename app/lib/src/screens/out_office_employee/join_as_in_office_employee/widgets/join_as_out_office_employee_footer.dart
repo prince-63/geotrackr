@@ -3,8 +3,8 @@ import 'package:idcard/src/utils/custom_color.dart';
 import 'package:idcard/src/utils/custom_media_query.dart';
 import 'package:idcard/src/widgets/custom_button.dart';
 
-class LoginFooter extends StatelessWidget {
-  const LoginFooter({Key? key}) : super(key: key);
+class JoinAsOutOfficeEmployeeFooter extends StatelessWidget {
+  const JoinAsOutOfficeEmployeeFooter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,26 +20,12 @@ class LoginFooter extends StatelessWidget {
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: 'Don’t have an account? you can open account by ',
+                  text:
+                      'you are not joining first time then click below button.',
                   style: TextStyle(
                     color: Colors.black.withOpacity(0.75),
                     fontSize: 14.0,
                   ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'sign up',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black.withOpacity(0.70),
-                      ),
-                    ),
-                    TextSpan(
-                      text: '.',
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.85),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),
@@ -47,9 +33,9 @@ class LoginFooter extends StatelessWidget {
           const SizedBox(height: 10.0),
           CustomButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/signup');
+              Navigator.pushNamed(context, '/login');
             },
-            text: 'Sign up',
+            text: 'Log In',
             color: CustomColor.primaryValue,
           ),
         ],

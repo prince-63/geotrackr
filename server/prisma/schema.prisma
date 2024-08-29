@@ -54,6 +54,8 @@ model MasterOfficeAdmin {
 enum ROLE {
   MASTER_ADMIN
   ADMIN
+  IN_OFFICE_EMPLOYEE
+  OUT_OFFICE_EMPLOYEE
 }
 
 // This model is used to track the admin details
@@ -78,6 +80,7 @@ model InOfficeEmployee {
   employeeContactNumber String
   employeePassword      String?
   verificationCode      String?
+  role                  ROLE?                @default(IN_OFFICE_EMPLOYEE)
   inOfficeAttendance    InOfficeAttendance[] @relation("InOfficeEmployeeToAttendance")
   office                Office               @relation("OfficeToEmployee", fields: [officeId], references: [id])
   createdAt             DateTime             @default(now())
@@ -92,7 +95,7 @@ model InOfficeAttendance {
   employeeId   String            @db.ObjectId
   date         DateTime          @default(now())
   status       AttendanceStatus?
-  totalHours   Int?
+  totalHours   String?
   checkInTime  DateTime?
   checkOutTime DateTime?
   createdAt    DateTime          @default(now())
@@ -107,6 +110,7 @@ model OutOfficeEmployee {
   employeeContactNumber String
   employeePassword      String?
   verificationCode      String?
+  role                  ROLE                       @default(OUT_OFFICE_EMPLOYEE)
   outOfficeAttendance   OutOfficeAttendance[]      @relation("OutOfficeEmployeeToAttendance")
   outOfficeDayWork      OutOfficeEmployeeDayWork[]
   office                Office                     @relation("OfficeToOutEmployee", fields: [officeId], references: [id])
@@ -117,13 +121,39 @@ model OutOfficeEmployee {
 
 // This model is used to track the attendance of the employees who are working out of the office
 model OutOfficeAttendance {
-  id         String            @id @default(auto()) @map("_id") @db.ObjectId
-  employee   OutOfficeEmployee @relation("OutOfficeEmployeeToAttendance", fields: [employeeId], references: [employeeId])
-  employeeId String            @db.ObjectId
-  date       DateTime          @default(now())
-  status     AttendanceStatus?
-  createdAt  DateTime          @default(now())
-  updatedAt  DateTime          @updatedAt
+  id         String                       @id @default(auto()) @map("_id") @db.ObjectId
+  employee   OutOfficeEmployee            @relation("OutOfficeEmployeeToAttendance", fields: [employeeId], references: [employeeId])
+  date       DateTime                     @default(now())
+  employeeId String                       @db.ObjectId
+  checkIn    outOfficeAttendanceCheckIn?  @relation("CheckInToOutOfficeAttendance")
+  checkOut   outOfficeAttendanceCheckOut? @relation("CheckOutToOutOfficeAttendance")
+  totalHours String?
+  createdAt  DateTime                     @default(now())
+  updatedAt  DateTime                     @updatedAt
+}
+
+model outOfficeAttendanceCheckIn {
+  id                    String               @id @default(auto()) @map("_id") @db.ObjectId
+  checkInTime           DateTime
+  outOfficeAttendance   OutOfficeAttendance? @relation("CheckInToOutOfficeAttendance", fields: [outOfficeAttendanceId], references: [id])
+  status                AttendanceStatus?
+  longitude             String
+  latitude              String
+  outOfficeAttendanceId String?              @unique @db.ObjectId
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+}
+
+model outOfficeAttendanceCheckOut {
+  id                    String               @id @default(auto()) @map("_id") @db.ObjectId
+  checkOutTime          DateTime
+  outOfficeAttendance   OutOfficeAttendance? @relation("CheckOutToOutOfficeAttendance", fields: [outOfficeAttendanceId], references: [id])
+  status                AttendanceStatus?
+  longitude             String
+  latitude              String
+  outOfficeAttendanceId String?              @unique @db.ObjectId
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
 }
 
 // This model is used to track the day work of the employees who are working out of the office
@@ -159,8 +189,9 @@ model WorkAddress {
 }
 
 enum AttendanceStatus {
-  PRESENT
+  CHECKED_IN
+  CHECKED_OUT
   ABSENT
-  LATE
   ON_LEAVE
+  HALF_DAY
 }

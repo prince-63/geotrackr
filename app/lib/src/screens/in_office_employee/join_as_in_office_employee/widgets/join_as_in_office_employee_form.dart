@@ -3,20 +3,18 @@ import 'package:idcard/src/utils/custom_color.dart';
 import 'package:idcard/src/widgets/custom_button.dart';
 import 'package:idcard/src/widgets/custom_text_form_field.dart';
 
-class SignupForm extends StatelessWidget {
+class JoinAsInOfficeEmployeeForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final TextEditingController usernameController;
-  final TextEditingController emailController;
+  final TextEditingController textController;
   final TextEditingController passwordController;
-  final VoidCallback onSignup;
+  final VoidCallback onJoin;
 
-  const SignupForm({
+  const JoinAsInOfficeEmployeeForm({
     Key? key,
     required this.formKey,
-    required this.usernameController,
-    required this.emailController,
+    required this.textController,
     required this.passwordController,
-    required this.onSignup,
+    required this.onJoin,
   }) : super(key: key);
 
   @override
@@ -28,25 +26,20 @@ class SignupForm extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormField(
-              controller: usernameController,
-              hintText: 'Username',
-              errorMessage: 'Please enter unique username',
-            ),
-            CustomTextFormField(
-              controller: emailController,
+              controller: textController,
               hintText: 'Email',
-              errorMessage: 'Please enter valid email',
+              errorMessage: "Please enter correct email",
             ),
             CustomTextFormField(
               controller: passwordController,
               hintText: 'Password',
               obscureText: true,
-              errorMessage: 'Please enter valid password',
+              errorMessage: "Please enter correct password",
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 5.0),
             CustomButton(
-              onPressed: onSignup,
-              text: 'Sign up',
+              onPressed: onJoin,
+              text: 'Join Now',
               color: CustomColor.primaryValue,
             ),
           ],

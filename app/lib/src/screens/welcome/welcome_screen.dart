@@ -14,11 +14,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    SharePreferences.containsKey('token').then((value) {
-      if (value) {
-        Navigator.pushNamed(context, '/home');
-      }
-    });
+    // SharePreferences.containsKey('token').then((value) {
+    //   if (value) {
+    //     Navigator.pushNamed(context, '/home');
+    //   }
+    // });
   }
 
   @override
@@ -26,7 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0), // Add 20 pixels of padding
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

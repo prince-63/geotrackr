@@ -14,7 +14,7 @@ class WelcomeImage extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Text(
-            'Create Your Perfect Identity Card',
+            'Join Your Office',
             style: TextStyle(
               fontSize: 16,
               color: Colors.black.withOpacity(0.8),

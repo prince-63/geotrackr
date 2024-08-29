@@ -43,87 +43,91 @@ class _CalenderState extends State<Calender> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                TableCalendar(
-                  firstDay: DateTime.utc(2024, 8, 1),
-                  lastDay: DateTime.utc(2030, 12, 31),
-                  focusedDay: _focusedDay,
-                  calendarFormat: _calendarFormat,
-                  selectedDayPredicate: (day) {
-                    return isSameDay(_selectedDay, day);
-                  },
-                  onDaySelected: (selectedDay, focusedDay) {
-                    setState(() {
-                      _selectedDay = selectedDay;
-                      _focusedDay =
-                          focusedDay; // update `_focusedDay` here as well
-                    });
-                  },
-                  onFormatChanged: (format) {
-                    if (_calendarFormat != format) {
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : Column(
+                children: [
+                  TableCalendar(
+                    firstDay: DateTime.utc(2024, 8, 1),
+                    lastDay: DateTime.utc(2030, 12, 31),
+                    focusedDay: _focusedDay,
+                    calendarFormat: _calendarFormat,
+                    selectedDayPredicate: (day) {
+                      return isSameDay(_selectedDay, day);
+                    },
+                    onDaySelected: (selectedDay, focusedDay) {
                       setState(() {
-                        _calendarFormat = format;
+                        _selectedDay = selectedDay;
+                        _focusedDay =
+                            focusedDay; // update `_focusedDay` here as well
                       });
-                    }
-                  },
-                  onPageChanged: (focusedDay) {
-                    _focusedDay = focusedDay;
-                  },
-                  calendarBuilders: CalendarBuilders(
-                    defaultBuilder: (context, day, focusedDay) {
-                      List attendance = _getAttendanceForDay(day);
-                      Color? backgroundColor;
-                      if (attendance.contains('PRESENT')) {
-                        backgroundColor = Colors.green;
-                      } else if (attendance.contains('ABSENT')) {
-                        backgroundColor = Colors.red;
+                    },
+                    onFormatChanged: (format) {
+                      if (_calendarFormat != format) {
+                        setState(() {
+                          _calendarFormat = format;
+                        });
                       }
-                      return Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: backgroundColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Text(
-                            day.day.toString(),
-                            style: TextStyle(
-                                color: const Color.fromARGB(255, 0, 0, 0)),
+                    },
+                    onPageChanged: (focusedDay) {
+                      _focusedDay = focusedDay;
+                    },
+                    calendarBuilders: CalendarBuilders(
+                      defaultBuilder: (context, day, focusedDay) {
+                        List attendance = _getAttendanceForDay(day);
+                        Color? backgroundColor;
+                        if (attendance.contains('PRESENT')) {
+                          backgroundColor = Colors.green;
+                        } else if (attendance.contains('ABSENT')) {
+                          backgroundColor = Colors.red;
+                        }
+                        return Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: backgroundColor,
+                            shape: BoxShape.circle,
                           ),
-                        ),
-                      );
-                    },
+                          child: Center(
+                            child: Text(
+                              day.day.toString(),
+                              style: TextStyle(
+                                  color: const Color.fromARGB(255, 0, 0, 0)),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8.0),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: _getAttendanceForDay(_selectedDay).length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(_getAttendanceForDay(_selectedDay)[index]),
-                      );
-                    },
+                  const SizedBox(height: 8.0),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: _getAttendanceForDay(_selectedDay).length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title:
+                              Text(_getAttendanceForDay(_selectedDay)[index]),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                // total attendance
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  color: Colors.grey[200],
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Total Present Attendance: '),
-                      Text('${_totalPresentAttendance} days'),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                  // total attendance
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.grey[200],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Total Present Attendance: '),
+                        Text('${_totalPresentAttendance} days'),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+      ),
     );
   }
 

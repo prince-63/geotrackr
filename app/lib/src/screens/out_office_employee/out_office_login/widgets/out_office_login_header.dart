@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:idcard/src/utils/custom_media_query.dart';
 
-class LoginHeader extends StatelessWidget {
-  const LoginHeader({Key? key}) : super(key: key);
+class OutOfficeLoginHeader extends StatelessWidget {
+  const OutOfficeLoginHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class LoginHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              'Log in with your email and password that you used for sign up.',
+              'Log in with your email and password that you used for joining.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.85),

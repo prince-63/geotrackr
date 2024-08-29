@@ -1,19 +1,21 @@
-import 'package:idcard/src/utils/custom_media_query.dart';
 import 'package:flutter/material.dart';
+import 'package:idcard/src/utils/custom_media_query.dart';
 
-class SignupHeader extends StatelessWidget {
+class InOfficeLoginHeader extends StatelessWidget {
+  const InOfficeLoginHeader({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 22.0),
-      height: CustomMediaQuery.screenHeight(context) * 0.25,
+      padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
+      height: CustomMediaQuery.screenHeight(context) * 0.3,
       width: CustomMediaQuery.screenWidth(context),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Sign up',
+              'Log in',
               style: TextStyle(
                 color: Colors.black.withOpacity(0.9),
                 fontSize: 20.0,
@@ -22,7 +24,7 @@ class SignupHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              'Sign up with your name, email and password that you use.',
+              'Log in with your email and password that you used for joining.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.85),

@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 export const createNewInOfficeEmployee = async (req, res) => {
   const { employeeName, employeeEmail, employeeContactNumber } = req.body;
 
-  const officeId = req.user.officeId;
+  const officeId = req.masterOfficeAdmin.officeId;
 
   if (!employeeName || !employeeEmail || !employeeContactNumber || !officeId) {
     return errorResponseHandler(
@@ -53,7 +53,7 @@ export const createNewInOfficeEmployee = async (req, res) => {
     return errorResponseHandler(res, 500, 'fail', 'Something went wrong');
   }
 
-  return responseHandler(res, 201, 'success', 'Employee created successfully', {
+  return responseHandler(res, 201, 'success', 'in office employee created successfully', {
     employeeId: newEmployee.employeeId,
     employeeName: newEmployee.employeeName,
     employeeEmail: newEmployee.employeeEmail,
@@ -63,6 +63,8 @@ export const createNewInOfficeEmployee = async (req, res) => {
 
 export const inOfficeEmployeeJoin = async (req, res) => {
   const { employeeEmail, employeePassword } = req.body;
+
+  console.log(employeeEmail, employeePassword);
 
   if (!employeeEmail || !employeePassword) {
     return errorResponseHandler(
@@ -98,13 +100,89 @@ export const inOfficeEmployeeJoin = async (req, res) => {
     httpOnly: true,
   });
 
-  return responseHandler(res, 200, 'success', 'Join successful', {
+  return responseHandler(res, 200, 'success', 'in office employee join successful.', {
     token,
-    data: {
+    employee: {
       employeeId: inOfficeEmployee.employeeId,
       employeeName: inOfficeEmployee.employeeName,
       employeeEmail: inOfficeEmployee.employeeEmail,
       employeeContactNumber: inOfficeEmployee.employeeContactNumber,
+      employeeRole: inOfficeEmployee.role,
     },
   });
 };
+
+export const getInOfficeEmployeeDetail = async (req, res) => {
+  const employeeId = req.inOfficeEmployee.employeeId;
+
+  const employee = await prisma.inOfficeEmployee.findFirst({
+    where: { employeeId },
+    select: {
+      employeeId: true,
+      employeeName: true,
+      employeeEmail: true,
+      employeeContactNumber: true,
+    },
+  });
+
+  if (!employee) {
+    return errorResponseHandler(res, 404, 'fail', 'Employee not found');
+  }
+
+  return responseHandler(res, 200, 'success', "fetch in office employee details successful.", {
+    employee,
+  });
+}
+
+export const getOfficeLocationCordinates = async (req, res) => {
+  const employeeId = req.inOfficeEmployee.employeeId;
+
+  const employee = await prisma.inOfficeEmployee.findFirst({
+    where: { employeeId },
+    select: {
+      officeId: true,
+    },
+  });
+
+  //console.log(employee);
+
+  if (!employee) {
+    return errorResponseHandler(res, 404, 'fail', 'Employee not found');
+  }
+
+  const office = await prisma.office.findFirst({
+    where: { id: employee.officeId },
+    select: {
+      addressId: true,
+    }
+  });
+
+  //console.log(office);
+
+  if (!office) {
+    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+  }
+
+  const address = await prisma.officeAddress.findFirst({
+    where: { id: office.addressId },
+    select: {
+      officeName: true,
+      officePincode: true,
+      officeCity: true,
+      officeState: true,
+      officeCountry: true,
+      officeLongitude: true,
+      officeLatitude: true,
+    }
+  });
+
+  //console.log(address);
+
+  if (!address) {
+    return errorResponseHandler(res, 404, 'fail', 'Address not found');
+  }
+
+  return responseHandler(res, 200, 'success', {
+    address,
+  });
+}

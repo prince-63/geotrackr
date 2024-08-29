@@ -9,17 +9,17 @@ class WelcomeFooter extends StatelessWidget {
       children: [
         CustomButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushNamed(context, '/join-as-in-office-employee');
           },
-          text: 'Login',
+          text: 'Join as In-Office Employee',
           color: CustomColor.primaryValue,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         CustomButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/signup');
+            Navigator.pushNamed(context, '/join-as-out-of-office-employee');
           },
-          text: 'Sign up',
+          text: 'Join as Out-Office Employee',
           color: CustomColor.primaryValue,
         ),
       ],
