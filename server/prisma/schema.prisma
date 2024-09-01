@@ -10,8 +10,10 @@ generator client {
 // This model is used to track the office details
 model Office {
   id                  String              @id @default(auto()) @map("_id") @db.ObjectId
-  officeEmail         String
-  officeContactNumber String
+  officeName          String?
+  officeEmail         String?
+  officePassword      String?
+  officeContactNumber String?
   address             OfficeAddress?      @relation("OfficeToAddress", fields: [addressId], references: [id])
   addressId           String?             @unique @db.ObjectId
   createdAt           DateTime            @default(now())
