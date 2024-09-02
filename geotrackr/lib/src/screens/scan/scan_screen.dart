@@ -2,7 +2,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:idcard/src/screens/scan/widgets/qr_view_container.dart';
 import 'package:idcard/src/screens/scan/widgets/scan_header.dart';
 import 'package:flutter/material.dart';
-import 'package:idcard/src/screens/scan/widgets/toggle_buttons.dart';
 import 'package:idcard/src/services/attendance/attendance_service.dart';
 import 'package:idcard/src/services/location/location_service.dart';
 import 'package:idcard/src/widgets/custom_messages.dart';

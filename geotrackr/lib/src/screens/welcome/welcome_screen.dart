@@ -1,6 +1,5 @@
 import 'package:idcard/src/screens/welcome/widgets/welcome_footer.dart';
 import 'package:idcard/src/screens/welcome/widgets/welcome_image.dart';
-import 'package:idcard/src/utils/share_preferences.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
