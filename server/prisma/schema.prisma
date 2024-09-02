@@ -7,52 +7,27 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// This model is used to track the office details
 model Office {
-  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  officeId            String              @id @default(auto()) @map("_id") @db.ObjectId
+  officeName          String
   officeEmail         String
-  officeContactNumber String
-  address             OfficeAddress?      @relation("OfficeToAddress", fields: [addressId], references: [id])
-  addressId           String?             @unique @db.ObjectId
+  officePassword      String
+  officeContactNumber String?
+  officeSubTitle      String?
+  officeCity          String?
+  officeState         String?
+  officeCountry       String?
+  officePincodes      String?
+  officeLongitude     String?
+  officeLatitude      String?
   createdAt           DateTime            @default(now())
   updatedAt           DateTime            @updatedAt
   inOfficeEmployee    InOfficeEmployee[]  @relation("OfficeToEmployee")
   outOfficeEmployee   OutOfficeEmployee[] @relation("OfficeToOutEmployee")
-  masterOfficeAdmin   MasterOfficeAdmin?  @relation("MasterOfficeAdminToOffice")
   admin               Admin[]             @relation("AdminToOffice")
 }
 
-// This model is used to track the office address details
-model OfficeAddress {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  officeName      String
-  officeCity      String
-  officeState     String
-  officeCountry   String
-  officePincode   String
-  officeLongitude String
-  officeLatitude  String
-  office          Office?  @relation("OfficeToAddress")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
-// This model is used to track the master office admin details
-model MasterOfficeAdmin {
-  id                             String   @id @default(auto()) @map("_id") @db.ObjectId
-  masterOfficeAdminName          String
-  masterOfficeAdminEmail         String
-  masterOfficeAdminContactNumber String
-  masterOfficeAdminPassword      String
-  role                           ROLE?
-  office                         Office   @relation("MasterOfficeAdminToOffice", fields: [officeId], references: [id])
-  createdAt                      DateTime @default(now())
-  updatedAt                      DateTime @updatedAt
-  officeId                       String   @unique @db.ObjectId
-}
-
 enum ROLE {
-  MASTER_ADMIN
   ADMIN
   IN_OFFICE_EMPLOYEE
   OUT_OFFICE_EMPLOYEE
@@ -66,7 +41,7 @@ model Admin {
   adminContactNumber String
   adminPassword      String
   role               ROLE?
-  office             Office   @relation("AdminToOffice", fields: [officeId], references: [id])
+  office             Office   @relation("AdminToOffice", fields: [officeId], references: [officeId])
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
   officeId           String   @db.ObjectId
@@ -82,7 +57,7 @@ model InOfficeEmployee {
   verificationCode      String?
   role                  ROLE?                @default(IN_OFFICE_EMPLOYEE)
   inOfficeAttendance    InOfficeAttendance[] @relation("InOfficeEmployeeToAttendance")
-  office                Office               @relation("OfficeToEmployee", fields: [officeId], references: [id])
+  office                Office               @relation("OfficeToEmployee", fields: [officeId], references: [officeId])
   createdAt             DateTime             @default(now())
   updatedAt             DateTime             @updatedAt
   officeId              String               @db.ObjectId
@@ -113,7 +88,7 @@ model OutOfficeEmployee {
   role                  ROLE                       @default(OUT_OFFICE_EMPLOYEE)
   outOfficeAttendance   OutOfficeAttendance[]      @relation("OutOfficeEmployeeToAttendance")
   outOfficeDayWork      OutOfficeEmployeeDayWork[]
-  office                Office                     @relation("OfficeToOutEmployee", fields: [officeId], references: [id])
+  office                Office                     @relation("OfficeToOutEmployee", fields: [officeId], references: [officeId])
   createdAt             DateTime                   @default(now())
   updatedAt             DateTime                   @updatedAt
   officeId              String                     @db.ObjectId

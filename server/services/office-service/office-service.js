@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { hashPassword } from '../../helper/password.js';
+import { hashPassword, comparePassword } from '../../helper/password.js';
 import signToken from '../../helper/jwt-sign-token.js';
 import { parseDuration } from '../../utils/parse-duration.js';
 import errorResponseHandler from '../../handlers/error-response-handlers.js';
@@ -7,38 +7,14 @@ import responseHandler from '../../handlers/response-handlers.js';
 
 const prisma = new PrismaClient();
 
-export const createOffice = async (req, res) => {
+export const officeSingup = async (req, res) => {
   const {
-    officeEmail,
     officeName,
-    officeCity,
-    officeState,
-    officeCountry,
-    officePincode,
-    officeLongitude,
-    officeLatitude,
-    officeContactNumber,
-    masterOfficeAdminName,
-    masterOfficeAdminEmail,
-    masterOfficeAdminContactNumber,
-    masterOfficeAdminPassword,
+    officeEmail,
+    officePassword
   } = req.body;
 
-  if (
-    !officeEmail ||
-    !officeName ||
-    !officeCity ||
-    !officeState ||
-    !officeCountry ||
-    !officePincode ||
-    !officeLongitude ||
-    !officeLatitude ||
-    !officeContactNumber ||
-    !masterOfficeAdminName ||
-    !masterOfficeAdminEmail ||
-    !masterOfficeAdminContactNumber ||
-    !masterOfficeAdminPassword
-  ) {
+  if (!officeName || !officeEmail || !officePassword) {
     return errorResponseHandler(
       res,
       400,
@@ -60,89 +36,217 @@ export const createOffice = async (req, res) => {
     );
   }
 
-  const hashedPassword = await hashPassword(masterOfficeAdminPassword);
+  const hashedPassword = await hashPassword(officePassword);
 
   let office;
-  let officeAddress;
-  let masterOfficeAdmin;
   try {
-    officeAddress = await prisma.officeAddress.create({
-      data: {
-        officeName,
-        officeCity,
-        officeState,
-        officeCountry,
-        officePincode,
-        officeLongitude,
-        officeLatitude,
-      },
-    });
-
     office = await prisma.office.create({
       data: {
+        officeName,
         officeEmail,
-        officeContactNumber,
-        addressId: officeAddress.id,
+        officePassword: hashedPassword,
       },
     });
-
-    masterOfficeAdmin = await prisma.masterOfficeAdmin.create({
-      data: {
-        officeId: office.id,
-        masterOfficeAdminName,
-        masterOfficeAdminEmail,
-        masterOfficeAdminContactNumber,
-        masterOfficeAdminPassword: hashedPassword,
-        role: 'MASTER_ADMIN',
-      },
-    });
-  } catch (error) {
-    next(error);
+  }
+  catch (error) {
+    console.log(error);
+    return errorResponseHandler(res, 500, 'fail', 'Internal Server Error');
   }
 
-  const token = signToken({ id: masterOfficeAdmin.id });
+  const token = signToken({ id: office.officeId });
 
   const cookieExpiresInMs = parseDuration(process.env.JWT_EXPIRES_IN);
+
   // Set the token in a cookie
   res.cookie('token', token, {
     expires: new Date(Date.now() + cookieExpiresInMs),
     httpOnly: true,
   });
 
-  return responseHandler(res, 201, 'success', {
+  return responseHandler(res, 201, 'success', "Signup Successful.", {
     token,
   });
-};
+}
 
-export const getOfficeDetails = async (req, res) => {
-  const officeId = req.masterOfficeAdmin.officeId;
+export const officeLogin = async (req, res) => {
+  const { officeEmail, officePassword } = req.body;
 
-  const office = await prisma.office.findFirst({
-    where: { id: officeId },
-  });
-
-  if (!office) {
-    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+  if (!officeEmail || !officePassword) {
+    return errorResponseHandler(
+      res,
+      400,
+      'fail',
+      'Please provide all required fields'
+    );
   }
 
-  console.log(office);
-
-  const officeAddress = await prisma.officeAddress.findFirst({
-    where: { id: office.addressId },
+  const office = await prisma.office.findFirst({
+    where: { officeEmail },
   });
 
   if (!office) {
-    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+    return errorResponseHandler(
+      res,
+      401,
+      'fail',
+      'Invalid email or password'
+    );
+  }
+
+  const isPasswordCorrect = await comparePassword(
+    officePassword,
+    office.officePassword
+  );
+
+  if (!isPasswordCorrect) {
+    return errorResponseHandler(
+      res,
+      401,
+      'fail',
+      'Invalid email or password'
+    );
+  }
+
+  const token = signToken({ id: office.officeId });
+
+  const cookieExpiresInMs = parseDuration(process.env.JWT_EXPIRES_IN);
+
+  // Set the token in a cookie
+  res.cookie('token', token, {
+    expires: new Date(Date.now() + cookieExpiresInMs),
+    httpOnly: true,
+  });
+
+  return responseHandler(res, 200, 'success', "Login Successful.", {
+    token,
+  });
+}
+
+export const uploadOfficeDetails = async (req, res) => {
+  const officeId = req.office.officeId;
+  const {
+    officeName,
+    officeSubTitle,
+    officeEmail,
+    officeContactNumber,
+    officeCity,
+    officeCountry,
+    officePincodes,
+    officeLongitude,
+    officeLatitude
+  } = req.body;
+
+  const officeDetails = await prisma.officeDetails.findFirst({
+    where: { officeId },
+  });
+
+  if (officeDetails) {
+    return errorResponseHandler(res, 400, 'fail', 'Office details already uploaded');
+  }
+
+  let officeDetailsData;
+  try {
+    officeDetailsData = await prisma.officeDetails.create({
+      data: {
+        officeId,
+        officeName,
+        officeSubTitle,
+        officeEmail,
+        officeContactNumber,
+        officeCity,
+        officeCountry,
+        officePincodes,
+        officeLongitude,
+        officeLatitude
+      },
+    });
+  }
+  catch (error) {
+    console.log(error);
+    return errorResponseHandler(res, 500, 'fail', 'Internal Server Error');
+  }
+
+  return responseHandler(res, 201, 'success', "Office Details Upload Successful.", {
+    officeDetailsData,
+  });
+}
+
+export const getOfficeDetails = async (req, res) => {
+  const officeId = req.office.officeId;
+
+  const officeDetails = await prisma.office.findUnique({
+    where: { officeId },
+    select: {
+      officeId: true,
+      officeName: true,
+      officeEmail: true,
+      officeSubTitle: true,
+      officeContactNumber: true,
+      officeCity: true,
+      officeState: true,
+      officeCountry: true,
+      officePincodes: true,
+      officeLongitude: true,
+      officeLatitude: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  if (!officeDetails) {
+    return errorResponseHandler(res, 404, 'fail', 'Office details not found');
   }
 
   return responseHandler(res, 200, 'success', "Office Details Fetch Successful.", {
-    office,
-    officeAddress,
+    officeDetails,
+  });
+}
+
+export const updateOfficeDetails = async (req, res) => {
+  const officeId = req.office.officeId;
+  const {
+    officeName,
+    officeSubTitle,
+    officeEmail,
+    officeContactNumber,
+    officeCity,
+    officeState,
+    officeCountry,
+    officePincodes,
+    officeLongitude,
+    officeLatitude
+  } = req.body;
+
+  let updatedOfficeDetails;
+  try {
+    updatedOfficeDetails = await prisma.office.update({
+      where: { officeId },
+      data: {
+        officeName,
+        officeSubTitle,
+        officeEmail,
+        officeContactNumber,
+        officeCity,
+        officeState,
+        officeCountry,
+        officePincodes,
+        officeLongitude,
+        officeLatitude
+      },
+    });
+  }
+  catch (error) {
+    console.log(error);
+    return errorResponseHandler(res, 500, 'fail', 'Internal Server Error');
+  }
+
+  return responseHandler(res, 200, 'success', "Office Details Update Successful.", {
+    updatedOfficeDetails,
   });
 }
 
 export const getAllInOfficeEmployees = async (req, res) => {
-  const officeId = req.masterOfficeAdmin.officeId;
+  const officeId = req.office.officeId;
 
   const inOfficeEmployees = await prisma.inOfficeEmployee.findMany({
     where: { officeId },
@@ -151,7 +255,6 @@ export const getAllInOfficeEmployees = async (req, res) => {
       employeeName: true,
       employeeEmail: true,
       employeeContactNumber: true,
-      role: true,
     }
   });
 
