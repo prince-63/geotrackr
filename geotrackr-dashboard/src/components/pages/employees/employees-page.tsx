@@ -1,7 +1,10 @@
+
+import InOfficeEmployee from "./in-office-employee";
+
 const EmployeesPage = () => {
   return (
-    <div>
-      <h1>Employee Page</h1>
+    <div className="p-4 h-full">
+      <InOfficeEmployee />
     </div>
   );
 };

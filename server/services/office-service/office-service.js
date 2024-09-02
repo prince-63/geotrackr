@@ -53,7 +53,7 @@ export const officeSingup = async (req, res) => {
     return errorResponseHandler(res, 500, 'fail', 'Internal Server Error');
   }
 
-  const token = signToken({ id: office.id });
+  const token = signToken({ id: office.officeId });
 
   const cookieExpiresInMs = parseDuration(process.env.JWT_EXPIRES_IN);
 
@@ -107,7 +107,7 @@ export const officeLogin = async (req, res) => {
     );
   }
 
-  const token = signToken({ id: office.id });
+  const token = signToken({ id: office.officeId });
 
   const cookieExpiresInMs = parseDuration(process.env.JWT_EXPIRES_IN);
 
@@ -122,142 +122,131 @@ export const officeLogin = async (req, res) => {
   });
 }
 
-export const createOffice = async (req, res) => {
+export const uploadOfficeDetails = async (req, res) => {
+  const officeId = req.office.officeId;
   const {
-    officeEmail,
     officeName,
-    officeCity,
-    officeState,
-    officeCountry,
-    officePincode,
-    officeLongitude,
-    officeLatitude,
+    officeSubTitle,
+    officeEmail,
     officeContactNumber,
-    masterOfficeAdminName,
-    masterOfficeAdminEmail,
-    masterOfficeAdminContactNumber,
-    masterOfficeAdminPassword,
+    officeCity,
+    officeCountry,
+    officePincodes,
+    officeLongitude,
+    officeLatitude
   } = req.body;
 
-  if (
-    !officeEmail ||
-    !officeName ||
-    !officeCity ||
-    !officeState ||
-    !officeCountry ||
-    !officePincode ||
-    !officeLongitude ||
-    !officeLatitude ||
-    !officeContactNumber ||
-    !masterOfficeAdminName ||
-    !masterOfficeAdminEmail ||
-    !masterOfficeAdminContactNumber ||
-    !masterOfficeAdminPassword
-  ) {
-    return errorResponseHandler(
-      res,
-      400,
-      'fail',
-      'Please provide all required fields'
-    );
-  }
-
-  const existingOffice = await prisma.office.findFirst({
-    where: { officeEmail },
+  const officeDetails = await prisma.officeDetails.findFirst({
+    where: { officeId },
   });
 
-  if (existingOffice) {
-    return errorResponseHandler(
-      res,
-      400,
-      'fail',
-      'Office with that email already exists'
-    );
+  if (officeDetails) {
+    return errorResponseHandler(res, 400, 'fail', 'Office details already uploaded');
   }
 
-  const hashedPassword = await hashPassword(masterOfficeAdminPassword);
-
-  let office;
-  let officeAddress;
-  let masterOfficeAdmin;
+  let officeDetailsData;
   try {
-    officeAddress = await prisma.officeAddress.create({
+    officeDetailsData = await prisma.officeDetails.create({
       data: {
+        officeId,
         officeName,
-        officeCity,
-        officeState,
-        officeCountry,
-        officePincode,
-        officeLongitude,
-        officeLatitude,
-      },
-    });
-
-    office = await prisma.office.create({
-      data: {
+        officeSubTitle,
         officeEmail,
         officeContactNumber,
-        addressId: officeAddress.id,
+        officeCity,
+        officeCountry,
+        officePincodes,
+        officeLongitude,
+        officeLatitude
       },
     });
-
-    masterOfficeAdmin = await prisma.masterOfficeAdmin.create({
-      data: {
-        officeId: office.id,
-        masterOfficeAdminName,
-        masterOfficeAdminEmail,
-        masterOfficeAdminContactNumber,
-        masterOfficeAdminPassword: hashedPassword,
-        role: 'MASTER_ADMIN',
-      },
-    });
-  } catch (error) {
-    next(error);
+  }
+  catch (error) {
+    console.log(error);
+    return errorResponseHandler(res, 500, 'fail', 'Internal Server Error');
   }
 
-  const token = signToken({ id: masterOfficeAdmin.id });
-
-  const cookieExpiresInMs = parseDuration(process.env.JWT_EXPIRES_IN);
-  // Set the token in a cookie
-  res.cookie('token', token, {
-    expires: new Date(Date.now() + cookieExpiresInMs),
-    httpOnly: true,
+  return responseHandler(res, 201, 'success', "Office Details Upload Successful.", {
+    officeDetailsData,
   });
-
-  return responseHandler(res, 201, 'success', {
-    token,
-  });
-};
+}
 
 export const getOfficeDetails = async (req, res) => {
-  const officeId = req.masterOfficeAdmin.officeId;
+  const officeId = req.office.officeId;
 
-  const office = await prisma.office.findFirst({
-    where: { id: officeId },
+  const officeDetails = await prisma.office.findUnique({
+    where: { officeId },
+    select: {
+      officeId: true,
+      officeName: true,
+      officeEmail: true,
+      officeSubTitle: true,
+      officeContactNumber: true,
+      officeCity: true,
+      officeState: true,
+      officeCountry: true,
+      officePincodes: true,
+      officeLongitude: true,
+      officeLatitude: true,
+      createdAt: true,
+      updatedAt: true,
+    },
   });
 
-  if (!office) {
-    return errorResponseHandler(res, 404, 'fail', 'Office not found');
-  }
-
-  console.log(office);
-
-  const officeAddress = await prisma.officeAddress.findFirst({
-    where: { id: office.addressId },
-  });
-
-  if (!office) {
-    return errorResponseHandler(res, 404, 'fail', 'Office not found');
+  if (!officeDetails) {
+    return errorResponseHandler(res, 404, 'fail', 'Office details not found');
   }
 
   return responseHandler(res, 200, 'success', "Office Details Fetch Successful.", {
-    office,
-    officeAddress,
+    officeDetails,
+  });
+}
+
+export const updateOfficeDetails = async (req, res) => {
+  const officeId = req.office.officeId;
+  const {
+    officeName,
+    officeSubTitle,
+    officeEmail,
+    officeContactNumber,
+    officeCity,
+    officeState,
+    officeCountry,
+    officePincodes,
+    officeLongitude,
+    officeLatitude
+  } = req.body;
+
+  let updatedOfficeDetails;
+  try {
+    updatedOfficeDetails = await prisma.office.update({
+      where: { officeId },
+      data: {
+        officeName,
+        officeSubTitle,
+        officeEmail,
+        officeContactNumber,
+        officeCity,
+        officeState,
+        officeCountry,
+        officePincodes,
+        officeLongitude,
+        officeLatitude
+      },
+    });
+  }
+  catch (error) {
+    console.log(error);
+    return errorResponseHandler(res, 500, 'fail', 'Internal Server Error');
+  }
+
+  return responseHandler(res, 200, 'success', "Office Details Update Successful.", {
+    updatedOfficeDetails,
   });
 }
 
 export const getAllInOfficeEmployees = async (req, res) => {
-  const officeId = req.masterOfficeAdmin.officeId;
+  const officeId = req.office.officeId;
 
   const inOfficeEmployees = await prisma.inOfficeEmployee.findMany({
     where: { officeId },
@@ -266,7 +255,6 @@ export const getAllInOfficeEmployees = async (req, res) => {
       employeeName: true,
       employeeEmail: true,
       employeeContactNumber: true,
-      role: true,
     }
   });
 

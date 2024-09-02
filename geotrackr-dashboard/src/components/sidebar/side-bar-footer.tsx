@@ -6,7 +6,7 @@ import Typography from "../general/typography";
 
 const SideBarFooter: React.FC = () => {
   return (
-    <div className="mt-auto">
+    <div className="mt-auto flex-1">
       <nav>
         <ul className="space-y-1">
           {dashboard_sidebar_footer.map((link, index) => (

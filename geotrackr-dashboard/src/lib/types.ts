@@ -12,3 +12,12 @@ export type DASHBOARD_SIDEBAR_LINKS_FOOTER_TYPE = {
   icon: ComponentType<{ className?: string }>;
   link: string;
 }[];
+
+interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export type InOfficeEmployeeType = Employee[];

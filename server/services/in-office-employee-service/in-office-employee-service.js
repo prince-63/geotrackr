@@ -10,9 +10,11 @@ import responseHandler from '../../handlers/response-handlers.js';
 const prisma = new PrismaClient();
 
 export const createNewInOfficeEmployee = async (req, res) => {
-  const { employeeName, employeeEmail, employeeContactNumber } = req.body;
+  const employeeName = req.body.name;
+  const employeeEmail = req.body.email;
+  const employeeContactNumber = req.body.phone;
 
-  const officeId = req.masterOfficeAdmin.officeId;
+  const officeId = req.office.officeId;
 
   if (!employeeName || !employeeEmail || !employeeContactNumber || !officeId) {
     return errorResponseHandler(
@@ -58,6 +60,68 @@ export const createNewInOfficeEmployee = async (req, res) => {
     employeeName: newEmployee.employeeName,
     employeeEmail: newEmployee.employeeEmail,
     employeeContactNumber: newEmployee.employeeContactNumber,
+  });
+};
+
+export const deleteInOfficeEmployee = async (req, res) => {
+  const employeeId = req.params.employeeId;
+  console.log(employeeId);
+
+  const employee = await prisma.inOfficeEmployee.findFirst({
+    where: { employeeId },
+  });
+
+  console.log(employee);
+
+  if (!employee) {
+    return errorResponseHandler(res, 404, 'fail', 'Employee not found');
+  }
+
+  await prisma.inOfficeEmployee.delete({
+    where: { employeeId },
+  });
+
+  return responseHandler(res, 200, 'success', 'Employee deleted successfully');
+};
+
+export const updateInOfficeEmployee = async (req, res) => {
+  const employeeId = req.params.employeeId;
+
+  const employeeName = req.body.name;
+  const employeeEmail = req.body.email;
+  const employeeContactNumber = req.body.phone;
+
+  if (!employeeName || !employeeEmail || !employeeContactNumber) {
+    return errorResponseHandler(
+      res,
+      400,
+      'fail',
+      'Please provide all required fields'
+    );
+  }
+
+  const employee = await prisma.inOfficeEmployee.findFirst({
+    where: { employeeId },
+  });
+
+  if (!employee) {
+    return errorResponseHandler(res, 404, 'fail', 'Employee not found');
+  }
+
+  const updatedEmployee = await prisma.inOfficeEmployee.update({
+    where: { employeeId },
+    data: {
+      employeeName,
+      employeeEmail,
+      employeeContactNumber,
+    },
+  });
+
+  return responseHandler(res, 200, 'success', 'Employee updated successfully', {
+    employeeId: updatedEmployee.employeeId,
+    employeeName: updatedEmployee.employeeName,
+    employeeEmail: updatedEmployee.employeeEmail,
+    employeeContactNumber: updatedEmployee.employeeContactNumber,
   });
 };
 

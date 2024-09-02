@@ -6,7 +6,7 @@ const Layout: React.FC = () => {
   return (
     <div className="flex h-screen">
       <SideBar />
-      <div className="ml-52 flex-1 p-4 overflow-y-auto">
+      <div className="ml-52 flex-1 p-0 overflow-y-auto mb-20">
         <Outlet />
       </div>
     </div>

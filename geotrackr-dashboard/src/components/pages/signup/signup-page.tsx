@@ -17,7 +17,7 @@ const Signup: React.FC = () => {
   const { setUserStatus } = useUserContext();
   const navigate = useNavigate();
 
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOfficeName(e.target.value);
   };
 
@@ -63,7 +63,7 @@ const Signup: React.FC = () => {
               type="text"
               placeholder="Name"
               value={officeName}
-              onChange={handleUsernameChange}
+              onChange={handleNameChange}
               icon={User}
               className="w-full text-lg text-gray-700"
             />

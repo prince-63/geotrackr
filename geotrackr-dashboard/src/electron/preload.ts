@@ -20,9 +20,6 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     const [channel, ...omit] = args;
     return ipcRenderer.invoke(channel, ...omit);
   },
-
-  // You can expose other APIs you need here.
-  // ...
 });
 
 contextBridge.exposeInMainWorld("electron", {

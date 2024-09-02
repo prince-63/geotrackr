@@ -33,7 +33,8 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
     },
-    // autoHideMenuBar: true, // Add this line to auto-hide the menu bar
+    autoHideMenuBar: true, // Add this line to auto-hide the menu bar
+    frame: false,
   });
 
   win.webContents.on("did-finish-load", () => {
@@ -47,7 +48,7 @@ function createWindow() {
   }
 
   // Explicitly hide the menu bar
-  // win.setMenuBarVisibility(false);
+  win.setMenuBarVisibility(false);
 }
 
 app.on("window-all-closed", () => {
@@ -78,5 +79,23 @@ ipcMain.handle("get-token", () => {
 ipcMain.handle("remove-token", () => {
   store.delete("jwtToken");
 });
+
+// IPC handlers for window controls
+ipcMain.on("minimize-window", () => {
+  win?.minimize();
+});
+
+ipcMain.on("maximize-window", () => {
+  if (win?.isMaximized()) {
+    win.unmaximize();
+  } else {
+    win?.maximize();
+  }
+});
+
+ipcMain.on("close-window", () => {
+  win?.close();
+});
+
 
 export { MAIN_DIST, RENDERER_DIST, VITE_DEV_SERVER_URL };

@@ -1,4 +1,4 @@
-import ApiConfig from "../../../config/api-config";
+import ApiConfig from "../../config/api-config";
 
 class LoginService {
   LoginService() {}
