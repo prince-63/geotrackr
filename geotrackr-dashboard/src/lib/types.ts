@@ -21,3 +21,4 @@ interface Employee {
 }
 
 export type InOfficeEmployeeType = Employee[];
+export type OutOfficeEmployeeType = Employee[];
