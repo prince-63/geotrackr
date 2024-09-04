@@ -268,7 +268,7 @@ export const getAllInOfficeEmployees = async (req, res) => {
 }
 
 export const getAllOutOfficeEmployees = async (req, res) => {
-  const officeId = req.masterOfficeAdmin.officeId;
+  const officeId = req.office.officeId;
 
   const outOfficeEmployees = await prisma.outOfficeEmployee.findMany({
     where: { officeId },

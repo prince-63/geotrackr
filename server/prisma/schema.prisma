@@ -85,7 +85,7 @@ model OutOfficeEmployee {
   employeeContactNumber String
   employeePassword      String?
   verificationCode      String?
-  role                  ROLE                       @default(OUT_OFFICE_EMPLOYEE)
+  role                  ROLE?                       @default(OUT_OFFICE_EMPLOYEE)
   outOfficeAttendance   OutOfficeAttendance[]      @relation("OutOfficeEmployeeToAttendance")
   outOfficeDayWork      OutOfficeEmployeeDayWork[]
   office                Office                     @relation("OfficeToOutEmployee", fields: [officeId], references: [officeId])

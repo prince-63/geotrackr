@@ -72,7 +72,8 @@ class OutOfficeEmployeeService {
             throw new Error("Network response was not ok");
         }
     
-        return;
+        const deletedEmployee = await response.json();
+        return deletedEmployee.status;
         } catch (error) {
         console.error("Failed to delete employee:", error);
         throw error;

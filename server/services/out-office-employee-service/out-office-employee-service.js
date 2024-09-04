@@ -10,9 +10,11 @@ import responseHandler from '../../handlers/response-handlers.js';
 const prisma = new PrismaClient();
 
 export const createNewOutOfficeEmployee = async (req, res) => {
-  const { employeeName, employeeEmail, employeeContactNumber } = req.body;
-
-  const officeId = req.masterOfficeAdmin.officeId;
+  const employeeName = req.body.name;
+  const employeeEmail = req.body.email;
+  const employeeContactNumber = req.body.phone;
+  
+  const officeId = req.office.officeId;
 
   if (!employeeName || !employeeEmail || !employeeContactNumber || !officeId) {
     return errorResponseHandler(
@@ -23,7 +25,7 @@ export const createNewOutOfficeEmployee = async (req, res) => {
     );
   }
 
-  const existingEmployee = await prisma.outOfficeEmployee.findFirst({
+  const existingEmployee = await prisma.outOfficeEmployee.findUnique({
     where: { employeeEmail },
   });
 
