@@ -1,19 +1,18 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:idcard/src/config/routes.dart';
-import 'package:idcard/src/utils/text_theme.dart';
+import 'package:geotrackr/config/routes.dart';
+import 'package:geotrackr/utils/dark_theme.dart';
+import 'package:geotrackr/utils/light_theme.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
-  runZonedGuarded(() {
-    runApp(MyApp());
-  }, (Object error, StackTrace stackTrace) {
-    print('Uncaught error: $error');
-    print('Stack trace: $stackTrace');
-  });
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('storage');
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -29,20 +28,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Id Card',
+      title: 'GeoTrackr',
       debugShowCheckedModeBanner: false,
-      theme: _buildThemeData(),
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       initialRoute: initialRoute,
       routes: buildRoutes(),
-    );
-  }
-
-  ThemeData _buildThemeData() {
-    return ThemeData(
-      fontFamily: 'Lato',
-      textTheme: appTextTheme,
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      useMaterial3: true,
     );
   }
 }

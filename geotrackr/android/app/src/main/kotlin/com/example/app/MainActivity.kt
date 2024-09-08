@@ -1,4 +1,4 @@
-package com.example.app
+package com.geotrackr.app
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
