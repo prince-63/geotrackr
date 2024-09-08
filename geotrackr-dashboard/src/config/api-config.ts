@@ -13,6 +13,14 @@ class ApiConfig {
     ApiConfig.BASE_URL + "/office/update-in-office-employee";
   public static deleteInOfficeEmployee =
     ApiConfig.BASE_URL + "/office/delete-in-office-employee";
+  public static addOutOfficeEmployee =
+    ApiConfig.BASE_URL + "/office/add-out-office-employee";
+  public static getOutOfficeEmployees =
+    ApiConfig.BASE_URL + "/office/get-all-out-office-employees";
+  public static updateOutOfficeEmployee =
+    ApiConfig.BASE_URL + "/office/update-out-office-employee";
+  public static deleteOutOfficeEmployee =
+    ApiConfig.BASE_URL + "/office/delete-out-office-employee";
 }
 
 export default ApiConfig;
