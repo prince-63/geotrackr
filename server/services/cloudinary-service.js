@@ -1,4 +1,4 @@
-import cloudinaryConfig from '../../config/cloudinary/cloudinary-config.js';
+import cloudinaryConfig from '../config/cloudinary/cloudinary-config.js';
 
 cloudinaryConfig();
 

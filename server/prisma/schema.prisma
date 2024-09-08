@@ -1,5 +1,5 @@
 datasource db {
-  provider = "mongodb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -8,9 +8,9 @@ generator client {
 }
 
 model Office {
-  officeId            String              @id @default(auto()) @map("_id") @db.ObjectId
+  officeId            String     @id @default(uuid())
   officeName          String
-  officeEmail         String
+  officeEmail         String     @unique
   officePassword      String
   officeContactNumber String?
   officeSubTitle      String?
@@ -20,147 +20,57 @@ model Office {
   officePincodes      String?
   officeLongitude     String?
   officeLatitude      String?
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
-  inOfficeEmployee    InOfficeEmployee[]  @relation("OfficeToEmployee")
-  outOfficeEmployee   OutOfficeEmployee[] @relation("OfficeToOutEmployee")
-  admin               Admin[]             @relation("AdminToOffice")
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  Employees           Employee[] @relation("OfficeToEmployee")
 }
 
-enum ROLE {
-  ADMIN
-  IN_OFFICE_EMPLOYEE
-  OUT_OFFICE_EMPLOYEE
+model Employee {
+  employeeId              String         @id @default(uuid())
+  employeeName            String
+  employeeEmail           String         @unique
+  employeeContactNumber   String
+  employeePassword        String?
+  employeeProfileImageUrl String?
+  verificationCode        String?
+  isVerified              Boolean?       @default(false)
+  biometricEnabled        Boolean?       @default(false)
+  roles                   EmployeeRole[]
+  Attendances             Attendances[]  @relation("EmployeeToAttendance")
+  office                  Office         @relation("OfficeToEmployee", fields: [officeId], references: [officeId])
+  officeId                String
+  createdAt               DateTime       @default(now())
+  updatedAt               DateTime       @updatedAt
 }
 
-// This model is used to track the admin details
-model Admin {
-  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
-  adminName          String
-  adminEmail         String
-  adminContactNumber String
-  adminPassword      String
-  role               ROLE?
-  office             Office   @relation("AdminToOffice", fields: [officeId], references: [officeId])
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  officeId           String   @db.ObjectId
+model Role {
+  roleId    String         @id @default(uuid())
+  roleName  String         @unique
+  Employees EmployeeRole[]
 }
 
-// This model is used to track the employees who are working in the office
-model InOfficeEmployee {
-  employeeId            String               @id @default(auto()) @map("_id") @db.ObjectId
-  employeeName          String
-  employeeEmail         String
-  employeeContactNumber String
-  employeePassword      String?
-  verificationCode      String?
-  role                  ROLE?                @default(IN_OFFICE_EMPLOYEE)
-  inOfficeAttendance    InOfficeAttendance[] @relation("InOfficeEmployeeToAttendance")
-  office                Office               @relation("OfficeToEmployee", fields: [officeId], references: [officeId])
-  createdAt             DateTime             @default(now())
-  updatedAt             DateTime             @updatedAt
-  officeId              String               @db.ObjectId
+model EmployeeRole {
+  employeeId String
+  roleId     String
+  Employee   Employee @relation(fields: [employeeId], references: [employeeId])
+  Role       Role     @relation(fields: [roleId], references: [roleId])
+
+  @@id([employeeId, roleId])
 }
 
-// This model is used to track the attendance of the employees who are working in the office
-model InOfficeAttendance {
-  id           String            @id @default(auto()) @map("_id") @db.ObjectId
-  employee     InOfficeEmployee  @relation("InOfficeEmployeeToAttendance", fields: [employeeId], references: [employeeId])
-  employeeId   String            @db.ObjectId
-  date         DateTime          @default(now())
-  status       AttendanceStatus?
-  totalHours   String?
-  checkInTime  DateTime?
-  checkOutTime DateTime?
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-}
-
-// This model is used to track the employees who are working out of the office
-model OutOfficeEmployee {
-  employeeId            String                     @id @default(auto()) @map("_id") @db.ObjectId
-  employeeName          String
-  employeeEmail         String
-  employeeContactNumber String
-  employeePassword      String?
-  verificationCode      String?
-  role                  ROLE                       @default(OUT_OFFICE_EMPLOYEE)
-  outOfficeAttendance   OutOfficeAttendance[]      @relation("OutOfficeEmployeeToAttendance")
-  outOfficeDayWork      OutOfficeEmployeeDayWork[]
-  office                Office                     @relation("OfficeToOutEmployee", fields: [officeId], references: [officeId])
-  createdAt             DateTime                   @default(now())
-  updatedAt             DateTime                   @updatedAt
-  officeId              String                     @db.ObjectId
-}
-
-// This model is used to track the attendance of the employees who are working out of the office
-model OutOfficeAttendance {
-  id         String                       @id @default(auto()) @map("_id") @db.ObjectId
-  employee   OutOfficeEmployee            @relation("OutOfficeEmployeeToAttendance", fields: [employeeId], references: [employeeId])
-  date       DateTime                     @default(now())
-  employeeId String                       @db.ObjectId
-  checkIn    outOfficeAttendanceCheckIn?  @relation("CheckInToOutOfficeAttendance")
-  checkOut   outOfficeAttendanceCheckOut? @relation("CheckOutToOutOfficeAttendance")
-  totalHours String?
-  createdAt  DateTime                     @default(now())
-  updatedAt  DateTime                     @updatedAt
-}
-
-model outOfficeAttendanceCheckIn {
-  id                    String               @id @default(auto()) @map("_id") @db.ObjectId
-  checkInTime           DateTime
-  outOfficeAttendance   OutOfficeAttendance? @relation("CheckInToOutOfficeAttendance", fields: [outOfficeAttendanceId], references: [id])
-  status                AttendanceStatus?
-  longitude             String
-  latitude              String
-  outOfficeAttendanceId String?              @unique @db.ObjectId
-  createdAt             DateTime             @default(now())
-  updatedAt             DateTime             @updatedAt
-}
-
-model outOfficeAttendanceCheckOut {
-  id                    String               @id @default(auto()) @map("_id") @db.ObjectId
-  checkOutTime          DateTime
-  outOfficeAttendance   OutOfficeAttendance? @relation("CheckOutToOutOfficeAttendance", fields: [outOfficeAttendanceId], references: [id])
-  status                AttendanceStatus?
-  longitude             String
-  latitude              String
-  outOfficeAttendanceId String?              @unique @db.ObjectId
-  createdAt             DateTime             @default(now())
-  updatedAt             DateTime             @updatedAt
-}
-
-// This model is used to track the day work of the employees who are working out of the office
-model OutOfficeEmployeeDayWork {
-  id                          String             @id @default(auto()) @map("_id") @db.ObjectId
-  workDate                    DateTime
-  workAddress                 WorkAddress?       @relation("DayWorkToWorkAddress", fields: [workAddressId], references: [id])
-  workAddressId               String?            @unique @db.ObjectId
-  workStatus                  WorkStatus?
-  createdAt                   DateTime           @default(now())
-  updatedAt                   DateTime           @updatedAt
-  OutOfficeEmployee           OutOfficeEmployee? @relation(fields: [outOfficeEmployeeEmployeeId], references: [employeeId])
-  outOfficeEmployeeEmployeeId String?            @db.ObjectId
-}
-
-enum WorkStatus {
-  COMPLETED
-  IN_PROGRESS
-}
-
-model WorkAddress {
-  id              String                     @id @default(auto()) @map("_id") @db.ObjectId
-  workAddressName String
-  workCity        String
-  workState       String
-  workCountry     String
-  workPincode     String
-  workLongitude   String
-  workLatitude    String
-  dayWork         OutOfficeEmployeeDayWork[] @relation("DayWorkToWorkAddress")
-  createdAt       DateTime                   @default(now())
-  updatedAt       DateTime                   @updatedAt
+model Attendances {
+  attendanceId     String            @id @default(uuid())
+  employee         Employee          @relation("EmployeeToAttendance", fields: [employeeId], references: [employeeId])
+  employeeId       String
+  date             DateTime          @default(now())
+  checkInTime      DateTime?
+  checkInLocation  String?
+  checkOutTime     DateTime?
+  checkOutLocation String?
+  status           AttendanceStatus?
+  totalHours       String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 }
 
 enum AttendanceStatus {
@@ -169,4 +79,9 @@ enum AttendanceStatus {
   ABSENT
   ON_LEAVE
   HALF_DAY
+}
+
+enum ROLES {
+  OFFICE
+  REMOTE
 }

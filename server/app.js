@@ -4,8 +4,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import session from 'express-session';
 import officeRoutes from './routes/office-routes.js';
-import inOfficeEmployeeRoutes from './routes/in-office-employee-route.js';
-import outOfficeEmployeeRoutes from './routes/out-office-employee-route.js';
+import employeeRoutes from './routes/employee-routes.js';
+import attendanceRoutes from './routes/attendance-routes.js';
 import globalErrorHandler from './handlers/global-error-handler.js';
 import { EventEmitter } from 'events';
 
@@ -39,8 +39,8 @@ const version = process.env.VERSION || 'v1';
 
 // Routes
 app.use(`/api/${version}/office`, officeRoutes);
-app.use(`/api/${version}/office/in-office`, inOfficeEmployeeRoutes);
-app.use(`/api/${version}/office/out-office`, outOfficeEmployeeRoutes);
+app.use(`/api/${version}/office`, employeeRoutes);
+app.use(`/api/${version}/office/employee`, attendanceRoutes);
 app.use(globalErrorHandler);
 
 // testing

@@ -1,44 +1,44 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"No tests specified\" && exit 0",
-    "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md}\"",
-    "dev": "nodemon ./server.js",
-    "start": "node ./server.js",
-    "postinstall": "prisma generate"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@prisma/client": "^5.19.0",
-    "bcrypt": "^5.1.1",
-    "canvas": "^2.11.2",
-    "cloudinary": "^2.4.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "express-session": "^1.18.0",
-    "helmet": "^7.1.0",
-    "joi": "^17.13.3",
-    "jsonwebtoken": "^9.0.2",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.14",
-    "nodemon": "^3.1.4",
-    "npmlog": "^7.0.1",
-    "pdfkit": "^0.15.0",
-    "qrcode": "^1.5.4",
-    "redis": "^4.7.0",
-    "rimraf": "^6.0.1",
-    "util": "^0.12.5"
-  },
-  "devDependencies": {
-    "prettier": "^3.3.3",
-    "prisma": "^5.19.0"
-  }
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"No tests specified\" && exit 0",
+        "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md}\"",
+        "dev": "nodemon ./server.js",
+        "start": "node ./server.js",
+        "postinstall": "prisma generate"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@prisma/client": "^5.19.1",
+        "bcrypt": "^5.1.1",
+        "canvas": "^2.11.2",
+        "cloudinary": "^2.4.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "express-session": "^1.18.0",
+        "helmet": "^7.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.5-lts.1",
+        "nodemailer": "^6.9.14",
+        "nodemon": "^3.1.4",
+        "npmlog": "^7.0.1",
+        "pdfkit": "^0.15.0",
+        "qrcode": "^1.5.4",
+        "redis": "^4.7.0",
+        "rimraf": "^6.0.1",
+        "server": "file:",
+        "util": "^0.12.5"
+    },
+    "devDependencies": {
+        "prettier": "^3.3.3",
+        "prisma": "^5.19.1"
+    }
 }
