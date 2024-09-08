@@ -1,20 +1,17 @@
-import { PrismaClient } from "@prisma/client";
-import jwt from "jsonwebtoken";
-import errorResponseHandler from "../handlers/error-response-handlers.js";
+import { PrismaClient } from '@prisma/client';
+import jwt from 'jsonwebtoken';
+import errorResponseHandler from '../handlers/error-response-handlers.js';
 
 const prisma = new PrismaClient();
 
 const employeeMiddleware = async (req, res, next) => {
     let token;
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith("Bearer")
-    ) {
-        token = req.headers.authorization.split(" ")[1];
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        token = req.headers.authorization.split(' ')[1];
     }
 
     if (!token) {
-        return errorResponseHandler(res, 401, "fail", "Not authorized to access this route");
+        return errorResponseHandler(res, 401, 'fail', 'Not authorized to access this route');
     }
 
     try {
@@ -23,7 +20,7 @@ const employeeMiddleware = async (req, res, next) => {
         //console.log(decoded);
 
         if (!decoded.id) {
-            return errorResponseHandler(res, 401, "fail", "Invalid token payload");
+            return errorResponseHandler(res, 401, 'fail', 'Invalid token payload');
         }
 
         const employee = await prisma.employee.findUnique({
@@ -31,17 +28,17 @@ const employeeMiddleware = async (req, res, next) => {
         });
 
         if (!employee) {
-            return errorResponseHandler(res, 401, "fail", "No employee found with this id");
+            return errorResponseHandler(res, 401, 'fail', 'No employee found with this id');
         }
 
         req.employee = employee;
         next();
     } catch (error) {
-        if (error.name === "JsonWebTokenError") {
-            return errorResponseHandler(res, 401, "fail", "Invalid token");
+        if (error.name === 'JsonWebTokenError') {
+            return errorResponseHandler(res, 401, 'fail', 'Invalid token');
         }
         next(error);
     }
-}
+};
 
 export default employeeMiddleware;

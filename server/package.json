@@ -5,7 +5,7 @@
     "main": "server.js",
     "type": "module",
     "scripts": {
-        "test": "echo \"No tests specified\" && exit 0",
+        "test": "jest",
         "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md}\"",
         "dev": "nodemon ./server.js",
         "start": "node ./server.js",
@@ -32,12 +32,11 @@
         "npmlog": "^7.0.1",
         "pdfkit": "^0.15.0",
         "qrcode": "^1.5.4",
-        "redis": "^4.7.0",
         "rimraf": "^6.0.1",
-        "server": "file:",
         "util": "^0.12.5"
     },
     "devDependencies": {
+        "jest": "^29.7.0",
         "prettier": "^3.3.3",
         "prisma": "^5.19.1"
     }

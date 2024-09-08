@@ -1,4 +1,4 @@
-import { storage } from "../config/multer/multer.js";
+import { storage } from '../config/multer/multer.js';
 import multer from 'multer';
 import path from 'path';
 

@@ -16,22 +16,22 @@ const app = express();
 // Middleware
 app.use(helmet());
 app.use(
-  cors({
-    // any origin can access this API
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
-    credentials: true,
-  })
+    cors({
+        // any origin can access this API
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
+        credentials: true,
+    }),
 );
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(
-  session({
-    secret: process.env.JWT_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using HTTPS
-  })
+    session({
+        secret: process.env.JWT_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false }, // Set to true if using HTTPS
+    }),
 );
 
 // version
@@ -45,15 +45,15 @@ app.use(globalErrorHandler);
 
 // testing
 app.get('/', (req, res) => {
-  res.send('Hello World');
+    res.send('Hello World');
 });
 
 // Error handling
 app.all('*', (req, res, next) => {
-  res.status(404).json({
-    status: 'fail',
-    message: `Can't find ${req.originalUrl} on this server!`,
-  });
+    res.status(404).json({
+        status: 'fail',
+        message: `Can't find ${req.originalUrl} on this server!`,
+    });
 });
 
 export { app as default };
