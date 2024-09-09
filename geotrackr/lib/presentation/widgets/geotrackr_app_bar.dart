@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geotrackr/presentation/blocs/load_employee_bloc.dart';
 import 'package:geotrackr/presentation/pages/profile_page.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
@@ -19,20 +21,47 @@ class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
       ),
       actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 15),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+        BlocBuilder<LoadEmployeeBloc, LoadEmployeeState>(
+          builder: (context, state) {
+            if (state is LoadEmployeeLoaded) {
+              final imageUrl = state.employee.employeeProfileImageUrl ?? '';
+              print('EmployeeLoaded state: $imageUrl');
+              return Container(
+                margin: const EdgeInsets.only(right: 15),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfilePage()),
+                    );
+                  },
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(imageUrl),
+                  ),
+                ),
               );
-            },
-            child: const CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://res.cloudinary.com/dysmrirqf/image/upload/v1724207599/profile_pictures/66c551c5e66bbd8fcdfc78ac_profile_picture.png'),
-            ),
-          ),
+            } else if (state is LoadEmployeeLoading) {
+              print('EmployeeLoading state');
+              return Container(
+                margin: const EdgeInsets.only(right: 15),
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(textColor),
+                  ),
+                ),
+              );
+            }
+            print('Default state');
+            return Container(
+              margin: const EdgeInsets.only(right: 15),
+              child: CircleAvatar(
+                backgroundColor: Colors.grey,
+                child: Icon(Icons.person, color: textColor),
+              ),
+            );
+          },
         ),
       ],
     );

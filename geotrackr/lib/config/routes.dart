@@ -4,6 +4,7 @@ import 'package:geotrackr/presentation/pages/login_page.dart';
 
 Map<String, WidgetBuilder> buildRoutes() {
   return {
-    '/': (context) => HomeScreen(),
+    '/': (context) => LoginPage(),
+    '/home': (context) => HomeScreen(),
   };
 }

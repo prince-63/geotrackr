@@ -2,9 +2,9 @@ import '../../domain/entities/office.dart';
 
 class OfficeModel extends Office {
   OfficeModel({
-    required super.officeId,
-    required super.officeName,
-    required super.officeEmail,
+    super.officeId,
+    super.officeName,
+    super.officeEmail,
     super.officeContactNumber,
     super.officeSubTitle,
     super.officeCity,
@@ -13,13 +13,11 @@ class OfficeModel extends Office {
     super.officePincodes,
     super.officeLongitude,
     super.officeLatitude,
-    super.createdAt,
-    super.updatedAt,
   });
 
   factory OfficeModel.fromJson(Map<String, dynamic> json) {
     return OfficeModel(
-      officeId: json['_id'],
+      officeId: json['officeId'],
       officeName: json['officeName'],
       officeEmail: json['officeEmail'],
       officeContactNumber: json['officeContactNumber'],
@@ -30,14 +28,12 @@ class OfficeModel extends Office {
       officePincodes: json['officePincodes'],
       officeLongitude: json['officeLongitude'],
       officeLatitude: json['officeLatitude'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      '_id': officeId,
+      'officeId': officeId,
       'officeName': officeName,
       'officeEmail': officeEmail,
       'officeContactNumber': officeContactNumber,
@@ -48,8 +44,6 @@ class OfficeModel extends Office {
       'officePincodes': officePincodes,
       'officeLongitude': officeLongitude,
       'officeLatitude': officeLatitude,
-      'createdAt': createdAt?.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String(),
     };
   }
 }

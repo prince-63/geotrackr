@@ -8,6 +8,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    // ignore: unused_local_variable
     final textColor =
         isDarkMode ? CustomColor.darkTextColor : CustomColor.lightTextColor;
     final backgroundColor = isDarkMode
@@ -22,7 +23,7 @@ class ProfilePage extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,59 +1,59 @@
 class Attendances {
-  final String attendanceId;
-  final String employeeId;
+  final String? attendanceId;
+  final String? employeeId;
   final DateTime? date;
   final DateTime? checkInTime;
-  final String? checkInLocation;
+  final String? checkInLocationLongitude;
+  final String? checkInLocationLatitude;
   final DateTime? checkOutTime;
-  final String? checkOutLocation;
+  final String? checkOutLocationLongitude;
+  final String? checkOutLocationLatitude;
   final String? status;
   final String? totalHours;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
 
   Attendances({
-    required this.attendanceId,
-    required this.employeeId,
+    this.attendanceId,
+    this.employeeId,
     this.date,
     this.checkInTime,
-    this.checkInLocation,
+    this.checkInLocationLongitude,
+    this.checkInLocationLatitude,
     this.checkOutTime,
-    this.checkOutLocation,
+    this.checkOutLocationLongitude,
+    this.checkOutLocationLatitude,
     this.status,
     this.totalHours,
-    this.createdAt,
-    this.updatedAt,
   });
 
   factory Attendances.fromJson(Map<String, dynamic> json) {
     return Attendances(
-      attendanceId: json['_id'],
+      attendanceId: json['attendanceId'],
       employeeId: json['employeeId'],
       date: DateTime.parse(json['date']),
       checkInTime: DateTime.parse(json['checkInTime']),
-      checkInLocation: json['checkInLocation'],
+      checkInLocationLongitude: json['checkInLocationLongitude'],
+      checkInLocationLatitude: json['checkInLocationLatitude'],
       checkOutTime: DateTime.parse(json['checkOutTime']),
-      checkOutLocation: json['checkOutLocation'],
+      checkOutLocationLongitude: json['checkOutLocationLongitude'],
+      checkOutLocationLatitude: json['checkOutLocationLatitude'],
       status: json['status'],
       totalHours: json['totalHours'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      '_id': attendanceId,
+      'attendanceId': attendanceId,
       'employeeId': employeeId,
       'date': date?.toIso8601String(),
       'checkInTime': checkInTime?.toIso8601String(),
-      'checkInLocation': checkInLocation,
+      'checkInLocationLongitude': checkInLocationLongitude,
+      'checkInLocationLatitude': checkInLocationLatitude,
       'checkOutTime': checkOutTime?.toIso8601String(),
-      'checkOutLocation': checkOutLocation,
+      'checkOutLocationLongitude': checkOutLocationLongitude,
+      'checkOutLocationLatitude': checkOutLocationLatitude,
       'status': status,
       'totalHours': totalHours,
-      'createdAt': createdAt?.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String(),
     };
   }
 }

@@ -32,9 +32,9 @@ class LocationView extends StatelessWidget {
           BlocBuilder<LocationBloc, LocationState>(
             builder: (context, state) {
               if (state is LocationInitial) {
-                return Text('Press the button to get location');
+                return const Text('Press the button to get location');
               } else if (state is LocationLoading) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               } else if (state is LocationLoaded) {
                 return Text(
                     'Location: ${state.location.latitude}, ${state.location.longitude}');
@@ -44,12 +44,12 @@ class LocationView extends StatelessWidget {
               return Container();
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               context.read<LocationBloc>().add(GetLocationEvent());
             },
-            child: Text('Get Location'),
+            child: const Text('Get Location'),
           ),
         ],
       ),
