@@ -59,24 +59,3 @@ jobs:
           app-name: 'geotrackr-server'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
-
-      - name: Set environment variables
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: 'geotrackr-server'
-          app-settings-json: |
-            {
-              "PORT": "${{ secrets.PORT }}",
-              "VERSION": "${{ secrets.VERSION }}",
-              "SSL_CERT_PATH": "${{ secrets.SSL_CERT_PATH }}",
-              "DATABASE_URL": "${{ secrets.DATABASE_URL }}",
-              "JWT_SECRET": "${{ secrets.JWT_SECRET }}",
-              "JWT_EXPIRES_IN": "${{ secrets.JWT_EXPIRES_IN }}",
-              "EMAIL_USERNAME": "${{ secrets.EMAIL_USERNAME }}",
-              "EMAIL_PASSWORD": "${{ secrets.EMAIL_PASSWORD }}",
-              "EMAIL_FROM": "${{ secrets.EMAIL_FROM }}",
-              "DATA_ENCRYPTION_KEY": "${{ secrets.DATA_ENCRYPTION_KEY }}",
-              "CLOUDINARY_CLOUD_NAME": "${{ secrets.CLOUDINARY_CLOUD_NAME }}",
-              "CLOUDINARY_API_KEY": "${{ secrets.CLOUDINARY_API_KEY }}",
-              "CLOUDINARY_API_SECRET": "${{ secrets.CLOUDINARY_API_SECRET }}"
-            }
