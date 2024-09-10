@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geotrackr/presentation/blocs/load_employee_bloc.dart';
-import 'package:geotrackr/presentation/pages/profile_page.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
 class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -25,16 +24,11 @@ class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {
           builder: (context, state) {
             if (state is LoadEmployeeLoaded) {
               final imageUrl = state.employee.employeeProfileImageUrl ?? '';
-              print('EmployeeLoaded state: $imageUrl');
               return Container(
                 margin: const EdgeInsets.only(right: 15),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfilePage()),
-                    );
+                    Navigator.pushNamed(context, "/profile");
                   },
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(imageUrl),
@@ -42,7 +36,6 @@ class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               );
             } else if (state is LoadEmployeeLoading) {
-              print('EmployeeLoading state');
               return Container(
                 margin: const EdgeInsets.only(right: 15),
                 child: CircleAvatar(
@@ -53,7 +46,6 @@ class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               );
             }
-            print('Default state');
             return Container(
               margin: const EdgeInsets.only(right: 15),
               child: CircleAvatar(

@@ -4,4 +4,6 @@ class ApiConfig {
   static const String employeeLogin = '$baseUrl/login-employee';
 
   static const String employeeDetails = '$baseUrl/get-employee-details';
+
+  static const String officeDetails = '$baseUrl/get-office-details';
 }

@@ -9,4 +9,8 @@ class LoginEmployee {
   Future<Employee> call(String email, String password) async {
     return await _repository.login(email, password);
   }
+
+  Future<Employee> loadEmployee() async {
+    return await _repository.loadEmployee();
+  }
 }

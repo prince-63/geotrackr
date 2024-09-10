@@ -60,7 +60,7 @@ class GeoTrackrDrawer extends StatelessWidget {
             leading: const Icon(Icons.person_2_outlined),
             title: const Text('Profile'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "/profile");
             },
           ),
           ListTile(
@@ -152,7 +152,7 @@ class GeoTrackrDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "/help-and-support");
             },
           ),
           const Divider(

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geotrackr/config/routes.dart';
 import 'package:geotrackr/utils/dark_theme.dart';
 import 'package:geotrackr/utils/light_theme.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
 void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox('storage');
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

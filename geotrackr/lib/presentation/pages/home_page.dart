@@ -7,8 +7,8 @@ import 'package:geotrackr/presentation/widgets/geotrackr_app_bar.dart';
 import 'package:geotrackr/presentation/widgets/geotrackr_drawer.dart';
 import 'package:geotrackr/utils/custom_color.dart'; // Import the custom app bar
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

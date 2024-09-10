@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geotrackr/domain/repositories/employee_repository_impl.dart';
+import 'package:geotrackr/domain/repositories/office_repository_impl.dart';
+import 'package:geotrackr/domain/use_cases/load_employee.dart';
+import 'package:geotrackr/domain/use_cases/load_office.dart';
+import 'package:geotrackr/presentation/blocs/load_employee_bloc.dart';
+import 'package:geotrackr/presentation/blocs/load_office_bloc.dart';
 import 'package:geotrackr/presentation/widgets/default_app_bar.dart';
+import 'package:geotrackr/presentation/widgets/profile/profile_body.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -8,9 +16,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    // ignore: unused_local_variable
-    final textColor =
-        isDarkMode ? CustomColor.darkTextColor : CustomColor.lightTextColor;
     final backgroundColor = isDarkMode
         ? CustomColor.darkBackgroundColor
         : CustomColor.lightBackgroundColor;
@@ -23,43 +28,57 @@ class ProfilePage extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://res.cloudinary.com/dysmrirqf/image/upload/v1724207599/profile_pictures/66c551c5e66bbd8fcdfc78ac_profile_picture.png'),
-              radius: 50,
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Princewill Iroka',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            // Add the following code snippet
-            SizedBox(height: 10),
-            Text(
-              'Software Engineer',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-
-            SizedBox(height: 20),
-            Text(
-              'Flutter Developer',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-          ],
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) {
+              final bloc = LoadEmployeeBloc(
+                loadEmployee: LoadEmployee(
+                  EmployeeRepositoryImpl(),
+                ),
+              );
+              bloc.load();
+              return bloc;
+            },
+          ),
+          BlocProvider(
+            create: (context) {
+              final bloc = LoadOfficeBloc(
+                loadOffice: LoadOffice(
+                  OfficeRepositoryImpl(),
+                ),
+              );
+              bloc.load();
+              return bloc;
+            },
+          ),
+        ],
+        child: SafeArea(
+          child: BlocBuilder<LoadEmployeeBloc, LoadEmployeeState>(
+            builder: (context, employeeState) {
+              if (employeeState is LoadEmployeeLoaded) {
+                final employee = employeeState.employee;
+                return BlocBuilder<LoadOfficeBloc, LoadOfficeState>(
+                  builder: (context, officeState) {
+                    if (officeState is LoadOfficeLoaded) {
+                      final office = officeState.office;
+                      return ProfileBody(employee: employee, office: office);
+                    } else if (officeState is LoadOfficeLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return Container();
+                  },
+                );
+              } else if (employeeState is LoadEmployeeLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return Container();
+            },
+          ),
         ),
       ),
     );

@@ -31,6 +31,7 @@ class OfficeModel extends Office {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'officeId': officeId,

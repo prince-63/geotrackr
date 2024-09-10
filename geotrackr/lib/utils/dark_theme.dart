@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geotrackr/utils/text_theme.dart';
 
 ThemeData darkTheme = ThemeData(
-  fontFamily: 'Lato',
-  textTheme: appTextTheme,
   colorScheme: ColorScheme(
     primary: Colors.blue,
     secondary: Colors.amber,

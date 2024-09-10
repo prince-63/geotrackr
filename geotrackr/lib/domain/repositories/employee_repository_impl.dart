@@ -24,8 +24,9 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
       final String token = responseData['data']['token'];
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', token);
-      // print(token);
-      // print(responseData['data']['employee']);
+      // Cache employee details
+      prefs.setString(
+          'employeeDetails', jsonEncode(responseData['data']['employee']));
       return Employee.fromJson(responseData['data']['employee']);
     } else {
       print(jsonDecode(response.body));
@@ -38,6 +39,13 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
+    // Check for cached employee details
+    final cachedData = prefs.getString('employeeDetails');
+    if (cachedData != null) {
+      final responseData = jsonDecode(cachedData);
+      return Employee.fromJson(responseData);
+    }
+
     final response = await http.get(
       Uri.parse(ApiConfig.employeeDetails),
       headers: {
@@ -48,6 +56,9 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
+      // Cache employee details
+      prefs.setString(
+          'employeeDetails', jsonEncode(responseData['data']['employee']));
       return Employee.fromJson(responseData['data']['employee']);
     } else {
       print(jsonDecode(response.body));
