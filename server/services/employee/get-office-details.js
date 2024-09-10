@@ -27,7 +27,20 @@ const getOfficeDetails = async (req, res) => {
         return errorResponseHandler(res, 404, 'fail', 'Office details not found');
     }
 
-    return responseHandler(res, 200, 'Office details fetched successfully', officeDetails);
+    return responseHandler(res, 200, 'Office details fetched successfully', {
+        office: {
+            officeName: officeDetails.officeName,
+            officeEmail: officeDetails.officeEmail,
+            officeContactNumber: officeDetails.officeContactNumber,
+            officeSubTitle: officeDetails.officeSubTitle,
+            officeCity: officeDetails.officeCity,
+            officeState: officeDetails.officeState,
+            officeCountry: officeDetails.officeCountry,
+            officePincodes: officeDetails.officePincodes,
+            officeLongitude: officeDetails.officeLongitude,
+            officeLatitude: officeDetails.officeLatitude,
+        }
+    });
 };
 
 export default getOfficeDetails;
