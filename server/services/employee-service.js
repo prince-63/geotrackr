@@ -5,5 +5,6 @@ import getEmployeeDetails from './employee/get-employee-details.js';
 import getEmployees from './employee/get-employees.js';
 import loginEmployee from './employee/login-employee.js';
 import uploadProfileImage from './employee/upload-profile-image.js';
+import getOfficeDetails from './employee/get-office-details.js';
 
-export { addOfficeEmployee, addRemoteEmployee, deleteEmployee, getEmployeeDetails, getEmployees, loginEmployee, uploadProfileImage };
+export { addOfficeEmployee, addRemoteEmployee, deleteEmployee, getEmployeeDetails, getEmployees, loginEmployee, uploadProfileImage, getOfficeDetails };
