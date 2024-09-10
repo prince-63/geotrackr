@@ -27,8 +27,9 @@ const getOfficeDetails = async (req, res) => {
         return errorResponseHandler(res, 404, 'fail', 'Office details not found');
     }
 
-    return responseHandler(res, 200, 'Office details fetched successfully', {
+    return responseHandler(res, 200, 'success','Office details fetched successfully', {
         office: {
+            officeId: officeId,
             officeName: officeDetails.officeName,
             officeEmail: officeDetails.officeEmail,
             officeContactNumber: officeDetails.officeContactNumber,
