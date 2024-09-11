@@ -69,7 +69,6 @@ class LoginForm extends StatelessWidget {
                     });
                     return Container();
                   } else if (state is LoginError) {
-                    print(state.message);
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       CustomMessages.showErrorMessage(context, state.message);
                     });

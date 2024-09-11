@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geotrackr/domain/entities/office.dart';
 import 'package:geotrackr/presentation/widgets/data_display.dart';
-import 'package:geotrackr/utils/custom_color.dart';
 
 class ProfileOfficeInformation extends StatelessWidget {
   final Office office;
@@ -13,16 +12,19 @@ class ProfileOfficeInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textColor = CustomColor.lightTextColor;
-    const backgroundColor = CustomColor.appBarColor;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode
+        ? const Color.fromARGB(255, 51, 56, 61)
+        : const Color.fromARGB(255, 195, 222, 241);
+    final textColor = !isDarkMode ? Colors.black : Colors.white;
 
     return Column(
       children: [
         // title
-        const Align(
+        Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(left: 10.0),
             child: Text(
               'Office Information',
               style: TextStyle(

@@ -24,9 +24,6 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
       final String token = responseData['data']['token'];
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', token);
-      // Cache employee details
-      prefs.setString(
-          'employeeDetails', jsonEncode(responseData['data']['employee']));
       return Employee.fromJson(responseData['data']['employee']);
     } else {
       print(jsonDecode(response.body));
@@ -56,6 +53,7 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
+      print(jsonEncode(responseData['data']['employee']));
       // Cache employee details
       prefs.setString(
           'employeeDetails', jsonEncode(responseData['data']['employee']));
@@ -79,14 +77,17 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
         'Authorization': 'Bearer $token'
       },
       body: jsonEncode({
-        employeeName: employeeName,
-        employeeEmail: employeeEmail,
-        employeeContactNumber: employeeContactNumber,
+        'employeeName': employeeName,
+        'employeeEmail': employeeEmail,
+        'employeeContactNumber': employeeContactNumber,
       }),
     );
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
+      print(jsonEncode(responseData['data']['employee']));
+      // first clear the cache
+      prefs.remove('employeeDetails');
       prefs.setString(
           'employeeDetails', jsonEncode(responseData['data']['employee']));
       return Employee.fromJson(responseData['data']['employee']);

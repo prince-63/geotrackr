@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geotrackr/domain/entities/employee.dart';
 import 'package:geotrackr/domain/entities/office.dart';
+import 'package:geotrackr/presentation/widgets/custom_button.dart';
 import 'package:geotrackr/presentation/widgets/profile/profile_employee_information.dart';
 import 'package:geotrackr/presentation/widgets/profile/profile_office_information.dart';
-import 'package:geotrackr/utils/custom_color.dart';
 
 class ProfileBody extends StatelessWidget {
   final Employee employee;
@@ -13,7 +13,10 @@ class ProfileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const cardBackgroundColor = CustomColor.appBarColor;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final cardBackgroundColor = isDarkMode
+        ? const Color.fromARGB(255, 51, 56, 61)
+        : const Color.fromARGB(255, 195, 222, 241);
 
     return SingleChildScrollView(
       child: Container(
@@ -53,6 +56,17 @@ class ProfileBody extends StatelessWidget {
                     ProfileOfficeInformation(office: office),
                   ],
                 ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              width: double.infinity,
+              child: CustomButton(
+                text: 'Update Employee Information',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/employee_update_information');
+                },
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geotrackr/utils/custom_color.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GeoTrackrDrawer extends StatelessWidget {
   const GeoTrackrDrawer({super.key});
@@ -12,6 +13,13 @@ class GeoTrackrDrawer extends StatelessWidget {
     final backgroundColor = isDarkMode
         ? CustomColor.darkBackgroundColor
         : CustomColor.lightBackgroundColor;
+
+    Future<void> clearAllAppData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+    }
 
     return Drawer(
       backgroundColor: backgroundColor,
@@ -167,7 +175,7 @@ class GeoTrackrDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context);
+              clearAllAppData();
             },
           ),
         ],
