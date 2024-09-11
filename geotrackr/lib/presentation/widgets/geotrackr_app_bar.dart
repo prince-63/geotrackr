@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geotrackr/presentation/blocs/load_employee_bloc.dart';
+import 'package:geotrackr/presentation/blocs/employee/load_employee_bloc.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
 class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {

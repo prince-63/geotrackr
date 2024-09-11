@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geotrackr/domain/repositories/employee_repository_impl.dart';
+import 'package:geotrackr/domain/repositories/implementation/employee_repository_impl.dart';
 import 'package:geotrackr/domain/use_cases/load_employee.dart';
-import 'package:geotrackr/presentation/blocs/load_employee_bloc.dart';
+import 'package:geotrackr/presentation/blocs/employee/load_employee_bloc.dart';
 import 'package:geotrackr/presentation/widgets/geotrackr_app_bar.dart';
 import 'package:geotrackr/presentation/widgets/geotrackr_drawer.dart';
 import 'package:geotrackr/utils/custom_color.dart'; // Import the custom app bar

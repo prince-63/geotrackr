@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geotrackr/domain/repositories/employee_repository_impl.dart';
-import 'package:geotrackr/domain/repositories/office_repository_impl.dart';
+import 'package:geotrackr/domain/repositories/implementation/employee_repository_impl.dart';
+import 'package:geotrackr/domain/repositories/implementation/office_repository_impl.dart';
 import 'package:geotrackr/domain/use_cases/load_employee.dart';
 import 'package:geotrackr/domain/use_cases/load_office.dart';
-import 'package:geotrackr/presentation/blocs/load_employee_bloc.dart';
-import 'package:geotrackr/presentation/blocs/load_office_bloc.dart';
+import 'package:geotrackr/presentation/blocs/employee/load_employee_bloc.dart';
+import 'package:geotrackr/presentation/blocs/office/load_office_bloc.dart';
 import 'package:geotrackr/presentation/widgets/default_app_bar.dart';
 import 'package:geotrackr/presentation/widgets/profile/profile_body.dart';
 import 'package:geotrackr/utils/custom_color.dart';

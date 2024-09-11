@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geotrackr/domain/repositories/employee_repository_impl.dart';
+import 'package:geotrackr/domain/repositories/implementation/employee_repository_impl.dart';
 import 'package:geotrackr/domain/use_cases/login_employee.dart';
-import 'package:geotrackr/presentation/blocs/login_bloc.dart';
+import 'package:geotrackr/presentation/blocs/login/login_bloc.dart';
 import 'package:geotrackr/presentation/widgets/login/login_form.dart';
 
 class LoginPage extends StatelessWidget {

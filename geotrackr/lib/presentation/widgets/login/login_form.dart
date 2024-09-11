@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geotrackr/presentation/blocs/login_bloc.dart';
+import 'package:geotrackr/presentation/blocs/login/login_bloc.dart';
 import 'package:geotrackr/presentation/widgets/custom_button.dart';
 import 'package:geotrackr/presentation/widgets/custom_messages.dart';
 import 'package:geotrackr/presentation/widgets/labeled_input.dart';

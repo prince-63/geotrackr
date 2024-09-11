@@ -65,4 +65,34 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
       throw Exception('Failed to get employee details');
     }
   }
+
+  @override
+  Future<Employee> updateEmployee(String employeeName, String employeeEmail,
+      String employeeContactNumber) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    final response = await http.put(
+      Uri.parse(ApiConfig.updateEmployeeDetails),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode({
+        employeeName: employeeName,
+        employeeEmail: employeeEmail,
+        employeeContactNumber: employeeContactNumber,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      prefs.setString(
+          'employeeDetails', jsonEncode(responseData['data']['employee']));
+      return Employee.fromJson(responseData['data']['employee']);
+    } else {
+      print(jsonDecode(response.body));
+      throw Exception('Failed to update employee details');
+    }
+  }
 }
