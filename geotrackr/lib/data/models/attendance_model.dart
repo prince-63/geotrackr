@@ -1,9 +1,8 @@
 import 'package:geotrackr/domain/entities/attendance.dart';
 
-class AttendanceModel extends Attendances {
+class AttendanceModel extends Attendance {
   AttendanceModel({
     super.attendanceId,
-    super.employeeId,
     super.date,
     super.checkInTime,
     super.checkInLocationLongitude,
