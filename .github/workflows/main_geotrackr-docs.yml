@@ -21,15 +21,20 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install
+      - name: Install dependencies
         run: |
           cd docs
           npm install
 
+      - name: Build the project
+        run: |
+          cd docs
+          npm run build
+
       - name: Zip artifact for deployment
         run: |
           cd docs
-          zip -r ../release.zip . -x "node_modules/*"
+          zip -r ../release.zip dist
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -61,4 +66,4 @@ jobs:
         with:
           app-name: 'geotrackr-docs'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DOCS }}
-          package: .
+          package: dist
