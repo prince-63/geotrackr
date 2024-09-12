@@ -30,8 +30,6 @@ const getEmployees = async (req, res) => {
                     checkOutLocationLatitude: true,
                     status: true,
                     totalHours: true,
-                    createdAt: true,
-                    updatedAt: true,
                 },
             },
             officeId: true,

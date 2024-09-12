@@ -9,6 +9,18 @@ const getEmployeeAttendance = async (req, res) => {
         where: {
             employeeId,
         },
+        select: {
+            attendanceId: true,
+            date: true,
+            checkInTime: true,
+            checkInLocationLongitude: true,
+            checkInLocationLatitude: true,
+            checkOutTime: true,
+            checkOutLocationLongitude: true,
+            checkOutLocationLatitude: true,
+            status: true,
+            totalHours: true,
+        },
     });
 
     if (!attendances) {
