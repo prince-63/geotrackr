@@ -59,18 +59,20 @@ model EmployeeRole {
 }
 
 model Attendances {
-  attendanceId     String            @id @default(uuid())
-  employee         Employee          @relation("EmployeeToAttendance", fields: [employeeId], references: [employeeId])
-  employeeId       String
-  date             DateTime          @default(now())
-  checkInTime      DateTime?
-  checkInLocation  String?
-  checkOutTime     DateTime?
-  checkOutLocation String?
-  status           AttendanceStatus?
-  totalHours       String?
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  attendanceId              String            @id @default(uuid())
+  employee                  Employee          @relation("EmployeeToAttendance", fields: [employeeId], references: [employeeId])
+  employeeId                String
+  date                      DateTime          @default(now())
+  checkInTime               DateTime?
+  checkInLocationLatitude   String?
+  checkInLocationLongitude  String?
+  checkOutTime              DateTime?
+  checkOutLocationLatitude  String?
+  checkOutLocationLongitude String?
+  status                    AttendanceStatus?
+  totalHours                String?
+  createdAt                 DateTime          @default(now())
+  updatedAt                 DateTime          @updatedAt
 }
 
 enum AttendanceStatus {
