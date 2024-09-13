@@ -10,9 +10,11 @@ class AttendanceBloc extends Cubit<AttendanceState> {
   Future<void> load() async {
     try {
       emit(AttendanceLoading());
-      final List<Attendance> attendances = await loadAttendances();
+      final attendances = await loadAttendances();
+      print("Attendances: $attendances");
       emit(AttendanceLoaded(attendances));
     } catch (e) {
+      print("Exception: $e");
       emit(AttendanceError(e.toString()));
     }
   }

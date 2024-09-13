@@ -8,7 +8,7 @@ part 'check_in_state.dart';
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   final CheckIn checkIn;
 
-  CheckInBloc(this.checkIn) : super(CheckInInitial()) {
+  CheckInBloc({required this.checkIn}) : super(CheckInInitial()) {
     on<CheckInButtonPressed>(_checkIn);
   }
 
