@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geotrackr/config/routes.dart';
 import 'package:geotrackr/utils/dark_theme.dart';
 import 'package:geotrackr/utils/light_theme.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());

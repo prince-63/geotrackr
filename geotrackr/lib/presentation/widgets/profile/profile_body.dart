@@ -27,8 +27,15 @@ class ProfileBody extends StatelessWidget {
             const SizedBox(height: 20),
             CircleAvatar(
               radius: 80,
-              backgroundImage:
-                  NetworkImage(employee.employeeProfileImageUrl ?? ''),
+              backgroundColor: Colors.grey,
+              backgroundImage: (employee.employeeProfileImageUrl == null ||
+                      employee.employeeProfileImageUrl!.isEmpty)
+                  ? null
+                  : NetworkImage(employee.employeeProfileImageUrl!),
+              child: (employee.employeeProfileImageUrl == null ||
+                      employee.employeeProfileImageUrl!.isEmpty)
+                  ? const Icon(Icons.person, color: Colors.white, size: 80)
+                  : null,
             ),
             const SizedBox(height: 30),
             Card(

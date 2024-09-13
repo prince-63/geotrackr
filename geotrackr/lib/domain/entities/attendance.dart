@@ -1,6 +1,5 @@
-class Attendances {
+class Attendance {
   final String? attendanceId;
-  final String? employeeId;
   final DateTime? date;
   final DateTime? checkInTime;
   final String? checkInLocationLongitude;
@@ -11,9 +10,8 @@ class Attendances {
   final String? status;
   final String? totalHours;
 
-  Attendances({
+  Attendance({
     this.attendanceId,
-    this.employeeId,
     this.date,
     this.checkInTime,
     this.checkInLocationLongitude,
@@ -25,10 +23,9 @@ class Attendances {
     this.totalHours,
   });
 
-  factory Attendances.fromJson(Map<String, dynamic> json) {
-    return Attendances(
+  factory Attendance.fromJson(Map<String, dynamic> json) {
+    return Attendance(
       attendanceId: json['attendanceId'],
-      employeeId: json['employeeId'],
       date: DateTime.parse(json['date']),
       checkInTime: DateTime.parse(json['checkInTime']),
       checkInLocationLongitude: json['checkInLocationLongitude'],
@@ -44,7 +41,6 @@ class Attendances {
   Map<String, dynamic> toJson() {
     return {
       'attendanceId': attendanceId,
-      'employeeId': employeeId,
       'date': date?.toIso8601String(),
       'checkInTime': checkInTime?.toIso8601String(),
       'checkInLocationLongitude': checkInLocationLongitude,

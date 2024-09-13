@@ -3,7 +3,8 @@ import errorResponseHandler from '../../handlers/error-response-handlers.js';
 import responseHandler from '../../handlers/response-handler.js';
 
 const checkIn = async (req, res) => {
-    const checkInLocation = req.body.checkInLocation;
+    const checkInLocationLatitude = req.body.checkInLocationLatitude;
+    const checkInLocationLongitude = req.body.checkInLocationLongitude;
     const employeeId = req.employee.employeeId;
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
@@ -30,7 +31,8 @@ const checkIn = async (req, res) => {
             data: {
                 employeeId,
                 checkInTime: new Date(),
-                checkInLocation: checkInLocation || null,
+                checkInLocationLatitude: checkInLocationLatitude || null,
+                checkInLocationLongitude: checkInLocationLongitude || null,
                 status: 'CHECKED_IN',
             },
         });

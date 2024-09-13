@@ -72,37 +72,6 @@ class GeoTrackrDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.work_outline),
-            title: Text('Office', style: TextStyle(color: textColor)),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.location_on),
-            title: Text(
-              'Geolocation Check-In/Out',
-              style: TextStyle(
-                color: textColor,
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.location_on),
-            title: Text(
-              'Manual Check-In/Out',
-              style: TextStyle(
-                color: textColor,
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.access_time),
             title: Text(
               'Working Hours',
@@ -111,34 +80,10 @@ class GeoTrackrDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calendar_today),
-            title: Text(
-              'Calendar',
-              style: TextStyle(
-                color: textColor,
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, "/working-hours");
             },
           ),
           const Divider(),
-          ListTile(
-            leading: const Icon(Icons.video_library),
-            title: Text(
-              'Learn',
-              style: TextStyle(
-                color: textColor,
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: Text(

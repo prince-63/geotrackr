@@ -3,7 +3,8 @@ import errorResponseHandler from '../../handlers/error-response-handlers.js';
 import responseHandler from '../../handlers/response-handler.js';
 
 const checkOut = async (req, res) => {
-    const checkOutLocation = req.body.checkOutLocation;
+    const checkOutLocationLatitude = req.body.checkOutLocationLatitude;
+    const checkOutLocationLongitude = req.body.checkOutLocationLongitude;
     const employeeId = req.employee.employeeId;
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
@@ -37,7 +38,8 @@ const checkOut = async (req, res) => {
                 checkOutTime: new Date(),
                 status: 'CHECKED_OUT',
                 totalHours: totalTimeWorked,
-                checkOutLocation: checkOutLocation || null,
+                checkOutLocationLatitude: checkOutLocationLatitude || null,
+                checkOutLocationLongitude: checkOutLocationLongitude || null,
             },
         });
     } catch (error) {

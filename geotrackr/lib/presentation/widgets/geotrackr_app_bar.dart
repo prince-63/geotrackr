@@ -31,8 +31,27 @@ class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Navigator.pushNamed(context, "/profile");
                   },
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(imageUrl),
+                    backgroundColor: Colors.grey,
+                    backgroundImage:
+                        imageUrl.isEmpty ? null : NetworkImage(imageUrl),
+                    child: imageUrl.isEmpty
+                        ? const Icon(Icons.person, color: Colors.white)
+                        : null,
                   ),
+                  // child: Column(
+                  //   children: [
+                  //     if (imageUrl == '') ...[
+                  //       CircleAvatar(
+                  //         backgroundColor: Colors.grey,
+                  //         child: Icon(Icons.person, color: textColor),
+                  //       ),
+                  //     ] else ...[
+                  //       CircleAvatar(
+                  //         backgroundImage: NetworkImage(imageUrl),
+                  //       ),
+                  //     ]
+                  //   ],
+                  // ),
                 ),
               );
             } else if (state is LoadEmployeeLoading) {

@@ -10,7 +10,7 @@ class Employee {
   final bool? isVerified;
   final bool? biometricEnabled;
   final List<String>? roles;
-  final List<Attendances>? attendances;
+  final List<Attendance>? attendances;
   final String? officeId;
 
   Employee({
@@ -37,7 +37,7 @@ class Employee {
       verificationCode: json['verificationCode'],
       roles: List<String>.from(json['roles']),
       attendances: List.from(json['attendances'])
-          .map((e) => Attendances.fromJson(e))
+          .map((e) => Attendance.fromJson(e))
           .toList(),
       officeId: json['officeId'],
       isVerified: json['isVerified'],
@@ -54,7 +54,7 @@ class Employee {
       'employeeProfileImageUrl': employeeProfileImageUrl,
       'verificationCode': verificationCode,
       'roles': roles,
-      'attendance': attendances?.map((e) => e.toJson()).toList(),
+      'attendances': attendances?.map((e) => e.toJson()).toList(),
       'officeId': officeId,
       'isVerified': isVerified,
       'biometricEnabled': biometricEnabled,
