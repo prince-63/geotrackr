@@ -14,6 +14,7 @@ import WorkPage from "./components/pages/work/work-page";
 import EmployeesPage from "./components/pages/employees/employees-page";
 import SettingsPage from "./components/pages/settings/settings-page";
 import ProtectedRoute from "./protected-route";
+import EmployeeProfile from "./components/pages/employeeProfile/employeeProfile";
 
 function App() {
   return (
@@ -39,6 +40,11 @@ function App() {
             path="employees"
             element={<ProtectedRoute element={<EmployeesPage />} />}
           />
+          <Route
+            path="employee-profile"
+            element={<EmployeeProfile employeeId={"t4785353"}              
+            />}
+            />
           <Route
             path="work"
             element={<ProtectedRoute element={<WorkPage />} />}
