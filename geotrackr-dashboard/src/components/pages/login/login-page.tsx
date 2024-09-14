@@ -46,60 +46,60 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
-      <FormContainer className="max-w-sm border">
-        <div className="text-center mb-6">
-          <LogoForPages message="Login to your office account." />
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <TextInput
-              type="text"
-              placeholder="Email"
-              value={officeEmail}
-              onChange={handleUsernameChange}
-              icon={User}
-              className="w-full text-lg text-gray-700"
-            />
+      <div className="flex items-center justify-center min-h-screen ">
+        <FormContainer className="max-w-sm border">
+          <div className="text-center mb-6">
+            <LogoForPages message="Login to your office account." />
           </div>
-          <div className="mb-4">
-            <TextInput
-              type="password"
-              placeholder="Password"
-              value={officePassword}
-              onChange={handlePasswordChange}
-              icon={Lock}
-              className="w-full text-lg text-gray-700"
-            />
-          </div>
-          <div className="flex justify-end my-2">
-            <Typography
-              variant="body3"
-              className="text-black hover:text-blue-400 transition duration-200 ease-in-out"
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <TextInput
+                type="text"
+                placeholder="Email"
+                value={officeEmail}
+                onChange={handleUsernameChange}
+                icon={User}
+                className="w-full text-lg text-gray-700"
+              />
+            </div>
+            <div className="mb-4">
+              <TextInput
+                type="password"
+                placeholder="Password"
+                value={officePassword}
+                onChange={handlePasswordChange}
+                icon={Lock}
+                className="w-full text-lg text-gray-700"
+              />
+            </div>
+            <div className="flex justify-end my-2">
+              <Typography
+                variant="body3"
+                className="text-black hover:text-blue-400 transition duration-200 ease-in-out"
+              >
+                <Link to="/forgot-password">Forgot password?</Link>
+              </Typography>
+            </div>
+            <Button
+              type="submit"
+              className="w-full py-2 bg-green-600 hover:bg-green-500 text-white font-medium"
             >
-              <Link to="/forgot-password">Forgot password?</Link>
+              Login
+            </Button>
+          </form>
+          <div className="flex justify-center items-center mt-4 space-x-2">
+            <Typography variant="body3">Don't have an account?</Typography>
+            <Typography variant="body3" className="text-black">
+              <Link
+                to="/signup"
+                className="hover:text-blue-400 transition duration-200 ease-in-out"
+              >
+                Sign up
+              </Link>
             </Typography>
           </div>
-          <Button
-            type="submit"
-            className="w-full py-2 bg-green-600 hover:bg-green-500 text-white font-medium"
-          >
-            Login
-          </Button>
-        </form>
-        <div className="flex justify-center items-center mt-4 space-x-2">
-          <Typography variant="body3">Don't have an account?</Typography>
-          <Typography variant="body3" className="text-black">
-            <Link
-              to="/signup"
-              className="hover:text-blue-400 transition duration-200 ease-in-out"
-            >
-              Sign up
-            </Link>
-          </Typography>
-        </div>
-      </FormContainer>
-    </div>
+        </FormContainer>
+      </div>
   );
 };
 
