@@ -8,4 +8,14 @@ import uploadProfileImage from './employee/upload-profile-image.js';
 import getOfficeDetails from './employee/get-office-details.js';
 import updateEmployeeDetails from './employee/update-employee-details.js';
 
-export { addOfficeEmployee, addRemoteEmployee, deleteEmployee, getEmployeeDetails, getEmployees, loginEmployee, uploadProfileImage, updateEmployeeDetails, getOfficeDetails };
+export {
+  addOfficeEmployee,
+  addRemoteEmployee,
+  deleteEmployee,
+  getEmployeeDetails,
+  getEmployees,
+  loginEmployee,
+  uploadProfileImage,
+  updateEmployeeDetails,
+  getOfficeDetails,
+};

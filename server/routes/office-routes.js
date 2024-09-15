@@ -1,4 +1,10 @@
-import { updateOfficeDetails, getOfficeDetails, officeSignup, officeLogin, officeLogout } from '../services/office-service.js';
+import {
+  updateOfficeDetails,
+  getOfficeDetails,
+  officeSignup,
+  officeLogin,
+  officeLogout,
+} from '../services/office-service.js';
 import officeMiddleware from '../middleware/office-middleware.js';
 import express from 'express';
 
