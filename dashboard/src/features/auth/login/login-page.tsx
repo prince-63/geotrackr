@@ -27,7 +27,7 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     await login(officeEmail, officePassword);
-    navigate('/hello');
+    navigate('/dashboard');
   };
 
   return (

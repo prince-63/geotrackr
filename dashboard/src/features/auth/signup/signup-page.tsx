@@ -32,7 +32,7 @@ const Signup: React.FC = () => {
     e.preventDefault();
 
     signup(officeName, officeEmail, officePassword);
-    navigate('/hello');
+    navigate('/dashboard');
   };
 
   return (

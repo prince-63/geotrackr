@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../../assets/mstile-70x70.png';
+import logo from '../../assets/fab-icons/mstile-70x70.png';
 // import Typography from "../general/typography";
 
 const SideBarHeader = () => {

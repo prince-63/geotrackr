@@ -11,6 +11,12 @@ import {
   DASHBOARD_SIDEBAR_LINKS_TYPE,
   DASHBOARD_SIDEBAR_LINKS_FOOTER_TYPE,
 } from './types';
+import Illustration from '../assets/images/Illustration.png';
+import Illustration2 from '../assets/images/illustration2.png';
+import Illustration3 from '../assets/images/illustration3.png';
+import identity from '../assets/images/identity.png';
+import fingerprint from '../assets/images/fingerprint.png';
+import mobile from '../assets/images/mobile.webp';
 
 export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
   {
@@ -50,5 +56,65 @@ export const dashboard_sidebar_footer: DASHBOARD_SIDEBAR_LINKS_FOOTER_TYPE = [
     title: 'Logout',
     icon: LogOut,
     link: '/logout',
+  },
+];
+
+export const NAV_LINKS = [
+  {
+    label: 'Home',
+    href: '/',
+  },
+  {
+    label: 'Login',
+    href: '/login',
+  },
+  {
+    label: 'Signup',
+    href: '/signup',
+  },
+];
+
+export const hero_content = [
+  {
+    heading: 'Revolutionize Attendance Tracking',
+    subheading: 'With Cutting-Edge Technology',
+    description:
+      'Learn how our system combines biometric verification, GPS tracking, and blockchain for secure and accurate attendance management.',
+    img: Illustration,
+  },
+  {
+    heading: 'Seamless Online & Offline',
+    subheading: 'Attendance Solutions',
+    description:
+      'Discover how our technology ensures reliable attendance recording even in low connectivity environments.',
+    img: Illustration2,
+  },
+  {
+    heading: 'Start Using Our System',
+    subheading: 'Today and Transform Operations',
+    description:
+      'Get started with our solution to enhance security, accuracy, and efficiency in attendance management.',
+    img: Illustration3,
+  },
+];
+
+export const service_data = [
+  {
+    image: identity,
+    title: 'Identity Verification',
+    description:
+      'Each user receives a unique QR codeed identity card storing encrypted data including user ID, fingerprint, and office location, offering a compact secure method to manage attendance.',
+  },
+  {
+    image: mobile,
+    title: 'Mobile Application',
+    description:
+      'Our mobile app offers a convenient way for employees to clock in and out, view their attendance history, and receive notifications about their attendance status.',
+  },
+  {
+    image: fingerprint,
+    title: 'Biometric Verification',
+    description:
+      'Our system uses biometric verification to ensure that the person clocking in is the same person assigned to the user ID, preventing buddy punching and other forms of attendance fraud.',
   },
 ];
