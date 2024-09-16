@@ -11,9 +11,9 @@ import {
   DASHBOARD_SIDEBAR_LINKS_TYPE,
   DASHBOARD_SIDEBAR_LINKS_FOOTER_TYPE,
 } from './types';
-import Illustration from '../assets/images/Illustration.png';
-import Illustration2 from '../assets/images/illustration2.png';
-import Illustration3 from '../assets/images/illustration3.png';
+import appInstall from '../assets/images/app-install.png';
+import security from '../assets/images/security.png';
+import attendance from '../assets/images/attendance.png';
 import identity from '../assets/images/identity.png';
 import fingerprint from '../assets/images/fingerprint.png';
 import mobile from '../assets/images/mobile.webp';
@@ -80,21 +80,21 @@ export const hero_content = [
     subheading: 'With Cutting-Edge Technology',
     description:
       'Learn how our system combines biometric verification, GPS tracking, and blockchain for secure and accurate attendance management.',
-    img: Illustration,
+    img: attendance,
   },
   {
     heading: 'Seamless Online & Offline',
     subheading: 'Attendance Solutions',
     description:
       'Discover how our technology ensures reliable attendance recording even in low connectivity environments.',
-    img: Illustration2,
+    img: security,
   },
   {
     heading: 'Start Using Our System',
     subheading: 'Today and Transform Operations',
     description:
       'Get started with our solution to enhance security, accuracy, and efficiency in attendance management.',
-    img: Illustration3,
+    img: appInstall,
   },
 ];
 

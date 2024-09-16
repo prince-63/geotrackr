@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`p-2 rounded-sm transition duration-200 ease-in-out ${className}`}
+      className={`p-2 rounded-md transition duration-200 ease-in-out ${className}`}
     >
       {children}
     </button>

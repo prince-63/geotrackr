@@ -34,7 +34,7 @@ const Header = () => {
   return (
     <header
       className={mergeClasses(
-        'sticky top-0 z-30 w-full border-b border-transparent bg-gray max-md:border-gray-100',
+        'sticky top-0 z-30 w-full border-b border-transparent bg-gray-100  max-md:border-gray-100',
         scrolled ? 'bg-gray/20 backdrop-blur-xl md:border-gray-100' : ''
       )}
     >

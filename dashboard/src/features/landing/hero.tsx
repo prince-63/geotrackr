@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { hero_content as content } from '../../lib/data';
+import Button from '../../components/general/button';
+import Typography from '../../components/general/typography';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -15,7 +17,7 @@ const Hero = () => {
     }, 3500);
 
     return () => clearInterval(interval);
-  }, [content.length]);
+  }, []);
 
   const handleDotClick = (index: React.SetStateAction<number>) => {
     setAnimating(true);
@@ -26,38 +28,49 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative flex flex-col md:flex-row items-center justify-between p-6 md:p-12 max-w-7xl mx-auto">
+    <div className="relative grid grid-cols-1 md:grid-cols-2 items-center justify-between p-6 md:p-12 md:flex md:justify-around min-h-screen bg-gray-100 dark:from-gray-800 dark:to-gray-900">
       {/* Text Section */}
       <div
-        className={`flex-1 text-center md:text-left mb-8 md:mb-0 transition-all duration-700 ease-in-out transform ${
+        className={`flex-1 text-center md:text-left mb-8 md:mb-0 transition-all duration-700 ease-in-out transform md:max-w-xl ${
           animating ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
-        }`}
+        } min-h-[300px] flex flex-col justify-center order-2 md:order-1`}
       >
-        <h1 className="text-5xl md:text-7xl font-medium text-gray-700 mb-4">
+        <Typography
+          variant="h1"
+          className="text-4xl md:text-6xl font-bold text-black dark:text-white mb-4"
+        >
           {content[currentSlide].heading}
-        </h1>
-        <p className="text-4xl md:text-6xl font-medium text-green-500 mb-4">
+        </Typography>
+        <Typography
+          variant="h2"
+          className="text-2xl md:text-4xl font-semibold text-black dark:text-white mb-4"
+        >
           {content[currentSlide].subheading}
-        </p>
-        <p className="text-base text-gray-500 mb-6">
+        </Typography>
+        <Typography
+          variant="body1"
+          className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-4"
+        >
           {content[currentSlide].description}
-        </p>
-        <button className="px-8 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-500 transition-colors transform hover:scale-105">
-          Get Started
-        </button>
+        </Typography>
+        <div>
+          <Button className="bg-black text-gray-100 font-semibold py-3 px-4 mt-4 rounded-lg shadow-lg hover:bg-gray-900 transition-colors duration-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+            Get Started
+          </Button>
+        </div>
       </div>
 
       {/* Image Section */}
       <div
-        className={`flex-1 flex justify-center transition-all duration-700 ease-in-out w-fit transform ${
+        className={`flex justify-center items-center transition-all duration-700 ease-in-out w-full md:w-fit transform md:justify-normal lg:items-end ${
           animating ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
-        }`}
+        } min-h-[300px] order-1 md:order-2`}
       >
         <img
           src={content[currentSlide].img}
           alt="hero"
-          className="w-full max-w-md h-auto object-contain"
-          style={{ minHeight: '500px' }}
+          className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain"
+          style={{ minHeight: '400px', maxHeight: '500px' }}
         />
       </div>
 

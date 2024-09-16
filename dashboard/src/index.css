@@ -4,7 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --app-gray-default: 255 255 255;
   --app-gray-50: 249 250 251;
@@ -33,4 +32,30 @@
   --app-gray-800: 243 244 246;
   --app-gray-900: 249 250 251;
   --app-gray-950: 255 255 255;
+}
+
+
+body {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(231, 231, 231);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(86, 86, 86);
+  border: 3px solid rgba(var(--app-gray-200), 1);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgb(55, 65, 81);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: white;
 }

@@ -4,6 +4,9 @@ import { IoLocation } from 'react-icons/io5';
 import { MdEmail } from 'react-icons/md';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SectionHeader from '../../components/data-display/section-header';
+import Typography from '../../components/general/typography';
+import Button from '../../components/general/button';
 
 const Contact: React.FC = () => {
   const nameRef = useRef<HTMLInputElement>(null);
@@ -29,84 +32,123 @@ const Contact: React.FC = () => {
     <div id="contact">
       <section className="bg-gray-100 py-12 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 text-gray-900">
-            Get in Touch
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-white shadow-lg p-6 md:p-8 rounded-lg border border-gray-300">
-              <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">
-                Contact Information
-              </h3>
-              <p className="mb-6 text-gray-700 text-base sm:text-lg">
-                Have questions or need support regarding our innovative
-                attendance system? Reach out to us through the following
-                methods.
-              </p>
-              <ul className="text-gray-800 text-base sm:text-lg">
+          <SectionHeader
+            title="Contact Us"
+            description="Have questions or need support regarding our innovative attendance system? Reach out to us through the following methods."
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-20">
+            <div className="bg-white dark:bg-gray-100 shadow-lg p-6 md:p-8 rounded-lg border border-gray-200 ">
+              <Typography
+                variant="h4"
+                className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 dark:text-white"
+              >
+                Get in Touch
+              </Typography>
+              <Typography
+                variant="body1"
+                className="text-gray-800 dark:text-white mb-6"
+              >
+                We are available 24/7 to answer your questions and provide
+                support. Feel free to contact us through the following methods.
+              </Typography>
+              <ul className="text-gray-800 dark:text-gray-200 text-base sm:text-lg">
                 <li className="mb-3 flex items-center">
-                  <IoMdCall className="text-green-700 text-2xl sm:text-3xl mr-3" />
-                  <span className="font-semibold px-2">Phone:</span>{' '}
-                  987-654-3210
+                  <IoMdCall className="text-blue-500 dark:text-blue-300 text-2xl sm:text-3xl mr-3" />
+                  <Typography
+                    variant="body1"
+                    className="text-gray-800 dark:text-white
+                    px-2"
+                  >
+                    Phone:
+                  </Typography>{' '}
+                  <Typography
+                    variant="body1"
+                    className="text-gray-800 dark:text-white"
+                  >
+                    +91 6289296197
+                  </Typography>
                 </li>
                 <li className="mb-3 flex items-center">
-                  <MdEmail className="text-green-700 text-2xl sm:text-3xl mr-3" />
-                  <span className="font-semibold px-2">Email:</span>{' '}
-                  support@attendancepro.com
+                  <MdEmail className="text-blue-500 dark:text-blue-300 text-2xl sm:text-3xl mr-3" />
+                  <Typography
+                    variant="body1"
+                    className="text-gray-800 dark:text-white
+                    px-2"
+                  >
+                    Email:
+                  </Typography>{' '}
+                  <Typography
+                    variant="body1"
+                    className="text-gray-800 dark:text-white"
+                  >
+                    contact@geotrackr.tech
+                  </Typography>
                 </li>
                 <li className="flex items-center">
-                  <IoLocation className="text-green-700 text-2xl sm:text-3xl mr-3" />
-                  <span className="font-semibold px-2">Address:</span> 456
-                  Innovation Dr, Tech City, CA
+                  <IoLocation className="text-blue-500 dark:text-blue-300 text-2xl sm:text-3xl mr-3" />
+                  <Typography
+                    variant="body1"
+                    className="text-gray-800 dark:text-white
+                    px-2"
+                  >
+                    Address:
+                  </Typography>{' '}
+                  <Typography
+                    variant="body1"
+                    className="text-gray-800 dark:text-white"
+                  >
+                    Bara kanthalia, Barrackpore, Kolkata, West Bengal 700121
+                  </Typography>
                 </li>
               </ul>
             </div>
-            <div className="bg-white shadow-lg p-6 md:p-8 rounded-lg border border-gray-300">
-              <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">
+            <div className="bg-white dark:bg-gray-100 shadow-lg p-6 md:p-8 rounded-lg border border-gray-200 ">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 dark:text-white">
                 Contact Us
               </h3>
               <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-1 sm:mb-2">
+                  <label className="block text-sm font-medium text-gray-800 dark:text-white mb-1 sm:mb-2">
                     Name
                   </label>
                   <input
                     type="text"
                     name="name"
                     ref={nameRef}
-                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 placeholder-gray-500"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 transition duration-300"
                     placeholder="Your Name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-1 sm:mb-2">
+                  <label className="block text-sm font-medium text-gray-800 dark:text-white mb-1 sm:mb-2">
                     Email
                   </label>
                   <input
                     type="email"
                     name="email"
                     ref={emailRef}
-                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 placeholder-gray-500"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 transition duration-300"
                     placeholder="Your Email"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-1 sm:mb-2">
+                  <label className="block text-sm font-medium text-gray-800 dark:text-white mb-1 sm:mb-2">
                     Message
                   </label>
                   <textarea
                     name="message"
                     ref={messageRef}
-                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 placeholder-gray-500"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 transition duration-300"
                     rows={4}
                     placeholder="Your Message"
                   ></textarea>
                 </div>
-                <button
-                  className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-green-700 text-white rounded-lg shadow-md hover:bg-green-600 transition duration-300"
-                  type="submit"
+                <Button
+                  className="w-full px-4 py-2 sm:px-6 sm:py-3 text-gray-100 bg-black font-semibold mt-4 rounded-lg shadow-lg transition-colors duration-300 dark:bg-white dark:text-black"
+                  type={'submit'}
                 >
                   Send Message
-                </button>
+                </Button>
               </form>
             </div>
           </div>
