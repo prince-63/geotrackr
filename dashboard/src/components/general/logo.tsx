@@ -1,5 +1,5 @@
 import React from 'react';
-import logoImage from '../../../../../fab-icons/mstile-70x70.png';
+import logoImage from '../../assets/fab-icons/mstile-70x70.png';
 
 const Logo: React.FC = () => {
   return (

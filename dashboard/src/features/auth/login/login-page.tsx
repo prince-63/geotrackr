@@ -31,8 +31,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
-      <FormContainer className="max-w-sm border">
+    <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-100">
+      <FormContainer className="max-w-sm w-full bg-white dark:bg-gray-100 p-8 rounded-lg shadow-lg border border-gray-300">
         <div className="text-center mb-6">
           <LogoForPages message="Login to your office account." />
         </div>
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
               value={officeEmail}
               onChange={handleUsernameChange}
               icon={User}
-              className="w-full text-lg text-gray-700"
+              className="w-full text-lg text-grey-800 dark:text-white"
             />
           </div>
           <div className="mb-4">
@@ -54,33 +54,36 @@ const Login: React.FC = () => {
               value={officePassword}
               onChange={handlePasswordChange}
               icon={Lock}
-              className="w-full text-lg text-gray-700"
+              className="w-full text-lg text-gray-700 dark:text-gray-200"
             />
           </div>
           <div className="flex justify-end my-2">
             <Typography
               variant="body3"
-              className="text-black hover:text-blue-400 transition duration-200 ease-in-out"
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-400 dark:hover:text-blue-500 transition duration-200 ease-in-out"
             >
-              <Link to="/forgot-password">Forgot password?</Link>
+              <Link to="/forgot-password" className='text-grey-800 dark:text-white'>Forgot password?</Link>
             </Typography>
           </div>
           <Button
             type="submit"
-            className="w-full py-2 bg-green-600 hover:bg-green-500 text-white font-medium"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg shadow-md transition duration-300"
           >
             Login
           </Button>
         </form>
         <div className="flex justify-center items-center mt-4 space-x-2">
-          <Typography variant="body3">Don't have an account?</Typography>
-          <Typography variant="body3" className="text-black">
-            <Link
-              to="/signup"
-              className="hover:text-blue-400 transition duration-200 ease-in-out"
-            >
-              Sign up
-            </Link>
+          <Typography
+            variant="body3"
+            className="text-gray-800 dark:text-white"
+          >
+            Don't have an account?
+          </Typography>
+          <Typography
+            variant="body3"
+            className="text-blue-600 dark:text-blue-400 hover:text-blue-400 dark:hover:text-blue-500 transition duration-200 ease-in-out"
+          >
+            <Link to="/signup">Sign up</Link>
           </Typography>
         </div>
       </FormContainer>

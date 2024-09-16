@@ -3,7 +3,7 @@ import { service_data as services } from '../../lib/data';
 
 const Service = () => {
   return (
-    <div className="bg-gray-100 py-20" id="services">
+    <div className="bg-gray-100 py-10 px-4" id="services">
       <SectionHeader
         title={'Our Services'}
         description={
