@@ -53,8 +53,8 @@ class LocationRepositoryImpl implements LocationRepository {
     return Geolocator.distanceBetween(
       location1.latitude,
       location1.longitude,
-      location2.latitude,
       location2.longitude,
+      location2.latitude,
     );
   }
 }

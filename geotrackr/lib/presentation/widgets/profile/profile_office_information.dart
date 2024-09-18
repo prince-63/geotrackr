@@ -15,7 +15,7 @@ class ProfileOfficeInformation extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDarkMode
         ? const Color.fromARGB(255, 51, 56, 61)
-        : const Color.fromARGB(255, 195, 222, 241);
+        : const Color.fromARGB(255, 250, 253, 255);
     final textColor = !isDarkMode ? Colors.black : Colors.white;
 
     return Column(

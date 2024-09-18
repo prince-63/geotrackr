@@ -82,7 +82,8 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
         final List<dynamic> data = responseBody['data']['attendances'];
-        List<Attendance> attendances = data.map((e) => Attendance.fromJson(e)).toList();
+        List<Attendance> attendances =
+            data.map((e) => Attendance.fromJson(e)).toList();
         print("Attendances: $attendances");
         return attendances;
       } else {

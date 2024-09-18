@@ -16,7 +16,7 @@ class ProfileBody extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final cardBackgroundColor = isDarkMode
         ? const Color.fromARGB(255, 51, 56, 61)
-        : const Color.fromARGB(255, 195, 222, 241);
+        : const Color.fromARGB(255, 250, 253, 255);
 
     return SingleChildScrollView(
       child: Container(

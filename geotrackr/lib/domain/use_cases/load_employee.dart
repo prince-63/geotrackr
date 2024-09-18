@@ -2,11 +2,11 @@ import 'package:geotrackr/domain/entities/employee.dart';
 import 'package:geotrackr/domain/repositories/employee_repository.dart';
 
 class LoadEmployee {
-  final EmployeeRepository _employeeRepository;
+  final EmployeeRepository employeeRepository;
 
-  LoadEmployee(this._employeeRepository);
+  LoadEmployee({required this.employeeRepository});
 
   Future<Employee> call() async {
-    return await _employeeRepository.loadEmployee();
+    return await employeeRepository.loadEmployee();
   }
 }

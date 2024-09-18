@@ -38,7 +38,9 @@ class _MainPageState extends State<MainPage> {
     return BlocProvider(
       create: (context) {
         final bloc = LoadEmployeeBloc(
-            loadEmployee: LoadEmployee(EmployeeRepositoryImpl()));
+            loadEmployee: LoadEmployee(
+          employeeRepository: EmployeeRepositoryImpl(),
+            ));
         bloc.load();
         return bloc;
       },

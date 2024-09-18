@@ -34,7 +34,7 @@ class ProfilePage extends StatelessWidget {
             create: (context) {
               final bloc = LoadEmployeeBloc(
                 loadEmployee: LoadEmployee(
-                  EmployeeRepositoryImpl(),
+                  employeeRepository: EmployeeRepositoryImpl(),
                 ),
               );
               bloc.load();
