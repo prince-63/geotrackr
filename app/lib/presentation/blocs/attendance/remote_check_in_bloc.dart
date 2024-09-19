@@ -10,12 +10,8 @@ class RemoteCheckInBloc extends Cubit<RemoteCheckInState> {
   Future<void> checkIn() async {
     emit(RemoteCheckInLoading());
     try {
-      final double distance = await remoteCheckIn.call();
-      if (distance == 0) {
-        emit(RemoteCheckInSuccess('Remote check-in success'));
-      } else {
-        emit(RemoteCheckInFailure('Error: Remote check-in failed'));
-      }
+      final String message = await remoteCheckIn.call();
+      emit(RemoteCheckInSuccess(message));
     } catch (e) {
       emit(RemoteCheckInError(e.toString()));
     }
@@ -32,12 +28,6 @@ class RemoteCheckInSuccess extends RemoteCheckInState {
   final String message;
 
   RemoteCheckInSuccess(this.message);
-}
-
-class RemoteCheckInFailure extends RemoteCheckInState {
-  final String message;
-
-  RemoteCheckInFailure(this.message);
 }
 
 class RemoteCheckInError extends RemoteCheckInState {

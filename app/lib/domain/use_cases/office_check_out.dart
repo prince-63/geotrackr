@@ -7,7 +7,7 @@ class OfficeCheckOut {
     required this.attendanceService,
   });
 
-  Future<double> call() async {
+  Future<String> call() async {
     return await attendanceService.officeCheckOut();
   }
 }

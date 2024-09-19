@@ -10,12 +10,8 @@ class RemoteCheckOutBloc extends Cubit<RemoteCheckOutState> {
   Future<void> checkOut() async {
     emit(RemoteCheckOutLoading());
     try {
-      final double distance = await remoteCheckOut.call();
-      if (distance == 0) {
-        emit(RemoteCheckOutSuccess('Remote check-out success'));
-      } else {
-        emit(RemoteCheckOutFailure('Error: Remote check-out failed'));
-      }
+      final String message = await remoteCheckOut.call();
+      emit(RemoteCheckOutSuccess(message));
     } catch (e) {
       emit(RemoteCheckOutError(e.toString()));
     }
@@ -32,12 +28,6 @@ class RemoteCheckOutSuccess extends RemoteCheckOutState {
   final String message;
 
   RemoteCheckOutSuccess(this.message);
-}
-
-class RemoteCheckOutFailure extends RemoteCheckOutState {
-  final String message;
-
-  RemoteCheckOutFailure(this.message);
 }
 
 class RemoteCheckOutError extends RemoteCheckOutState {

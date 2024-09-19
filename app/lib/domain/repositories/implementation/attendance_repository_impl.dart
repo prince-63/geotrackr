@@ -10,7 +10,7 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
   AttendanceRepositoryImpl();
 
   @override
-  Future<bool> checkIn(String longitude, String latitude) async {
+  Future<String> checkIn(String longitude, String latitude) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
@@ -21,16 +21,18 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
-        body: {
+        body: jsonEncode({
           'checkInLocationLongitude': longitude,
           'checkInLocationLatitude': latitude,
-        },
+        }),
       );
 
       if (response.statusCode == 200) {
-        return true;
+        final responseBody = jsonDecode(response.body);
+        return responseBody.message;
       } else {
-        return false;
+        final responseBody = jsonDecode(response.body);
+        return responseBody['message'];
       }
     } catch (e) {
       throw Exception('Failed to check in');
@@ -38,7 +40,7 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
   }
 
   @override
-  Future<bool> checkOut(String longitude, String latitude) async {
+  Future<String> checkOut(String longitude, String latitude) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
@@ -49,16 +51,18 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
-        body: {
-          'checkOutLocationLongitude': longitude,
-          'checkOutLocationLatitude': latitude,
-        },
+        body: jsonEncode({
+          'checkInLocationLongitude': longitude,
+          'checkInLocationLatitude': latitude,
+        }),
       );
 
       if (response.statusCode == 200) {
-        return true;
+        final responseBody = jsonDecode(response.body);
+        return responseBody.message;
       } else {
-        return false;
+        final responseBody = jsonDecode(response.body);
+        return responseBody['message'];
       }
     } catch (e) {
       throw Exception('Failed to check out');

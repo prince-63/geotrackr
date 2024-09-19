@@ -19,6 +19,59 @@ class _HomePageBodyState extends State<HomePageBody> {
   bool isCheckedIn = false;
   bool isCheckedOut = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+    // Check if the user is already checked in
+    final officeCheckInBloc = context.read<OfficeCheckInBloc?>();
+    final remoteCheckInBloc = context.read<RemoteCheckInBloc?>();
+
+    if (officeCheckInBloc != null) {
+      officeCheckInBloc.stream.listen((state) {
+        if (state is OfficeCheckInSuccess) {
+          setState(() {
+            isCheckedIn = true;
+          });
+        }
+      });
+    }
+
+    if (remoteCheckInBloc != null) {
+      remoteCheckInBloc.stream.listen((state) {
+        if (state is RemoteCheckInSuccess) {
+          setState(() {
+            isCheckedIn = true;
+          });
+        }
+      });
+    }
+
+    // Check if the user is already checked out
+    final officeCheckOutBloc = context.read<OfficeCheckOutBloc?>();
+    final remoteCheckOutBloc = context.read<RemoteCheckOutBloc?>();
+
+    if (officeCheckOutBloc != null) {
+      officeCheckOutBloc.stream.listen((state) {
+        if (state is OfficeCheckOutSuccess) {
+          setState(() {
+            isCheckedOut = true;
+          });
+        }
+      });
+    }
+
+    if (remoteCheckOutBloc != null) {
+      remoteCheckOutBloc.stream.listen((state) {
+        if (state is RemoteCheckOutSuccess) {
+          setState(() {
+            isCheckedOut = true;
+          });
+        }
+      });
+    }
+  }
+
   void _checkIn() {
     final officeCheckInBloc = context.read<OfficeCheckInBloc?>();
     final remoteCheckInBloc = context.read<RemoteCheckInBloc?>();
@@ -71,7 +124,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                       CustomMessages.showBeautifulMessage(
                           context, state.message);
                     });
-                  } else if (state is OfficeCheckInFailure) {
+                  } else if (state is OfficeCheckInError) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       CustomMessages.showErrorMessage(context, state.message);
                     });
@@ -96,7 +149,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                       CustomMessages.showBeautifulMessage(
                           context, state.message);
                     });
-                  } else if (state is OfficeCheckOutFailure) {
+                  } else if (state is OfficeCheckOutError) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       CustomMessages.showErrorMessage(context, state.message);
                     });
@@ -123,7 +176,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                       CustomMessages.showBeautifulMessage(
                           context, state.message);
                     });
-                  } else if (state is RemoteCheckInFailure) {
+                  } else if (state is RemoteCheckInError) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       CustomMessages.showErrorMessage(context, state.message);
                     });
@@ -148,7 +201,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                       CustomMessages.showBeautifulMessage(
                           context, state.message);
                     });
-                  } else if (state is RemoteCheckOutFailure) {
+                  } else if (state is RemoteCheckOutError) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       CustomMessages.showErrorMessage(context, state.message);
                     });

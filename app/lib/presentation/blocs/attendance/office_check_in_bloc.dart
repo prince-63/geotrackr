@@ -10,15 +10,8 @@ class OfficeCheckInBloc extends Cubit<OfficeCheckInState> {
   Future<void> checkIn() async {
     emit(OfficeCheckInLoading());
     try {
-      final double distance = await officeCheckIn.call();
-      if (distance == 0) {
-        emit(OfficeCheckInFailure('Check in success'));
-      } else if (distance == -1) {
-        emit(OfficeCheckInFailure('Error: Check in failed'));
-      } else {
-        emit(OfficeCheckInFailure(
-            'Distance to office is greater than ${200} meters: $distance meters.'));
-      }
+      final String message = await officeCheckIn.call();
+      emit(OfficeCheckInSuccess(message));
     } catch (e) {
       emit(OfficeCheckInError(e.toString()));
     }
@@ -35,12 +28,6 @@ class OfficeCheckInSuccess extends OfficeCheckInState {
   final String message;
 
   OfficeCheckInSuccess(this.message);
-}
-
-class OfficeCheckInFailure extends OfficeCheckInState {
-  final String message;
-
-  OfficeCheckInFailure(this.message);
 }
 
 class OfficeCheckInError extends OfficeCheckInState {
