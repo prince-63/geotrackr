@@ -9,8 +9,9 @@ import {
 import { EmployeeType } from '../../lib/types';
 import { useUserContext } from '../../hooks/use-user-context';
 
-const OfficeEmployee = () => {
+const Employees = () => {
   const [employees, setEmployees] = useState<EmployeeType[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const { token } = useUserContext();
 
   const handleAddEmployee = async (employee: {
@@ -26,7 +27,9 @@ const OfficeEmployee = () => {
       const employeeName = response.employeeName;
       const employeeEmail = response.employeeEmail;
       const employeeContactNumber = response.employeeContactNumber;
-      const employeeRole = response.employeeRole;
+      const employeeRole = response.roles[0];
+
+      console.log(response);
 
       setEmployees((prevEmployees) => [
         ...prevEmployees,
@@ -65,28 +68,18 @@ const OfficeEmployee = () => {
         const response = await loadEmployees({ token });
         console.log('Fetched employees:', response);
         const employees = response;
-        const inOfficeEmployees = employees.filter(
-          (employee: any) => employee.roles[0].Role.roleName === 'OFFICE'
-        );
-        if (Array.isArray(inOfficeEmployees)) {
-          inOfficeEmployees.forEach((employee) => {
-            const employeeId = employee.employeeId;
-            const employeeName = employee.employeeName;
-            const employeeEmail = employee.employeeEmail;
-            const employeeContactNumber = employee.employeeContactNumber;
-            const employeeRole = employee.roles[0].Role.roleName;
-
-            setEmployees((prevEmployees) => [
-              ...prevEmployees,
-              {
-                employeeId,
-                employeeName,
-                employeeEmail,
-                employeeContactNumber,
-                employeeRole,
-              },
-            ]);
-          });
+        if (Array.isArray(employees)) {
+          setEmployees(
+            employees.map((employee) => ({
+              employeeId: employee.employeeId,
+              employeeName: employee.employeeName,
+              employeeEmail: employee.employeeEmail,
+              employeeContactNumber: employee.employeeContactNumber,
+              employeeRole: employee.roles[0]
+                ? employee.roles[0].Role.roleName
+                : '',
+            }))
+          );
         } else {
           console.error('Failed to fetch employees:', employees);
         }
@@ -98,15 +91,32 @@ const OfficeEmployee = () => {
     fetchEmployees();
   }, [token]);
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredEmployees = employees.filter(
+    (employee) =>
+      employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.employeeEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.employeeContactNumber.includes(searchTerm) ||
+      employee.employeeRole.includes(searchTerm)
+  );
+
   return (
     <div className="p-4">
-      <AddEmployeeSection
-        onAdd={handleAddEmployee}
-        label={'In Office Employee'}
-      />
-
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search employees..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="p-2 border border-gray-300 rounded-md w-full"
+        />
+      </div>
+      <AddEmployeeSection onAdd={handleAddEmployee} label={'Employees'} />
       <EmployeeTable
-        employees={employees}
+        employees={filteredEmployees}
         onEdit={handleEditEmployee}
         onDelete={handleDeleteEmployee}
       />
@@ -114,4 +124,4 @@ const OfficeEmployee = () => {
   );
 };
 
-export default OfficeEmployee;
+export default Employees;

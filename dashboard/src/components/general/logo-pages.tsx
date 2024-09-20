@@ -14,7 +14,10 @@ const LogoForPages: React.FC<logoForPagesProps> = ({
   return (
     <div className={`text-center mb-6 ${className}`}>
       <Logo />
-      <Typography variant="body3" className="mt-2 text-grey-800 dark:text-white">
+      <Typography
+        variant="body3"
+        className="mt-2 text-grey-800 dark:text-white"
+      >
         {message}
       </Typography>
     </div>

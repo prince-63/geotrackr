@@ -28,10 +28,12 @@ const AddEmployeeSection: React.FC<AddEmployeeSectionProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(`Input Change - Name: ${name}, Value: ${value}`);
     setEmployee({ ...employee, [name]: value });
   };
 
   const handleAddClick = () => {
+    console.log('Add Clicked', employee);
     onAdd(employee);
     setIsModalOpen(false);
     setEmployee({
@@ -48,7 +50,10 @@ const AddEmployeeSection: React.FC<AddEmployeeSectionProps> = ({
         <span className="text-gray-700">{label}</span>
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center space-x-2"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            console.log('Open Modal');
+            setIsModalOpen(true);
+          }}
         >
           <Plus className="w-5 h-5" />
           <span>Add</span>
@@ -58,7 +63,10 @@ const AddEmployeeSection: React.FC<AddEmployeeSectionProps> = ({
       <div>
         <Modal
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          onClose={() => {
+            console.log('Close Modal');
+            setIsModalOpen(false);
+          }}
           title={label}
           width="400px"
           height="max-content"
@@ -68,7 +76,7 @@ const AddEmployeeSection: React.FC<AddEmployeeSectionProps> = ({
               label="Name"
               placeholder="Enter employee name"
               type="text"
-              name="name"
+              name="employeeName"
               value={employee.employeeName}
               onChange={handleInputChange}
             />
@@ -76,7 +84,7 @@ const AddEmployeeSection: React.FC<AddEmployeeSectionProps> = ({
               label="Email"
               placeholder="Enter employee email"
               type="email"
-              name="email"
+              name="employeeEmail"
               value={employee.employeeEmail}
               onChange={handleInputChange}
             />
@@ -84,7 +92,7 @@ const AddEmployeeSection: React.FC<AddEmployeeSectionProps> = ({
               label="Phone"
               placeholder="Enter employee phone"
               type="text"
-              name="phone"
+              name="employeeContactNumber"
               value={employee.employeeContactNumber}
               onChange={handleInputChange}
             />
@@ -92,7 +100,7 @@ const AddEmployeeSection: React.FC<AddEmployeeSectionProps> = ({
               label="Role"
               placeholder="Enter employee role"
               type="text"
-              name="role"
+              name="employeeRole"
               value={employee.employeeRole}
               onChange={handleInputChange}
             />

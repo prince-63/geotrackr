@@ -62,7 +62,12 @@ const Login: React.FC = () => {
               variant="body3"
               className="text-gray-700 dark:text-gray-300 hover:text-blue-400 dark:hover:text-blue-500 transition duration-200 ease-in-out"
             >
-              <Link to="/forgot-password" className='text-grey-800 dark:text-white'>Forgot password?</Link>
+              <Link
+                to="/forgot-password"
+                className="text-grey-800 dark:text-white"
+              >
+                Forgot password?
+              </Link>
             </Typography>
           </div>
           <Button
@@ -73,10 +78,7 @@ const Login: React.FC = () => {
           </Button>
         </form>
         <div className="flex justify-center items-center mt-4 space-x-2">
-          <Typography
-            variant="body3"
-            className="text-gray-800 dark:text-white"
-          >
+          <Typography variant="body3" className="text-gray-800 dark:text-white">
             Don't have an account?
           </Typography>
           <Typography

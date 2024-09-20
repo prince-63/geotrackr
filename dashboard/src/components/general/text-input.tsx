@@ -25,7 +25,11 @@ const TextInput: React.FC<TextInputProps> = ({
     >
       {Icon && (
         <IconContainer>
-          <Icon className="text-gray-500 dark:text-gray-400" width={20} height={20} />
+          <Icon
+            className="text-gray-500 dark:text-gray-400"
+            width={20}
+            height={20}
+          />
         </IconContainer>
       )}
       <input

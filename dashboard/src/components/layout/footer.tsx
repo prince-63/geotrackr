@@ -125,10 +125,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm sm:text-center text-grey-800 dark:text-white">
             © 2024{' '}
-            <Link
-              href="https://geotrackr.tech"
-              className="hover:underline"
-            >
+            <Link href="https://geotrackr.tech" className="hover:underline">
               GeoTrackr
             </Link>
             . All Rights Reserved.

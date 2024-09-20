@@ -4,9 +4,9 @@ import SideBar from '../sidebar/side-bar';
 
 const SideBarLayout: React.FC = () => {
   return (
-    <div className="flex h-screen">
+    <div className="md:flex md:h-screen">
       <SideBar />
-      <div className="ml-52 flex-1 p-0 overflow-y-auto mb-20">
+      <div className="mt-12 md:mt-0 flex-1 overflow-y-auto">
         <Outlet />
       </div>
     </div>

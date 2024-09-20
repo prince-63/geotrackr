@@ -8,7 +8,7 @@ import WorkPage from './features/work/work-page';
 import EmployeesPage from './features/employees/employees-page';
 import SettingsPage from './features/settings/settings-page';
 import ProtectedRoute from './protected-route';
-import EmployeeProfile from './features/employees/employee-profile';
+// import EmployeeProfile from './features/employees/employee-profile';
 import LandingPage from './features/landing/landing-page';
 import SideBarLayout from './components/layout/sidebar-layout';
 
@@ -36,10 +36,10 @@ function App() {
             path="employees"
             element={<ProtectedRoute element={<EmployeesPage />} />}
           />
-          <Route
+          {/* <Route
             path="employee-profile"
             element={<EmployeeProfile employeeId={'t4785353'} />}
-          />
+          /> */}
           <Route
             path="work"
             element={<ProtectedRoute element={<WorkPage />} />}

@@ -7,10 +7,7 @@ import {
   LogOut,
   UserRoundPen,
 } from 'lucide-react';
-import {
-  DASHBOARD_SIDEBAR_LINKS_TYPE,
-  DASHBOARD_SIDEBAR_LINKS_FOOTER_TYPE,
-} from './types';
+import { DASHBOARD_SIDEBAR_LINKS_TYPE } from './types';
 import appInstall from '../assets/images/app-install.png';
 import security from '../assets/images/security.png';
 import attendance from '../assets/images/attendance.png';
@@ -39,9 +36,6 @@ export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
     icon: UserRoundPen,
     link: '/profile',
   },
-];
-
-export const dashboard_sidebar_footer: DASHBOARD_SIDEBAR_LINKS_FOOTER_TYPE = [
   {
     title: 'Settings',
     icon: Settings,
