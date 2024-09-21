@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// A custom button widget with customizable properties.
 class CustomButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  final Color? backgroundColor;
-  final Color? textColor;
-  final double borderRadius;
-  final double padding;
-  final double elevation;
-  final double fontSize;
-  final FontWeight fontWeight;
-  final EdgeInsetsGeometry? margin;
+  final String text; // The text to display on the button.
+  final VoidCallback
+      onPressed; // The callback to execute when the button is pressed.
+  final Color? backgroundColor; // The background color of the button.
+  final Color? textColor; // The color of the text on the button.
+  final double borderRadius; // The border radius of the button.
+  final double padding; // The padding inside the button.
+  final double elevation; // The elevation of the button.
+  final double fontSize; // The font size of the text on the button.
+  final FontWeight fontWeight; // The font weight of the text on the button.
+  final EdgeInsetsGeometry? margin; // The margin outside the button.
 
+  /// Constructor for [CustomButton].
+  /// It initializes the class with the given parameters.
   const CustomButton({
     super.key,
     required this.text,

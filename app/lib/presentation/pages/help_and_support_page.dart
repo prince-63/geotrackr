@@ -5,9 +5,13 @@ import 'package:geotrackr/presentation/widgets/default_app_bar.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// The [HelpAndSupportPage] widget is a stateless widget that represents the help and support page of the application.
+/// It provides various options for contacting support and includes a list of frequently asked questions (FAQs).
 class HelpAndSupportPage extends StatelessWidget {
   const HelpAndSupportPage({super.key});
 
+  /// Launches a URL using the default external application.
+  /// This method is used to open email, website, phone, and chat links.
   void _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     try {
@@ -128,7 +132,7 @@ class HelpAndSupportPage extends StatelessWidget {
                         '1. Go to the login page.\n'
                         '2. Click on "Forgot Password".\n'
                         '3. Enter your registered email address.\n'
-                        '4. Check your email for verifcation code.\n'
+                        '4. Check your email for verification code.\n'
                         '5. Enter your verification code.\n'
                         '6. Enter your new password.\n'
                         '7. Click "Save" to apply the changes.',

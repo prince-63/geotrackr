@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:geotrackr/presentation/widgets/attendance/attendance_details_row.dart';
 import 'package:geotrackr/domain/entities/attendance.dart';
 
+/// The [AttendanceList] widget is a stateless widget that displays a list of attendance records for a selected day.
+/// It uses a function to get the attendance records for the selected day.
 class AttendanceList extends StatelessWidget {
-  final DateTime selectedDay;
-  final List<Attendance> Function(DateTime) getAttendanceForDay;
+  final DateTime
+      selectedDay; // The selected day for which to display attendance records.
+  final List<Attendance> Function(DateTime)
+      getAttendanceForDay; // Function to get attendance records for the selected day.
 
+  /// Constructor for [AttendanceList].
+  /// It initializes the class with the given selected day and function to get attendance records.
   const AttendanceList({
     super.key,
     required this.selectedDay,

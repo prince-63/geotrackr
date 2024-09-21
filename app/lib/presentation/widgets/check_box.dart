@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geotrackr/presentation/widgets/custom_button.dart';
 
+/// The [CheckBox] widget is a stateless widget that represents a custom checkbox with additional information.
+/// It displays a title, date, status, and a button if the checkbox is not checked.
 class CheckBox extends StatelessWidget {
   final BuildContext context;
   final String title;
@@ -11,6 +13,8 @@ class CheckBox extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
 
+  /// Constructor for [CheckBox].
+  /// It initializes the class with the given parameters.
   const CheckBox({
     super.key,
     required this.context,

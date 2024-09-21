@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geotrackr/presentation/blocs/employee/load_employee_bloc.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
+/// A custom AppBar widget for the GeoTrackr application.
+/// It includes a menu button and a profile avatar that displays the employee's profile image.
 class GeoTrackrAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GeoTrackrAppBar({super.key});
 

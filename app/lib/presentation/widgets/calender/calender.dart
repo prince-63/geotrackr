@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geotrackr/presentation/widgets/calender/attendance_list.dart';
-import 'package:geotrackr/presentation/widgets/calender/calender_widget.dart';
-import 'package:geotrackr/presentation/widgets/error_handling_widget.dart';
+import 'package:geotrackr/presentation/widgets/calender_widget.dart';
+import 'package:geotrackr/presentation/widgets/custom_messages.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:geotrackr/presentation/blocs/attendance/attendance_bloc.dart';
 import 'package:geotrackr/domain/entities/attendance.dart';
 
+/// The [Calender] widget is a stateful widget that represents the calendar page of the application.
+/// It uses the Bloc pattern to manage the state of loading attendance data.
 class Calender extends StatefulWidget {
   const Calender({super.key});
 
@@ -86,9 +88,15 @@ class _CalenderState extends State<Calender> {
               ],
             );
           } else if (state is AttendanceError) {
-            return ErrorHandlingWidget(message: state.message);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              CustomMessages.showErrorMessage(context, state.message);
+            });
+            return Container();
           } else {
-            return const ErrorHandlingWidget(message: "An error occurred");
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              CustomMessages.showErrorMessage(context, 'No data found');
+            });
+            return Container();
           }
         },
       ),

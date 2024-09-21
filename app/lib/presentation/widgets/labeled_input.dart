@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
+/// A custom labeled input widget that includes a label, hint text, and various customization options.
 class LabeledInput extends StatelessWidget {
-  final String label;
-  final String hintText;
-  final TextEditingController controller;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final Widget? prefixIcon;
-  final Widget? suffixIcon;
-  final String? Function(String?)? validator;
+  final String label; // The label text for the input field.
+  final String hintText; // The hint text for the input field.
+  final TextEditingController controller; // The controller for the input field.
+  final TextInputType keyboardType; // The keyboard type for the input field.
+  final bool obscureText; // Whether the input text should be obscured.
+  final Widget? prefixIcon; // The prefix icon for the input field.
+  final Widget? suffixIcon; // The suffix icon for the input field.
+  final String? Function(String?)?
+      validator; // The validator function for the input field.
 
+  /// Constructor for [LabeledInput].
+  /// It initializes the class with the given parameters.
   const LabeledInput({
     super.key,
     required this.label,

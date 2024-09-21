@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
+/// A widget for displaying labeled data with customizable properties.
 class DataDisplay extends StatelessWidget {
-  final String data;
-  final String label;
-  final Color? textColor;
-  final Color? backgroundColor;
-  final double? fontSize;
-  final FontWeight? fontWeight;
-  final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? margin;
-  final IconData? icon;
+  final String data; // The data to display.
+  final String label; // The label for the data.
+  final Color? textColor; // The color of the text.
+  final Color? backgroundColor; // The background color of the container.
+  final double? fontSize; // The font size of the text.
+  final FontWeight? fontWeight; // The font weight of the text.
+  final EdgeInsetsGeometry? padding; // The padding inside the container.
+  final EdgeInsetsGeometry? margin; // The margin outside the container.
+  final IconData? icon; // The icon to display alongside the text.
 
+  /// Constructor for [DataDisplay].
+  /// It initializes the class with the given parameters.
   const DataDisplay({
     super.key,
     required this.label,

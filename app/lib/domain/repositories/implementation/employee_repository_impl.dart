@@ -5,9 +5,13 @@ import 'package:geotrackr/domain/entities/employee.dart';
 import 'package:geotrackr/domain/repositories/employee_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Implementation of the [EmployeeRepository] interface.
+/// This class handles employee-related operations such as login, loading, and updating employee details.
 class EmployeeRepositoryImpl implements EmployeeRepository {
   EmployeeRepositoryImpl();
 
+  /// Logs in the employee using the provided email and password.
+  /// Returns an [Employee] object if the login is successful.
   @override
   Future<Employee> login(String email, String password) async {
     final response = await http.post(
@@ -31,6 +35,8 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
     }
   }
 
+  /// Loads the employee details.
+  /// Returns an [Employee] object if the details are successfully loaded.
   @override
   Future<Employee> loadEmployee() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -64,6 +70,9 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
     }
   }
 
+  /// Updates the employee details.
+  /// Takes the employee name, email, and contact number as parameters.
+  /// Returns an [Employee] object if the update is successful.
   @override
   Future<Employee> updateEmployee(String employeeName, String employeeEmail,
       String employeeContactNumber) async {
@@ -86,7 +95,7 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
       print(jsonEncode(responseData['data']['employee']));
-      // first clear the cache
+      // First clear the cache
       prefs.remove('employeeDetails');
       prefs.setString(
           'employeeDetails', jsonEncode(responseData['data']['employee']));

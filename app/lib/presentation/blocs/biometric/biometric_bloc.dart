@@ -5,15 +5,20 @@ import 'package:meta/meta.dart';
 part 'biometric_event.dart';
 part 'biometric_state.dart';
 
+/// Bloc class for managing biometric authentication states and events.
 class BiometricBloc extends Bloc<BiometricEvent, BiometricState> {
   final AuthenticateBiometric authenticateBiometric;
 
- BiometricBloc({required this.authenticateBiometric})
+  /// Constructor for [BiometricBloc].
+  /// It initializes the class with the given [AuthenticateBiometric] use case.
+  BiometricBloc({required this.authenticateBiometric})
       : super(BiometricInitial()) {
     on<CheckBiometricsEvent>(_onCheckBiometrics);
     on<AuthenticateEvent>(_onAuthenticate);
   }
 
+  /// Handles the [CheckBiometricsEvent].
+  /// Emits different states based on the result of the biometric check.
   Future<void> _onCheckBiometrics(
       CheckBiometricsEvent event, Emitter<BiometricState> emit) async {
     try {
@@ -25,6 +30,8 @@ class BiometricBloc extends Bloc<BiometricEvent, BiometricState> {
     }
   }
 
+  /// Handles the [AuthenticateEvent].
+  /// Emits different states based on the result of the authentication.
   Future<void> _onAuthenticate(
       AuthenticateEvent event, Emitter<BiometricState> emit) async {
     try {

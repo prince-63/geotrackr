@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
+/// A custom AppBar widget with animation and customizable properties.
 class DefaultAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final String title;
-  final Color? bgColor;
-  final Color? titleColor;
-  final double elevation;
-  final VoidCallback onBackButtonPressed;
+  final String title; // The title of the AppBar.
+  final Color? bgColor; // The background color of the AppBar.
+  final Color? titleColor; // The color of the title text.
+  final double elevation; // The elevation of the AppBar.
+  final VoidCallback onBackButtonPressed; // Callback for the back button press.
 
+  /// Constructor for [DefaultAppBar].
+  /// It initializes the class with the given parameters.
   const DefaultAppBar({
     super.key,
     required this.title,

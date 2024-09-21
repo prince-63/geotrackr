@@ -6,6 +6,7 @@ import 'package:geotrackr/domain/repositories/location_repository.dart';
 import 'package:geotrackr/domain/repositories/office_repository.dart';
 import 'package:logger/logger.dart';
 
+/// Service class for handling attendance-related operations.
 class AttendanceService {
   final AttendanceRepository attendanceRepository;
   final LocationRepository locationRepository;
@@ -15,6 +16,8 @@ class AttendanceService {
   static const double distanceThreshold = 200.0;
   final Logger _logger = Logger();
 
+  /// Constructor for [AttendanceService].
+  /// Initializes the service with the required repositories.
   AttendanceService({
     required this.attendanceRepository,
     required this.locationRepository,
@@ -22,6 +25,8 @@ class AttendanceService {
     required this.officeRepository,
   });
 
+  /// Handles the office check-in process.
+  /// Returns a response message indicating the result of the check-in.
   Future<String> officeCheckIn() async {
     late String responseMessage;
     try {
@@ -75,6 +80,8 @@ class AttendanceService {
     }
   }
 
+  /// Handles the office check-out process.
+  /// Returns a response message indicating the result of the check-out.
   Future<String> officeCheckOut() async {
     late String responseMessage;
     try {
@@ -128,6 +135,8 @@ class AttendanceService {
     }
   }
 
+  /// Handles the remote check-in process.
+  /// Returns a response message indicating the result of the check-in.
   Future<String> remoteCheckIn() async {
     late String responseMessage;
     try {
@@ -152,6 +161,8 @@ class AttendanceService {
     }
   }
 
+  /// Handles the remote check-out process.
+  /// Returns a response message indicating the result of the check-out.
   Future<String> remoteCheckOut() async {
     late String responseMessage;
     try {
@@ -176,10 +187,12 @@ class AttendanceService {
     }
   }
 
+  /// Converts a string to a double.
   static double convertStringToDouble(String data) {
     return double.parse(data);
   }
 
+  /// Rounds a double value to six decimal places.
   static double roundToSixDecimals(double value) {
     return double.parse(value.toStringAsFixed(6));
   }
