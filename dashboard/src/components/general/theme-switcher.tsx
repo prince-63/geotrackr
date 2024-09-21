@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import { MoonStar, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
