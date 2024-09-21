@@ -6,3 +6,4 @@ build
 .env
 server
 example.js
+.vercel
