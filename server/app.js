@@ -3,11 +3,13 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import session from 'express-session';
-import officeRoutes from './routes/office-routes.js';
-import employeeRoutes from './routes/employee-routes.js';
-import attendanceRoutes from './routes/attendance-routes.js';
 import globalErrorHandler from './handlers/global-error-handler.js';
 import { EventEmitter } from 'events';
+import roleRoutes from './routes/role-routes.js';
+import officeRoutes from './routes/office-routes.js';
+import authRoutes from './routes/auth-routes.js';
+import employeeRoutes from './routes/employee-routes.js';
+import attendanceRoutes from './routes/attendance-routes.js';
 
 EventEmitter.defaultMaxListeners = 20;
 
@@ -38,6 +40,8 @@ app.use(
 const version = process.env.VERSION || 'v1';
 
 // Routes
+app.use(`/api/${version}/office`, roleRoutes);
+app.use(`/api/${version}/office`, authRoutes);
 app.use(`/api/${version}/office`, officeRoutes);
 app.use(`/api/${version}/office`, employeeRoutes);
 app.use(`/api/${version}/office/employee`, attendanceRoutes);

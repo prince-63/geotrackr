@@ -1,5 +1,5 @@
 import { prisma } from '../../database/prisma-config.js';
-import { comparePassword } from '../..//helper/password.js';
+import { comparePassword } from '../../helper/password.js';
 import signToken from '../../helper/jwt-sign-token.js';
 import { parseDuration } from '../../utils/parse-duration.js';
 import errorResponseHandler from '../../handlers/error-response-handlers.js';
