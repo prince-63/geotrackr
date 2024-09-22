@@ -16,4 +16,16 @@ abstract class EmployeeRepository {
   /// Returns an [Employee] object if the update is successful.
   Future<Employee> updateEmployee(
       String employeeName, String employeeEmail, String employeeContactNumber);
+
+  /// Sends a password reset email to the employee.
+  /// Returns an [Employee] object if the email is successfully sent.
+  Future<void> forgotPassword(String email);
+
+  /// Verifies the password reset code.
+  /// Returns a boolean value indicating whether the code is valid.
+  Future<bool> verifyForgotPasswordCode(String code);
+
+  /// updates the employee password.
+  /// Returns an [Employee] object if the update is successful.
+  Future<void> updatePassword(String newPassword);
 }

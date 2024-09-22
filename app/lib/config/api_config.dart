@@ -16,6 +16,16 @@ class ApiConfig {
   static const String updateEmployeeDetails =
       '$baseUrl/update-employee-details';
 
+  /// Endpoint to send password reset email.
+  static const String forgotPassword = '$baseUrl/forgot-password';
+
+  /// Endpoint to verify password reset code.
+  static const String verifyForgotPasswordCode =
+      '$baseUrl/verify-forgot-password-code';
+
+  /// Endpoint to update employee password.
+  static const String updatePassword = '$baseUrl/update-password';
+
   /// Endpoint to get office details.
   static const String officeDetails = '$baseUrl/get-office-details';
 
