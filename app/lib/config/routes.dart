@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geotrackr/presentation/pages/employee_update_page.dart';
+import 'package:geotrackr/presentation/pages/forgot_password_page.dart';
 import 'package:geotrackr/presentation/pages/help_and_support_page.dart';
 import 'package:geotrackr/presentation/pages/login_page.dart';
 import 'package:geotrackr/presentation/pages/main_page.dart';
@@ -12,6 +13,12 @@ Map<String, WidgetBuilder> buildRoutes() {
   return {
     /// Route for the login page.
     '/': (context) => LoginPage(),
+
+    /// Route for the forgot password page.
+    '/forgot-password': (context) => ForgotPasswordPage(),
+
+    /// Route for verifying the forgot password page.
+    /// '/verify-forgot-password': (context) => VerifyForgotPasswordPage(),
 
     /// Route for the main page.
     '/home': (context) => const MainPage(),

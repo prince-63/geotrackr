@@ -1,34 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geotrackr/domain/repositories/implementation/auth_repository_impl.dart';
 import 'package:geotrackr/domain/repositories/implementation/employee_repository_impl.dart';
+import 'package:geotrackr/domain/use_cases/check_login_status.dart';
 import 'package:geotrackr/domain/use_cases/login_employee.dart';
 import 'package:geotrackr/presentation/blocs/login/login_bloc.dart';
-import 'package:geotrackr/presentation/widgets/login/login_form.dart';
+import 'package:geotrackr/presentation/blocs/login/login_status_bloc.dart';
+import 'package:geotrackr/presentation/widgets/custom_messages.dart';
+import 'package:geotrackr/presentation/widgets/login/login_page_body.dart';
 
 /// The [LoginPage] widget is a stateless widget that represents the login page of the application.
 /// It uses the Bloc pattern to manage the state of the login process.
 class LoginPage extends StatelessWidget {
-  // Controllers for the email and password input fields.
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
   /// Constructor for [LoginPage].
   /// It initializes the class with the given key.
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      // The BlocProvider is used to provide the LoginBloc to the widget tree.
-      create: (context) => LoginBloc(
-        // Create an instance of LoginBloc with the LoginEmployee use case.
-        loginEmployee: LoginEmployee(EmployeeRepositoryImpl()),
-      )..checkIfLoggedIn(), // Check if the user is already logged in when the bloc is created.
-      // The LoginForm widget is the child of the BlocProvider.
-      // It will have access to the LoginBloc provided by the BlocProvider.
-      child: LoginForm(
-        emailController: emailController,
-        passwordController: passwordController,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(
+            loginEmployee: LoginEmployee(
+              AuthRepositoryImpl(),
+            ),
+          ),
+        ),
+        BlocProvider<LoginStatusBloc>(
+          create: (context) => LoginStatusBloc(
+            checkLoginStatus: CheckLoginStatus(
+              EmployeeRepositoryImpl(),
+            ),
+          )..add(
+              CheckLoginStatusEvent()), // Trigger the event to check login status
+        ),
+      ],
+      child: BlocListener<LoginStatusBloc, LoginStatusState>(
+        listener: (context, state) {
+          if (state is LoginStatusLoaded) {
+            // Navigate to the home page if the user is already logged in
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacementNamed(context, '/home');
+            });
+          } else if (state is LoginStatusError) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              CustomMessages.showErrorMessage(context, state.message);
+            });
+          }
+        },
+        child: LoginPageBody(),
       ),
     );
   }
