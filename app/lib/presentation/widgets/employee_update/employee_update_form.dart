@@ -4,6 +4,8 @@ import 'package:geotrackr/presentation/blocs/employee/employee_update_bloc.dart'
 import 'package:geotrackr/presentation/widgets/custom_button.dart';
 import 'package:geotrackr/presentation/widgets/labeled_input.dart';
 
+/// The [EmployeeUpdateForm] widget is a stateful widget that represents the form for updating employee details.
+/// It uses the Bloc pattern to manage the state of the employee update process.
 class EmployeeUpdateForm extends StatefulWidget {
   @override
   _EmployeeUpdateFormState createState() => _EmployeeUpdateFormState();

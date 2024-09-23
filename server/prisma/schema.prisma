@@ -1,15 +1,14 @@
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
-  engineType = "binary"
 }
 
 model Office {
-  officeId            String     @id @default(uuid())
+  officeId            String     @id @default(auto()) @map("_id") @db.ObjectId
   officeName          String
   officeEmail         String     @unique
   officePassword      String
@@ -27,7 +26,7 @@ model Office {
 }
 
 model Employee {
-  employeeId              String         @id @default(uuid())
+  employeeId              String         @id @default(auto()) @map("_id") @db.ObjectId
   employeeName            String
   employeeEmail           String         @unique
   employeeContactNumber   String
@@ -39,30 +38,31 @@ model Employee {
   roles                   EmployeeRole[]
   Attendances             Attendances[]  @relation("EmployeeToAttendance")
   office                  Office         @relation("OfficeToEmployee", fields: [officeId], references: [officeId])
-  officeId                String
+  officeId                String         @db.ObjectId
   createdAt               DateTime       @default(now())
   updatedAt               DateTime       @updatedAt
 }
 
 model Role {
-  roleId    String         @id @default(uuid())
+  roleId    String         @id @default(auto()) @map("_id") @db.ObjectId
   roleName  String         @unique
   Employees EmployeeRole[]
 }
 
 model EmployeeRole {
-  employeeId String
-  roleId     String
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  employeeId String   @db.ObjectId
+  roleId     String   @db.ObjectId
   Employee   Employee @relation(fields: [employeeId], references: [employeeId])
   Role       Role     @relation(fields: [roleId], references: [roleId])
 
-  @@id([employeeId, roleId])
+  @@unique([employeeId, roleId])
 }
 
 model Attendances {
-  attendanceId              String            @id @default(uuid())
+  attendanceId              String            @id @default(auto()) @map("_id") @db.ObjectId
   employee                  Employee          @relation("EmployeeToAttendance", fields: [employeeId], references: [employeeId])
-  employeeId                String
+  employeeId                String            @db.ObjectId
   date                      DateTime          @default(now())
   checkInTime               DateTime?
   checkInLocationLatitude   String?

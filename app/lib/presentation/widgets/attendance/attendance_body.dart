@@ -4,6 +4,8 @@ import 'package:geotrackr/presentation/blocs/attendance/attendance_bloc.dart';
 import 'package:geotrackr/presentation/widgets/attendance/attendance_details_row.dart';
 import 'package:geotrackr/presentation/widgets/custom_messages.dart';
 
+/// The [AttendanceBody] widget is a stateless widget that represents the body of the attendance page.
+/// It uses the Bloc pattern to manage the state of loading attendance data.
 class AttendanceBody extends StatelessWidget {
   const AttendanceBody({super.key});
 

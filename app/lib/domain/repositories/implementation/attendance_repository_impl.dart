@@ -6,9 +6,14 @@ import 'package:geotrackr/config/api_config.dart';
 import 'package:geotrackr/domain/entities/attendance.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Implementation of the [AttendanceRepository] interface.
+/// This class handles attendance-related operations such as check-in, check-out, and loading attendances.
 class AttendanceRepositoryImpl implements AttendanceRepository {
   AttendanceRepositoryImpl();
 
+  /// Handles the check-in process.
+  /// Takes the longitude and latitude as parameters.
+  /// Returns a response message indicating the result of the check-in.
   @override
   Future<String> checkIn(String longitude, String latitude) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -29,7 +34,7 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
 
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
-        return responseBody.message;
+        return responseBody['message'];
       } else {
         final responseBody = jsonDecode(response.body);
         return responseBody['message'];
@@ -39,6 +44,9 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
     }
   }
 
+  /// Handles the check-out process.
+  /// Takes the longitude and latitude as parameters.
+  /// Returns a response message indicating the result of the check-out.
   @override
   Future<String> checkOut(String longitude, String latitude) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -59,7 +67,7 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
 
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
-        return responseBody.message;
+        return responseBody['message'];
       } else {
         final responseBody = jsonDecode(response.body);
         return responseBody['message'];
@@ -69,6 +77,8 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
     }
   }
 
+  /// Loads the attendance records.
+  /// Returns a list of [Attendance] objects.
   @override
   Future<List<Attendance>> loadAttendances() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

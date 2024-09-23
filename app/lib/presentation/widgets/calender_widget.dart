@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:geotrackr/domain/entities/attendance.dart';
 
+/// The [CalendarWidget] widget is a stateless widget that represents a calendar with attendance data.
+/// It uses the TableCalendar package to display the calendar.
 class CalendarWidget extends StatelessWidget {
   final DateTime selectedDay;
   final DateTime focusedDay;
@@ -12,6 +14,8 @@ class CalendarWidget extends StatelessWidget {
   final List<Attendance> Function(DateTime) getAttendanceForDay;
   final Color textColor;
 
+  /// Constructor for [CalendarWidget].
+  /// It initializes the class with the given parameters.
   const CalendarWidget({
     super.key,
     required this.selectedDay,

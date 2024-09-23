@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessages {
+  /// Shows a beautiful message with customizable appearance based on the theme.
   static void showBeautifulMessage(BuildContext context, String message) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     Flushbar(
@@ -24,6 +25,7 @@ class CustomMessages {
     ).show(context);
   }
 
+  /// Shows an error message with customizable appearance based on the theme.
   static void showErrorMessage(BuildContext context, String message) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     Flushbar(

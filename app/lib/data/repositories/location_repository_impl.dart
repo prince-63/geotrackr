@@ -4,7 +4,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geotrackr/domain/entities/location.dart';
 import 'package:geotrackr/domain/repositories/location_repository.dart';
 
+/// Implementation of the [LocationRepository] interface.
+/// This class handles location-related operations using the [Geolocator] package.
 class LocationRepositoryImpl implements LocationRepository {
+  /// Gets the current location of the device.
+  /// Throws an exception if location services are disabled or permissions are denied.
   @override
   Future<Location> getLocation() async {
     bool serviceEnabled;
@@ -42,19 +46,21 @@ class LocationRepositoryImpl implements LocationRepository {
 
     // Return the location as a custom Location object
     return Location(
-      latitude: position.latitude,
-      longitude: position.longitude,
+      latitude: position.latitude, // The latitude of the current location.
+      longitude: position.longitude, // The longitude of the current location.
     );
   }
 
+  /// Calculates the distance between two locations.
+  /// Returns the distance in meters.
   @override
   Future<double> getDistanceBetween(
       Location location1, Location location2) async {
     return Geolocator.distanceBetween(
-      location1.latitude,
-      location1.longitude,
-      location2.longitude,
-      location2.latitude,
+      location1.latitude, // The latitude of the first location.
+      location1.longitude, // The longitude of the first location.
+      location2.longitude, // The longitude of the second location.
+      location2.latitude, // The latitude of the second location.
     );
   }
 }

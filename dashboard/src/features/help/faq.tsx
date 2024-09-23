@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Typography from '../../components/general/typography';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
-interface FAQItem {
+interface FaqItem {
   question: string;
   answer: string;
 }
 
-const faqData: FAQItem[] = [
+const faqData: FaqItem[] = [
   {
     question: 'How do I reset my password?',
     answer:
@@ -25,7 +25,7 @@ const faqData: FAQItem[] = [
   },
 ];
 
-const FAQ: React.FC = () => {
+const Faq: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -65,4 +65,4 @@ const FAQ: React.FC = () => {
   );
 };
 
-export default FAQ;
+export default Faq;

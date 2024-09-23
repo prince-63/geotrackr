@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomExpansionCard extends StatelessWidget {
-  final String title;
-  final String content;
-  final IconData leadingIcon;
-  final Color textColor;
-  final Color backgroundColor;
-  final bool isDarkMode;
+  final String title; // The title of the expansion card.
+  final String content; // The content of the expansion card.
+  final IconData leadingIcon; // The leading icon of the expansion card.
+  final Color textColor; // The color of the text.
+  final Color backgroundColor; // The background color of the card.
+  final bool isDarkMode; // Whether the app is in dark mode.
 
+  /// Constructor for [CustomExpansionCard].
+  /// It initializes the class with the given parameters.
   const CustomExpansionCard({
     super.key,
     required this.title,

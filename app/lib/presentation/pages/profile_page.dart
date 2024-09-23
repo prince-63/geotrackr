@@ -10,11 +10,14 @@ import 'package:geotrackr/presentation/widgets/default_app_bar.dart';
 import 'package:geotrackr/presentation/widgets/profile/profile_body.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
+/// The [ProfilePage] widget is a stateless widget that represents the profile page of the application.
+/// It uses the Bloc pattern to manage the state of loading employee and office data.
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Determine if the app is in dark mode to set the appropriate background color.
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDarkMode
         ? CustomColor.darkBackgroundColor
@@ -30,6 +33,7 @@ class ProfilePage extends StatelessWidget {
       ),
       body: MultiBlocProvider(
         providers: [
+          // Provide the LoadEmployeeBloc to the widget tree.
           BlocProvider(
             create: (context) {
               final bloc = LoadEmployeeBloc(
@@ -37,10 +41,11 @@ class ProfilePage extends StatelessWidget {
                   employeeRepository: EmployeeRepositoryImpl(),
                 ),
               );
-              bloc.load();
+              bloc.load(); // Load the employee data when the bloc is created.
               return bloc;
             },
           ),
+          // Provide the LoadOfficeBloc to the widget tree.
           BlocProvider(
             create: (context) {
               final bloc = LoadOfficeBloc(
@@ -48,7 +53,7 @@ class ProfilePage extends StatelessWidget {
                   OfficeRepositoryImpl(),
                 ),
               );
-              bloc.load();
+              bloc.load(); // Load the office data when the bloc is created.
               return bloc;
             },
           ),
@@ -62,8 +67,10 @@ class ProfilePage extends StatelessWidget {
                   builder: (context, officeState) {
                     if (officeState is LoadOfficeLoaded) {
                       final office = officeState.office;
+                      // Display the profile body with the loaded employee and office data.
                       return ProfileBody(employee: employee, office: office);
                     } else if (officeState is LoadOfficeLoading) {
+                      // Show a loading indicator while the office data is being loaded.
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
@@ -72,6 +79,7 @@ class ProfilePage extends StatelessWidget {
                   },
                 );
               } else if (employeeState is LoadEmployeeLoading) {
+                // Show a loading indicator while the employee data is being loaded.
                 return const Center(
                   child: CircularProgressIndicator(),
                 );

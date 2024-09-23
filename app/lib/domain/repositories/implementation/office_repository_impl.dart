@@ -6,9 +6,13 @@ import 'package:http/http.dart' as http;
 import 'package:geotrackr/domain/repositories/office_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Implementation of the [OfficeRepository] interface.
+/// This class handles office-related operations such as loading office details.
 class OfficeRepositoryImpl implements OfficeRepository {
   OfficeRepositoryImpl();
 
+  /// Loads the office details.
+  /// Returns an [Office] object if the details are successfully loaded.
   @override
   Future<Office> loadOffice() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -25,7 +29,7 @@ class OfficeRepositoryImpl implements OfficeRepository {
       Uri.parse(ApiConfig.officeDetails),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer $token',
       },
     );
 

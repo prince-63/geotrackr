@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// A custom drawer widget for the GeoTrackr application.
+/// It includes navigation options for profile, working hours, settings, help & support, and logout.
 class GeoTrackrDrawer extends StatelessWidget {
   const GeoTrackrDrawer({super.key});
 
@@ -14,6 +16,7 @@ class GeoTrackrDrawer extends StatelessWidget {
         ? CustomColor.darkBackgroundColor
         : CustomColor.lightBackgroundColor;
 
+    /// Clears all application data and navigates to the login screen.
     Future<void> clearAllAppData() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.clear();

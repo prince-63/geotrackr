@@ -5,9 +5,11 @@ import 'package:geotrackr/presentation/blocs/attendance/office_check_out_bloc.da
 import 'package:geotrackr/presentation/blocs/attendance/remote_check_in_bloc.dart';
 import 'package:geotrackr/presentation/blocs/attendance/remote_check_out_bloc.dart';
 import 'package:geotrackr/presentation/widgets/custom_messages.dart';
-import 'package:geotrackr/presentation/widgets/home/check_box.dart';
+import 'package:geotrackr/presentation/widgets/check_box.dart';
 import 'package:geotrackr/utils/custom_color.dart';
 
+/// The [HomePageBody] widget is a stateful widget that represents the body of the home page.
+/// It manages the state of check-in and check-out processes using Bloc.
 class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
 
@@ -23,7 +25,6 @@ class _HomePageBodyState extends State<HomePageBody> {
   void initState() {
     super.initState();
 
-    // Check if the user is already checked in
     final officeCheckInBloc = context.read<OfficeCheckInBloc?>();
     final remoteCheckInBloc = context.read<RemoteCheckInBloc?>();
 
@@ -47,7 +48,6 @@ class _HomePageBodyState extends State<HomePageBody> {
       });
     }
 
-    // Check if the user is already checked out
     final officeCheckOutBloc = context.read<OfficeCheckOutBloc?>();
     final remoteCheckOutBloc = context.read<RemoteCheckOutBloc?>();
 
@@ -76,7 +76,6 @@ class _HomePageBodyState extends State<HomePageBody> {
     final officeCheckInBloc = context.read<OfficeCheckInBloc?>();
     final remoteCheckInBloc = context.read<RemoteCheckInBloc?>();
 
-    // Dispatch the check-in event based on the role
     officeCheckInBloc?.checkIn();
     remoteCheckInBloc?.checkIn();
 
@@ -90,7 +89,6 @@ class _HomePageBodyState extends State<HomePageBody> {
     final officeCheckOutBloc = context.read<OfficeCheckOutBloc?>();
     final remoteCheckOutBloc = context.read<RemoteCheckOutBloc?>();
 
-    // Dispatch the check-out event based on the role
     officeCheckOutBloc?.checkOut();
     remoteCheckOutBloc?.checkOut();
 
