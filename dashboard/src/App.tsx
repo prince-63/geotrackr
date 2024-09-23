@@ -11,6 +11,13 @@ import ProtectedRoute from './protected-route';
 // import EmployeeProfile from './features/employees/employee-profile';
 import LandingPage from './features/landing/landing-page';
 import SideBarLayout from './components/layout/sidebar-layout';
+import AboutUs from './features/about/about_us';
+import PrivacyPolicy from './features/privacy_policy/privacy_policy';
+import TermsAndConditions from './features/terms_conditions/terms_conditions';
+import Careers from './features/careers/careers';
+import Notices from './features/notices/notices';
+import Support from './features/support/support';
+import ContactUs from './features/contact_us/contact_us';
 
 function App() {
   return (
@@ -19,6 +26,13 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="about" element={<AboutUs />} />
+        <Route path="privacy" element={<PrivacyPolicy />} />
+        <Route path="terms" element={<TermsAndConditions />} />
+        <Route path="careers" element={<Careers />} />
+        <Route path="notices" element={<Notices />} />
+        <Route path="support" element={<Support />} />
+        <Route path="contact" element={<ContactUs />} />
         <Route path="/" element={<SideBarLayout />}>
           <Route
             path="dashboard"
