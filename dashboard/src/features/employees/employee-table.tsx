@@ -92,7 +92,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
           Page {currentPage} of {totalPages}
         </span>
         <button
-          className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"
+          className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded mb-10"
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
         >

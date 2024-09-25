@@ -29,11 +29,11 @@ const Footer = () => {
               <div className="flex gap-4">
                 <Link
                   href="#"
-                  className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-black rounded-md transition duration-300 dark:text-black dark:bg-white"
+                  className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-black rounded-md transition duration-300 dark:text-black dark:bg-white hover:text-white"
                   externalLink
                 >
                   <FaGooglePlay className="mr-2 text-2xl" />
-                  Download Our Android App
+                  <Typography variant="body3">Download App</Typography>
                 </Link>
               </div>
             </div>
@@ -47,11 +47,6 @@ const Footer = () => {
                 Resources
               </Typography>
               <ul className="text-gray-600 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <Link href="/docs" className="hover:underline">
-                    Docs
-                  </Link>
-                </li>
                 <li className="mb-4">
                   <Link href="/notices" className="hover:underline">
                     Notices

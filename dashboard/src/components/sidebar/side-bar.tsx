@@ -15,6 +15,7 @@ import Typography from '../general/typography';
 import ThemeSwitcher from '../general/theme-switcher';
 import LogoImage from '../../assets/fab-icons/mstile-70x70.png';
 import IconContainer from '../general/icon-container';
+import { useUserContext } from '../../hooks/use-user-context';
 
 const Logo = () => (
   <Typography variant="h1" className="hidden md:flex font-semibold">
@@ -23,6 +24,7 @@ const Logo = () => (
 );
 
 const SideBar = () => {
+  const { logout } = useUserContext();
   const [isOpen, setIsOpen] = useState(false);
   const size = useWindowSize();
 
@@ -45,17 +47,32 @@ const SideBar = () => {
             <ul className="space-y-1">
               {dashboard_sidebar_link.map((link, index) => (
                 <li key={index}>
-                  <Link
-                    to={link.link}
-                    className="flex w-[160px] items-center rounded-md hover:bg-gray-200 duration-200 ease-in-out text-base font-medium text-gray-600 transition-all hover:text-gray-900 active:text-gray-600"
-                  >
-                    <IconContainer>
-                      <link.icon className="w-5 h-5" />
-                    </IconContainer>
-                    <Typography variant="body3" className="ml-2">
-                      {link.title}
-                    </Typography>
-                  </Link>
+                  {link.title === 'Logout' && (
+                    <button
+                      onClick={logout}
+                      className="flex w-[160px] items-center rounded-md hover:bg-gray-200 duration-200 ease-in-out text-base font-medium text-gray-600 transition-all hover:text-gray-900 active:text-gray-600"
+                    >
+                      <IconContainer>
+                        <link.icon className="w-5 h-5" />
+                      </IconContainer>
+                      <Typography variant="body3" className="ml-2">
+                        {link.title}
+                      </Typography>
+                    </button>
+                  )}
+                  {link.title !== 'Logout' && (
+                    <Link
+                      to={link.link}
+                      className="flex w-[160px] items-center rounded-md hover:bg-gray-200 duration-200 ease-in-out text-base font-medium text-gray-600 transition-all hover:text-gray-900 active:text-gray-600"
+                    >
+                      <IconContainer>
+                        <link.icon className="w-5 h-5" />
+                      </IconContainer>
+                      <Typography variant="body3" className="ml-2">
+                        {link.title}
+                      </Typography>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -106,23 +123,43 @@ const SideBar = () => {
             <ul className="space-y-1">
               {dashboard_sidebar_link.map((link, index) => (
                 <li key={index}>
-                  <Link
-                    to={link.link}
-                    onClick={() => {
-                      const timeoutId = setTimeout(() => {
-                        setIsOpen(false);
-                        clearTimeout(timeoutId);
-                      }, 100);
-                    }}
-                    className="flex items-center rounded-md hover:bg-gray-200 duration-200 ease-in-out text-base font-medium text-gray-600 transition-all hover:text-gray-900 active:text-gray-600"
-                  >
-                    <IconContainer>
-                      <link.icon className="w-5 h-5" />
-                    </IconContainer>
-                    <Typography variant="body3" className="ml-2">
-                      {link.title}
-                    </Typography>
-                  </Link>
+                  {link.title === 'Logout' ? (
+                    <button
+                      onClick={() => {
+                        const timeoutId = setTimeout(() => {
+                          setIsOpen(false);
+                          clearTimeout(timeoutId);
+                        }, 100);
+                        logout();
+                      }}
+                      className="flex w-[176px]  items-center rounded-md hover:bg-gray-200 duration-200 ease-in-out text-base font-medium text-gray-600 transition-all hover:text-gray-900 active:text-gray-600"
+                    >
+                      <IconContainer>
+                        <link.icon className="w-5 h-5" />
+                      </IconContainer>
+                      <Typography variant="body3" className="ml-2">
+                        {link.title}
+                      </Typography>
+                    </button>
+                  ) : (
+                    <Link
+                      to={link.link}
+                      onClick={() => {
+                        const timeoutId = setTimeout(() => {
+                          setIsOpen(false);
+                          clearTimeout(timeoutId);
+                        }, 100);
+                      }}
+                      className="flex items-center rounded-md hover:bg-gray-200 duration-200 ease-in-out text-base font-medium text-gray-600 transition-all hover:text-gray-900 active:text-gray-600"
+                    >
+                      <IconContainer>
+                        <link.icon className="w-5 h-5" />
+                      </IconContainer>
+                      <Typography variant="body3" className="ml-2">
+                        {link.title}
+                      </Typography>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

@@ -1,8 +1,6 @@
 import {
-  Briefcase,
   BarChart,
   User,
-  Settings,
   HelpCircle,
   LogOut,
   UserRoundPen,
@@ -22,11 +20,6 @@ export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
     link: '/dashboard',
   },
   {
-    title: 'Work',
-    icon: Briefcase,
-    link: '/work',
-  },
-  {
     title: 'Employees',
     icon: User,
     link: '/employees',
@@ -35,11 +28,6 @@ export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
     title: 'Profile',
     icon: UserRoundPen,
     link: '/profile',
-  },
-  {
-    title: 'Settings',
-    icon: Settings,
-    link: '/settings',
   },
   {
     title: 'Help',

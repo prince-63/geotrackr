@@ -7,11 +7,9 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { userStatus } = useUserContext();
+  const { userStatus, token } = useUserContext();
 
-  console.log('userStatus', userStatus);
-
-  return userStatus === 'online' ? element : <Navigate to="/login" />;
+  return userStatus === 'online' || token ? element : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
