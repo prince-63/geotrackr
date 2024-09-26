@@ -29,6 +29,9 @@ class ApiConfig {
   /// Endpoint to get office details.
   static const String officeDetails = '$baseUrl/get-office-details';
 
+  /// Endpoint to upload profile image
+  static const String uploadProfileImage = '$baseUrl/update-profile-image';
+
   //========================== Attendance Endpoints ==========================//
   /// Endpoint for employee check-in.
   static const String checkIn = '$baseUrl/employee/check-in';

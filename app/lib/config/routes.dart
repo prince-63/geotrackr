@@ -6,6 +6,7 @@ import 'package:geotrackr/presentation/pages/login_page.dart';
 import 'package:geotrackr/presentation/pages/main_page.dart';
 import 'package:geotrackr/presentation/pages/profile_page.dart';
 import 'package:geotrackr/presentation/pages/set_new_password_page.dart';
+import 'package:geotrackr/presentation/pages/upload_profile_image_page.dart';
 import 'package:geotrackr/presentation/pages/verify_forgot_password_page.dart';
 import 'package:geotrackr/presentation/pages/working_hours_page.dart';
 
@@ -35,7 +36,10 @@ Map<String, WidgetBuilder> buildRoutes() {
     '/help-and-support': (context) => const HelpAndSupportPage(),
 
     /// Route for the employee update information page.
-    '/employee_update_information': (context) => const EmployeeUpdatePage(),
+    '/employee-update-information': (context) => const EmployeeUpdatePage(),
+
+    /// Route for upload profile image
+    '/upload-profile-image': (context) => const UploadProfileImagePage(),
 
     /// Route for the working hours page.
     '/working-hours': (context) => const WorkingHoursPage(),

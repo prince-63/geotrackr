@@ -12,5 +12,7 @@ abstract class EmployeeRepository {
   /// Returns an [Employee] object if the update is successful.
   Future<Employee> updateEmployee(
       String employeeName, String employeeEmail, String employeeContactNumber);
-  
+
+  Future<String> uploadProfileImage(
+      Stream<List<int>> stream, int length, String filePath);
 }

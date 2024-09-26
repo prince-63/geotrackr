@@ -4,7 +4,7 @@ import 'package:geotrackr/domain/repositories/implementation/employee_repository
 import 'package:geotrackr/domain/use_cases/employee_update_details.dart';
 import 'package:geotrackr/presentation/blocs/employee/employee_update_bloc.dart';
 import 'package:geotrackr/presentation/widgets/default_app_bar.dart';
-import 'package:geotrackr/presentation/widgets/employee_update/employee_update_form.dart';
+import 'package:geotrackr/presentation/widgets/profile/employee_update_form.dart';
 
 /// The [EmployeeUpdatePage] widget is a stateless widget that represents the page for updating employee details.
 /// It uses the Bloc pattern to manage the state of the employee update process.
