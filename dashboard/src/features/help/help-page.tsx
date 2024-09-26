@@ -49,7 +49,10 @@ const HelpPage: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {Resources.map((resource, index) => {
             return (
-              <div key={index} className="p-6 border border-gray-200 rounded-lg hover:shadow-2xl transition-shadow duration-500 transform hover:scale-105">
+              <div
+                key={index}
+                className="p-6 border border-gray-200 rounded-lg hover:shadow-2xl transition-shadow duration-500 transform hover:scale-105"
+              >
                 <Typography variant="h6" className="font-bold text-gray-900">
                   {resource.title}
                 </Typography>

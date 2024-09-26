@@ -16,4 +16,8 @@ export default defineConfig({
       },
     },
   },
+  optimizeDeps: {
+    // Include dependencies that are not detected automatically
+    include: ['framer-motion'],
+  },
 });

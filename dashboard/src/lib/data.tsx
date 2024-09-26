@@ -1,10 +1,4 @@
-import {
-  BarChart,
-  User,
-  HelpCircle,
-  LogOut,
-  UserRoundPen,
-} from 'lucide-react';
+import { BarChart, User, HelpCircle, LogOut, UserRoundPen } from 'lucide-react';
 import { DASHBOARD_SIDEBAR_LINKS_TYPE } from './types';
 import appInstall from '../assets/images/app-install.png';
 import security from '../assets/images/security.png';
