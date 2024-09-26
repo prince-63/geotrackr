@@ -11,16 +11,11 @@ class VerifyForgotPasswordBloc extends Cubit<VerifyForgotPasswordState> {
 
   /// Verifies the forgot password code.
   /// Emits [VerifyForgotPasswordLoading] state when the code is being verified.
-  void verifyForgotPass(String code) async {
+  Future<void> verifyForgotPass(String code) async {
     emit(VerifyForgotPasswordLoading());
     try {
-      final bool = await verifyForgotPassword.call(code);
-      if (bool) {
-        emit(VerifyForgotPasswordSuccess('Verification successful'));
-      } else {
-        emit(VerifyForgotPasswordFailure(
-            'Verification failed Please try again'));
-      }
+      String message = await verifyForgotPassword.call(code);
+      emit(VerifyForgotPasswordSuccess(message));
     } catch (e) {
       emit(VerifyForgotPasswordFailure(e.toString()));
     }

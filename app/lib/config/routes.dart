@@ -5,6 +5,7 @@ import 'package:geotrackr/presentation/pages/help_and_support_page.dart';
 import 'package:geotrackr/presentation/pages/login_page.dart';
 import 'package:geotrackr/presentation/pages/main_page.dart';
 import 'package:geotrackr/presentation/pages/profile_page.dart';
+import 'package:geotrackr/presentation/pages/set_new_password_page.dart';
 import 'package:geotrackr/presentation/pages/verify_forgot_password_page.dart';
 import 'package:geotrackr/presentation/pages/working_hours_page.dart';
 
@@ -20,6 +21,9 @@ Map<String, WidgetBuilder> buildRoutes() {
 
     /// Route for verifying the forgot password page.
     '/verify-forgot-password': (context) => const VerifyForgotPasswordPage(),
+
+    /// Route for setting the new password page.
+    '/set-new-password': (context) => const SetNewPasswordPage(),
 
     /// Route for the main page.
     '/home': (context) => const MainPage(),

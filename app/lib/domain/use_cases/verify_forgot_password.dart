@@ -8,7 +8,7 @@ class VerifyForgotPassword {
   VerifyForgotPassword(this.authRepository);
 
   /// Verifies the password reset code.
-  Future<bool> call(String code) async {
+  Future<String> call(String code) async {
     return await authRepository.verifyForgotPasswordCode(code);
   }
 }

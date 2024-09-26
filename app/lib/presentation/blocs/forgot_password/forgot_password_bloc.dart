@@ -10,8 +10,8 @@ class ForgotPasswordBloc extends Cubit<ForgotPasswordState> {
   Future<void> forgot(String email) async {
     try {
       emit(ForgotPasswordLoading());
-      await forgotPassword.call(email);
-      emit(ForgotPasswordSuccess("Password reset link sent to your email"));
+      String message = await forgotPassword.call(email);
+      emit(ForgotPasswordSuccess(message));
     } catch (e) {
       emit(ForgotPasswordError(e.toString()));
     }

@@ -11,11 +11,11 @@ class SetNewPasswordBloc extends Cubit<SetNewPasswordState> {
 
   /// Sets the new password for the user.
   /// Emits [SetNewPasswordLoading] state when the password is being set.
-  void setNewPass(String password) async {
+  Future<void> setNewPass(String password) async {
     emit(SetNewPasswordLoading());
     try {
-      await setNewPassword.call(password);
-      emit(SetNewPasswordSuccess());
+      String message = await setNewPassword.call(password);
+      emit(SetNewPasswordSuccess(message));
     } catch (e) {
       emit(SetNewPasswordError(e.toString()));
     }
@@ -31,8 +31,7 @@ class SetNewPasswordLoading extends SetNewPasswordState {}
 class SetNewPasswordSuccess extends SetNewPasswordState {
   final String message;
 
-  SetNewPasswordSuccess(
-      {this.message = 'Password has been successfully updated.'});
+  SetNewPasswordSuccess(this.message);
 }
 
 class SetNewPasswordError extends SetNewPasswordState {

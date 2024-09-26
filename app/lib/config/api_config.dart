@@ -21,10 +21,10 @@ class ApiConfig {
 
   /// Endpoint to verify password reset code.
   static const String verifyForgotPasswordCode =
-      '$baseUrl/verify-forgot-password-code';
+      '$baseUrl/verify-reset-password';
 
   /// Endpoint to update employee password.
-  static const String updatePassword = '$baseUrl/update-password';
+  static const String updatePassword = '$baseUrl/set-new-password';
 
   /// Endpoint to get office details.
   static const String officeDetails = '$baseUrl/get-office-details';

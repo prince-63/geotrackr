@@ -30,9 +30,13 @@ class VerifyForgotPasswordForm extends StatelessWidget {
             text: 'Verify',
             onPressed: () {
               final code = codeController.text;
-              context
-                  .read<VerifyForgotPasswordBloc>()
-                  .verifyForgotPassword(code);
+              if (code.isEmpty) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  CustomMessages.showErrorMessage(context, 'Code is required');
+                });
+              } else {
+                context.read<VerifyForgotPasswordBloc>().verifyForgotPass(code);
+              }
             },
           ),
         ),
@@ -41,6 +45,9 @@ class VerifyForgotPasswordForm extends StatelessWidget {
             if (state is VerifyForgotPasswordLoading) {
               return const CircularProgressIndicator();
             } else if (state is VerifyForgotPasswordSuccess) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                CustomMessages.showBeautifulMessage(context, state.message);
+              });
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushNamed(context, '/set-new-password');
               });
