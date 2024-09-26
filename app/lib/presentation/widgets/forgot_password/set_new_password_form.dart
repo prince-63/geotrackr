@@ -28,6 +28,7 @@ class SetNewPasswordForm extends StatelessWidget {
             label: 'Conform Password',
             controller: confirmPasswordController,
             obscureText: true),
+        const SizedBox(height: 20),
         SizedBox(
           width: double.infinity,
           child: CustomButton(

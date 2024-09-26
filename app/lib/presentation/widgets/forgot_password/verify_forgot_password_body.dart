@@ -17,19 +17,24 @@ class VerifyForgotPasswordBody extends StatelessWidget {
             Navigator.pop(context);
           }),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 140),
-            Image.asset(
-              'assets/images/verification.webp',
-              height: 270,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 140),
+                Image.asset(
+                  'assets/images/verification.webp',
+                  height: 270,
+                ),
+                const SizedBox(height: 30),
+                VerifyForgotPasswordForm(
+                  codeController: codeController,
+                ),
+              ],
             ),
-            const SizedBox(height: 30),
-            VerifyForgotPasswordForm(
-              codeController: codeController,
-            ),
-          ],
+          ),
         ),
       ),
     );

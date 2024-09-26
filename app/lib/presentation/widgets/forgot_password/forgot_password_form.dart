@@ -17,12 +17,16 @@ class ForgotPasswordForm extends StatelessWidget {
     required this.emailController,
   });
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        LabeledInput(label: 'Email', controller: emailController),
+        LabeledInput(
+          label: 'Email',
+          controller: emailController,
+        ),
         const SizedBox(height: 20),
         SizedBox(
           width: double.infinity,
@@ -30,6 +34,11 @@ class ForgotPasswordForm extends StatelessWidget {
             text: 'Send Verification Email',
             onPressed: () {
               final email = emailController.text;
+              if (email.isEmpty) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  CustomMessages.showErrorMessage(context, 'Email is required');
+                });
+              }
               context.read<ForgotPasswordBloc>().forgotPassword(email);
             },
           ),

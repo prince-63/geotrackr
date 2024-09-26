@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geotrackr/domain/repositories/implementation/auth_repository_impl.dart';
 import 'package:geotrackr/domain/use_cases/forgot_password.dart';
 import 'package:geotrackr/presentation/blocs/forgot_password/forgot_password_bloc.dart';
-import 'package:geotrackr/presentation/widgets/forgot_password/forgot_password_form.dart';
+import 'package:geotrackr/presentation/widgets/forgot_password/forgot_password_body.dart';
 
 /// The [ForgotPasswordPage] widget is a stateless widget that represents the forgot password page of the application.
 /// It uses the Bloc pattern to manage the state of the forgot password process.
@@ -27,9 +27,7 @@ class ForgotPasswordPage extends StatelessWidget {
       ),
       // The ForgotPasswordForm widget is the child of the BlocProvider.
       // It will have access to the ForgotPasswordBloc provided by the BlocProvider.
-      child: ForgotPasswordForm(
-        emailController: emailController,
-      ),
+      child: ForgotPasswordBody(),
     );
   }
 }

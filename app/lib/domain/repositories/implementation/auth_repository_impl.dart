@@ -43,6 +43,9 @@ class AuthRepositoryImpl implements AuthRepository {
         }),
       );
 
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('email', email);
+
       if (response.statusCode != 200) {
         throw Exception('Failed to send password reset email');
       }
@@ -56,12 +59,15 @@ class AuthRepositoryImpl implements AuthRepository {
   /// Verifies the password reset code.
   @override
   Future<bool> verifyForgotPasswordCode(String code) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString('email');
     try {
       final response = await http.post(
         Uri.parse(ApiConfig.verifyForgotPasswordCode),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'code': code,
+          'verificationCode': code,
+          'employeeEmail': email,
         }),
       );
 
@@ -77,12 +83,15 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> setNewPassword(String newPassword) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString('email');
     try {
       final response = await http.put(
         Uri.parse(ApiConfig.updatePassword),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'newPassword': newPassword,
+          'employeePassword': newPassword,
+          'employeeEmail': email,
         }),
       );
 
