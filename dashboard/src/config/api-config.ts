@@ -1,5 +1,5 @@
 class ApiConfig {
-  public static BASE_URL = 'http://192.168.0.186:8000/api/v1';
+  public static BASE_URL = 'http://localhost:8000/api/v1';
 
   public static officeSignup = ApiConfig.BASE_URL + '/office/sign-up';
 
@@ -19,8 +19,16 @@ class ApiConfig {
 
   public static updateOffice = ApiConfig.BASE_URL + '/office/update-details';
 
+  public static deleteOffice = ApiConfig.BASE_URL + '/office/delete-office';
+
+  public static addOffice = ApiConfig.BASE_URL + '/office/add-office';
+
   public static updateOfficeEmployee =
     ApiConfig.BASE_URL + '/office/update-employee';
+
+  public static employeeAttandances =
+    ApiConfig.BASE_URL + '/office/employee/attendances';
+  static employeeId: string;
 }
 
 export default ApiConfig;

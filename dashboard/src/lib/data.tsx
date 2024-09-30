@@ -22,11 +22,6 @@ export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
     link: '/dashboard',
   },
   {
-    title: 'Work',
-    icon: Briefcase,
-    link: '/work',
-  },
-  {
     title: 'Employees',
     icon: User,
     link: '/employees',
@@ -35,11 +30,6 @@ export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
     title: 'Profile',
     icon: UserRoundPen,
     link: '/profile',
-  },
-  {
-    title: 'Settings',
-    icon: Settings,
-    link: '/settings',
   },
   {
     title: 'Help',
@@ -51,6 +41,24 @@ export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
     icon: LogOut,
     link: '/logout',
   },
+];
+
+export const master_admin_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
+  {
+    title: 'Dashboard',
+    icon: BarChart,
+    link: '/master-admin/dashboard',
+  },
+  {
+    title: 'Office',
+    icon: User,
+    link: '/master-admin/offices',
+  },
+  {
+    title: 'Logout',
+    icon: LogOut,
+    link: '/master-admin/logout',
+  }
 ];
 
 export const NAV_LINKS = [

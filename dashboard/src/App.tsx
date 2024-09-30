@@ -18,6 +18,10 @@ import Careers from './features/careers/careers';
 import Notices from './features/notices/notices';
 import Support from './features/support/support';
 import ContactUs from './features/contact_us/contact_us';
+import MasterAdminSideBarLayout from './features/master_admin/sidebar-layout';
+import OfficesPage from './features/master_admin/offices';
+import MasterAdminDashboardPage from './features/master_admin/dashboard-page';
+import LogoutPage from './features/master_admin/logout-page';
 
 function App() {
   return (
@@ -61,6 +65,25 @@ function App() {
           <Route
             path="settings"
             element={<ProtectedRoute element={<SettingsPage />} />}
+          />
+        </Route>
+
+        <Route
+          path="master-admin"
+          element={<MasterAdminSideBarLayout />}
+        >
+          <Route
+            path="dashboard"
+            element={<MasterAdminDashboardPage />}
+          />
+
+          <Route
+            path="offices"
+            element={<OfficesPage />}
+          />
+          <Route
+            path="logout"
+            element={<LogoutPage />}
           />
         </Route>
       </Routes>

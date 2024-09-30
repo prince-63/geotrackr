@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -12,6 +12,9 @@ import {
   Legend,
 } from 'chart.js';
 import { useNavigate } from 'react-router-dom';
+import { getEmployeeAttandances } from '../../api-services/employee-service';
+import { useUserContext } from '../../hooks/use-user-context';
+import ApiConfig from '../../config/api-config';
 
 // Register necessary chart components
 ChartJS.register(
@@ -85,6 +88,23 @@ const DashboardPage: React.FC = () => {
   ];
 
   const navigate = useNavigate();
+  const { token } = useUserContext();
+  useEffect(() => {
+    const fetchEmployeeAttendances = async () => {
+      try {
+        if (token) {
+          const response = await getEmployeeAttandances(token);
+          console.log('Fetched employee attendance:', response);
+        } else {
+          console.error('Token is null, cannot fetch employee attendance');
+        }
+      } catch (error) {
+        console.error('Failed to fetch employee attendance:', error);
+      }
+    };
+
+    fetchEmployeeAttendances();
+  }, []);
 
   const handleEmployeeProfile = () => {
     navigate('/employee-profile');
