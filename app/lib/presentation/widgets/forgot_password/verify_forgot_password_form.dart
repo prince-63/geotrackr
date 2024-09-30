@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geotrackr/presentation/blocs/forgot_password/forgot_password_bloc.dart';
+import 'package:geotrackr/presentation/blocs/forgot_password/verify_forgot_password_bloc.dart';
 import 'package:geotrackr/presentation/widgets/custom_button.dart';
 import 'package:geotrackr/presentation/widgets/custom_messages.dart';
 import 'package:geotrackr/presentation/widgets/labeled_input.dart';
@@ -29,21 +29,30 @@ class VerifyForgotPasswordForm extends StatelessWidget {
           child: CustomButton(
             text: 'Verify',
             onPressed: () {
-              final email = codeController.text;
-              context.read<ForgotPasswordBloc>().forgotPassword(email);
+              final code = codeController.text;
+              if (code.isEmpty) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  CustomMessages.showErrorMessage(context, 'Code is required');
+                });
+              } else {
+                context.read<VerifyForgotPasswordBloc>().verifyForgotPass(code);
+              }
             },
           ),
         ),
-        BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+        BlocBuilder<VerifyForgotPasswordBloc, VerifyForgotPasswordState>(
           builder: (context, state) {
-            if (state is ForgotPasswordLoading) {
+            if (state is VerifyForgotPasswordLoading) {
               return const CircularProgressIndicator();
-            } else if (state is ForgotPasswordSuccess) {
+            } else if (state is VerifyForgotPasswordSuccess) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                CustomMessages.showBeautifulMessage(context, state.message);
+              });
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushNamed(context, '/set-new-password');
               });
               return Container();
-            } else if (state is ForgotPasswordError) {
+            } else if (state is VerifyForgotPasswordFailure) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 CustomMessages.showErrorMessage(context, state.message);
               });

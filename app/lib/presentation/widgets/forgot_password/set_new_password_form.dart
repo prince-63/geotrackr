@@ -28,6 +28,7 @@ class SetNewPasswordForm extends StatelessWidget {
             label: 'Conform Password',
             controller: confirmPasswordController,
             obscureText: true),
+        const SizedBox(height: 20),
         SizedBox(
           width: double.infinity,
           child: CustomButton(
@@ -36,13 +37,16 @@ class SetNewPasswordForm extends StatelessWidget {
               final password = passwordController.text;
               final conformPassword = confirmPasswordController.text;
 
-              if ((password != conformPassword) || password.isEmpty) {
+              if ((password != conformPassword) ||
+                  password.isEmpty ||
+                  conformPassword.isEmpty) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   CustomMessages.showErrorMessage(
                       context, 'Passwords do not match');
                 });
+              } else {
+                context.read<SetNewPasswordBloc>().setNewPass(password);
               }
-              context.read<SetNewPasswordBloc>().setNewPassword(password);
             },
           ),
         ),
@@ -51,6 +55,9 @@ class SetNewPasswordForm extends StatelessWidget {
             if (state is SetNewPasswordLoading) {
               return const CircularProgressIndicator();
             } else if (state is SetNewPasswordSuccess) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                CustomMessages.showBeautifulMessage(context, state.message);
+              });
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushNamed(context, '/');
               });

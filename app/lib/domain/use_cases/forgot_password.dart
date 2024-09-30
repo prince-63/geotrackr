@@ -5,7 +5,7 @@ class ForgotPassword {
 
   ForgotPassword(this.authRepository);
 
-  Future<void> call(String email) async {
+  Future<String> call(String email) async {
     return await authRepository.forgotPassword(email);
   }
 }

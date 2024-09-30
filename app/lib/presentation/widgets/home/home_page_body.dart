@@ -14,6 +14,7 @@ class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageBodyState createState() => _HomePageBodyState();
 }
 
@@ -78,11 +79,6 @@ class _HomePageBodyState extends State<HomePageBody> {
 
     officeCheckInBloc?.checkIn();
     remoteCheckInBloc?.checkIn();
-
-    setState(() {
-      isCheckedIn = true;
-      isCheckedOut = false;
-    });
   }
 
   void _checkOut() {
@@ -91,10 +87,6 @@ class _HomePageBodyState extends State<HomePageBody> {
 
     officeCheckOutBloc?.checkOut();
     remoteCheckOutBloc?.checkOut();
-
-    setState(() {
-      isCheckedOut = true;
-    });
   }
 
   @override

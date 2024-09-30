@@ -9,10 +9,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchToken = async () => {
-      const storedToken = localStorage.getItem('authToken');
+    const fetchToken = () => {
+      const storedToken = sessionStorage.getItem('authToken');
       if (storedToken) {
         setToken(storedToken);
+        setUserStatus('online');
       }
     };
 
@@ -21,11 +22,14 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     if (token) {
+      // check token already stored in session storage
+      if (!sessionStorage.getItem('authToken')) {
+        sessionStorage.setItem('authToken', token);
+      }
       setUserStatus('online');
-      localStorage.setItem('authToken', token);
     } else {
+      sessionStorage.removeItem('authToken');
       setUserStatus('offline');
-      localStorage.removeItem('authToken');
     }
   }, [token]);
 
@@ -33,9 +37,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     try {
       const token = await officeLogin({ officeEmail, officePassword });
       setToken(token);
+      setUserStatus('online');
     } catch (error) {
       console.error('Login failed', error);
       setToken(null);
+      setUserStatus('offline');
     }
   };
 
@@ -51,15 +57,18 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
         officePassword,
       });
       setToken(token);
+      setUserStatus('online');
     } catch (error) {
       console.error('Signup failed', error);
       setToken(null);
+      setUserStatus('offline');
     }
   };
 
   const logout = async () => {
     setToken(null);
     setUserStatus('offline');
+    sessionStorage.removeItem('authToken');
   };
 
   return (

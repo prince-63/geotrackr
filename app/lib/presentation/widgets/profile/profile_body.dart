@@ -70,9 +70,19 @@ class ProfileBody extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               width: double.infinity,
               child: CustomButton(
+                text: 'Upload Profile Image',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/upload-profile-image');
+                },
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              width: double.infinity,
+              child: CustomButton(
                 text: 'Update Employee Information',
                 onPressed: () {
-                  Navigator.pushNamed(context, '/employee_update_information');
+                  Navigator.pushNamed(context, '/employee-update-information');
                 },
               ),
             ),

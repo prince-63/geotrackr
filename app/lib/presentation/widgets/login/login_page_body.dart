@@ -20,11 +20,25 @@ class LoginPageBody extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: LoginForm(
-              emailController: emailController,
-              passwordController: passwordController),
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
+                Image.asset(
+                  'assets/images/logo.png',
+                  height: 400,
+                ),
+                const SizedBox(height: 10),
+                LoginForm(
+                  emailController: emailController,
+                  passwordController: passwordController,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

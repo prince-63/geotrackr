@@ -22,7 +22,10 @@ class ForgotPasswordForm extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        LabeledInput(label: 'Email', controller: emailController),
+        LabeledInput(
+          label: 'Email',
+          controller: emailController,
+        ),
         const SizedBox(height: 20),
         SizedBox(
           width: double.infinity,
@@ -30,7 +33,13 @@ class ForgotPasswordForm extends StatelessWidget {
             text: 'Send Verification Email',
             onPressed: () {
               final email = emailController.text;
-              context.read<ForgotPasswordBloc>().forgotPassword(email);
+              if (email.isEmpty) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  CustomMessages.showErrorMessage(context, 'Email is required');
+                });
+              } else {
+                context.read<ForgotPasswordBloc>().forgot(email);
+              }
             },
           ),
         ),
@@ -39,6 +48,9 @@ class ForgotPasswordForm extends StatelessWidget {
             if (state is ForgotPasswordLoading) {
               return const CircularProgressIndicator();
             } else if (state is ForgotPasswordSuccess) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                CustomMessages.showBeautifulMessage(context, state.message);
+              });
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushNamed(context, '/verify-forgot-password');
               });

@@ -8,7 +8,7 @@ class SetNewPassword {
   SetNewPassword(this.authRepository);
 
   /// Updates the employee password.
-  Future<void> call(String code) async {
+  Future<String> call(String code) async {
     return await authRepository.setNewPassword(code);
   }
 }

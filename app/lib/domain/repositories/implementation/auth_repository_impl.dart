@@ -33,66 +33,66 @@ class AuthRepositoryImpl implements AuthRepository {
 
   /// Sends a password reset email to the employee.
   @override
-  Future<void> forgotPassword(String email) async {
-    try {
-      final response = await http.post(
-        Uri.parse(ApiConfig.forgotPassword),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'employeeEmail': email,
-        }),
-      );
+  Future<String> forgotPassword(String email) async {
+    final response = await http.post(
+      Uri.parse(ApiConfig.forgotPassword),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'employeeEmail': email,
+      }),
+    );
 
-      if (response.statusCode != 200) {
-        throw Exception('Failed to send password reset email');
-      }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email', email);
 
-      return Future.value();
-    } catch (e) {
-      throw Exception('Failed to send password reset email');
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)['message'];
+    } else {
+      return throw Exception(jsonDecode(response.body)['message']);
     }
   }
 
   /// Verifies the password reset code.
   @override
-  Future<bool> verifyForgotPasswordCode(String code) async {
-    try {
-      final response = await http.post(
-        Uri.parse(ApiConfig.verifyForgotPasswordCode),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'code': code,
-        }),
-      );
+  Future<String> verifyForgotPasswordCode(String code) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString('email');
 
-      if (response.statusCode == 200) {
-        return Future.value(true);
-      } else {
-        return Future.value(false);
-      }
-    } catch (e) {
-      return Future.value(false);
+    final response = await http.post(
+      Uri.parse(ApiConfig.verifyForgotPasswordCode),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'verificationCode': code,
+        'employeeEmail': email,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)['message'];
+    } else {
+      return throw Exception(jsonDecode(response.body)['message']);
     }
   }
 
   @override
-  Future<void> setNewPassword(String newPassword) async {
-    try {
-      final response = await http.put(
-        Uri.parse(ApiConfig.updatePassword),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'newPassword': newPassword,
-        }),
-      );
+  Future<String> setNewPassword(String newPassword) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString('email');
 
-      if (response.statusCode != 200) {
-        throw Exception('Failed to update password');
-      }
+    final response = await http.post(
+      Uri.parse(ApiConfig.updatePassword),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'employeePassword': newPassword,
+        'employeeEmail': email,
+      }),
+    );
 
-      return Future.value();
-    } catch (e) {
-      throw Exception('Failed to update password');
+    await prefs.remove('email');
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)['message'];
+    } else {
+      return throw Exception(jsonDecode(response.body)['message']);
     }
   }
 }

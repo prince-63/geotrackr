@@ -28,7 +28,10 @@ class LoginForm extends StatelessWidget {
       children: [
         LabeledInput(label: 'Email', controller: emailController),
         const SizedBox(height: 20),
-        LabeledInput(label: 'Password', controller: passwordController),
+        LabeledInput(
+            label: 'Password',
+            controller: passwordController,
+            obscureText: true),
         const SizedBox(height: 10),
         Align(
           alignment: Alignment.centerRight,
