@@ -74,7 +74,7 @@ const loginEmployee = async (req, res) => {
       employeeProfileImageUrl: employee.employeeProfileImageUrl,
       isVerified: employee.isVerified,
       biometricEnabled: employee.biometricEnabled,
-      attendances: employee.Attendances, // Include attendances in the response
+      attendances: employee.Attendances,
       officeId: employee.officeId,
     },
   });

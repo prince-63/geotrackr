@@ -2,13 +2,14 @@ import { prisma } from '../../database/prisma-config.js';
 import errorResponseHandler from '../../handlers/error-response-handlers.js';
 import responseHandler from '../../handlers/response-handler.js';
 
-const getEmployeeAttendance = async (req, res) => {
+const getEmployeeTodayAttendance = async (req, res) => {
   const employeeId = req.employee.employeeId;
+  const date = new Date();
 
   const attendances = await prisma.attendances.findMany({
     where: {
       employeeId,
-      status: 'CHECKED_OUT',
+      date: date,
     },
     select: {
       attendanceId: true,
@@ -39,4 +40,4 @@ const getEmployeeAttendance = async (req, res) => {
   );
 };
 
-export default getEmployeeAttendance;
+export default getEmployeeTodayAttendance;
