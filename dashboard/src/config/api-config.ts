@@ -1,5 +1,6 @@
 class ApiConfig {
-  public static BASE_URL = 'http://localhost:8000/api/v1';
+  public static BASE_URL =
+    'https://geotrackr-server-deploy.onrender.com/api/v1';
 
   public static officeSignup = ApiConfig.BASE_URL + '/office/sign-up';
 
@@ -28,7 +29,7 @@ class ApiConfig {
 
   public static employeeAttandances =
     ApiConfig.BASE_URL + '/office/employee/attendances';
-  
+
   public static sendMessage = ApiConfig.BASE_URL + '/contact/send-message';
 }
 

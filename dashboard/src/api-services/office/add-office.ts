@@ -1,6 +1,6 @@
 import ApiConfig from '../../config/api-config';
 
-const addOffice = async ({ token }: { token: string | null; }, p0: { token: string | null; }) => {
+const addOffice = async ({ token }: { token: string | null; }) => {
     const response = await fetch(ApiConfig.addOffice, {
         method: 'POST',
         headers: {

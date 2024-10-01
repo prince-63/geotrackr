@@ -118,7 +118,7 @@ const DashboardPage = () => {
         datasets: [
             {
                 label: 'Profit Ranking',
-                data: offices.sort((a, b) => b.profit - a.profit).map((office, index) => index + 1),
+                data: offices.sort((a, b) => b.profit - a.profit).map((_office, index) => index + 1),
                 backgroundColor: 'rgba(153, 102, 255, 0.6)',
             },
         ],

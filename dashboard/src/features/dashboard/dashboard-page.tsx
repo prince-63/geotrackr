@@ -14,7 +14,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { getEmployeeAttandances } from '../../api-services/employee-service';
 import { useUserContext } from '../../hooks/use-user-context';
-import ApiConfig from '../../config/api-config';
 
 // Register necessary chart components
 ChartJS.register(
@@ -104,7 +103,7 @@ const DashboardPage: React.FC = () => {
     };
 
     fetchEmployeeAttendances();
-  }, []);
+  }, [token]);
 
   const handleEmployeeProfile = () => {
     navigate('/employee-profile');
