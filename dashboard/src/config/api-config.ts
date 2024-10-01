@@ -28,7 +28,8 @@ class ApiConfig {
 
   public static employeeAttandances =
     ApiConfig.BASE_URL + '/office/employee/attendances';
-  static employeeId: string;
+  
+  public static sendMessage = ApiConfig.BASE_URL + '/contact/send-message';
 }
 
 export default ApiConfig;
