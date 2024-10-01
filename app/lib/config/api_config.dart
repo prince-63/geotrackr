@@ -3,7 +3,7 @@
 class ApiConfig {
   //========================== Base Url ==========================//
   /// The base URL for the API.
-  static const String baseUrl = 'http://192.168.29.78:8000/api/v1/office';
+  static const String baseUrl = 'http://192.168.0.186:8000/api/v1/office';
 
   //========================== Employee Endpoints ==========================//
   /// Endpoint for employee login.
@@ -41,4 +41,7 @@ class ApiConfig {
 
   /// Endpoint to get employee attendances.
   static const String getAttendances = '$baseUrl/employee/attendances';
+
+  /// Endpoint to get today's attendance.
+  static const String getTodayAttendance = '$baseUrl/employee/today-attendance';
 }

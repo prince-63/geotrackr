@@ -7,10 +7,12 @@ import 'package:geotrackr/domain/repositories/implementation/attendance_reposito
 import 'package:geotrackr/domain/repositories/implementation/employee_repository_impl.dart';
 import 'package:geotrackr/domain/repositories/implementation/office_repository_impl.dart';
 import 'package:geotrackr/domain/use_cases/load_employee.dart';
+import 'package:geotrackr/domain/use_cases/load_today_attendance.dart';
 import 'package:geotrackr/domain/use_cases/office_check_in.dart';
 import 'package:geotrackr/domain/use_cases/office_check_out.dart';
 import 'package:geotrackr/domain/use_cases/remote_check_in.dart';
 import 'package:geotrackr/domain/use_cases/remote_check_out.dart';
+import 'package:geotrackr/presentation/blocs/attendance/load_today_attendance_bloc.dart';
 import 'package:geotrackr/presentation/blocs/attendance/office_check_in_bloc.dart';
 import 'package:geotrackr/presentation/blocs/attendance/office_check_out_bloc.dart';
 import 'package:geotrackr/presentation/blocs/attendance/remote_check_in_bloc.dart';
@@ -79,6 +81,13 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  BlocProvider(
+                    create: (context) => LoadTodayAttendanceBloc(
+                      loadTodayAttendance: LoadTodayAttendance(
+                        AttendanceRepositoryImpl(),
+                      ),
+                    ),
+                  ),
                 ],
                 // Provide RemoteCheckInBloc and RemoteCheckOutBloc if the employee has the "REMOTE" role.
                 if (employee.roles?.any((role) => role == "REMOTE") ??
@@ -94,6 +103,13 @@ class HomePage extends StatelessWidget {
                     create: (context) => RemoteCheckOutBloc(
                       remoteCheckOut: RemoteCheckOut(
                         attendanceService: attendanceService,
+                      ),
+                    ),
+                  ),
+                  BlocProvider(
+                    create: (context) => LoadTodayAttendanceBloc(
+                      loadTodayAttendance: LoadTodayAttendance(
+                        AttendanceRepositoryImpl(),
                       ),
                     ),
                   ),
