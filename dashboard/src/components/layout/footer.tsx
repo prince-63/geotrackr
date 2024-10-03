@@ -23,7 +23,7 @@ const Footer = () => {
                 <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-black rounded-md transition duration-300 dark:text-black dark:bg-white hover:text-white">
                   <FaGooglePlay className="mr-2 text-2xl" />
                   <a
-                    href="https://github.com/prince-63/geotrackr/blob/main/dashboard/src/assets/app/app-release.apk"
+                    href="../../../public/file/app-release.apk"
                     download={true}
                   >
                     <Typography variant="body3">Download App</Typography>
