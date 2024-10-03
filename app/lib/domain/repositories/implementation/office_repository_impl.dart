@@ -33,7 +33,6 @@ class OfficeRepositoryImpl implements OfficeRepository {
       },
     );
 
-    print(response.body);
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
       // Cache office details

@@ -33,7 +33,6 @@ class _HomePageBodyState extends State<HomePageBody> {
 
     loadTodayAttendanceBloc?.stream.listen((state) {
       if (state is LoadTodayAttendanceLoaded) {
-        print(state.attendance);
         setState(() {
           isCheckedIn = state.attendance.status == 'CHECKED_IN' ||
               state.attendance.status == 'CHECKED_OUT';

@@ -98,7 +98,6 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
         final List<dynamic> data = responseBody['data']['attendances'];
         List<Attendance> attendances =
             data.map((e) => Attendance.fromJson(e)).toList();
-        print("Attendances: $attendances");
         return attendances;
       } else {
         throw Exception('Failed to load attendances');
@@ -126,7 +125,6 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
         final responseBody = jsonDecode(response.body);
         final attendanceData = responseBody['data']['attendances'];
 
-        print("Today's attendance: $attendanceData");
         return Attendance.fromJson(attendanceData);
       } else {
         throw Exception('No attendance record found for today');

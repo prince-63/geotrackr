@@ -31,7 +31,7 @@ class EmployeeUpdatePage extends StatelessWidget {
         ),
         // The EmployeeUpdateForm widget is used as the body of the page.
         // It will have access to the EmployeeUpdateBloc provided by the BlocProvider.
-        body: EmployeeUpdateForm(),
+        body: const EmployeeUpdateForm(),
       ),
     );
   }

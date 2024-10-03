@@ -16,10 +16,8 @@ class AttendanceBloc extends Cubit<AttendanceState> {
     try {
       emit(AttendanceLoading());
       final attendances = await loadAttendances();
-      print("Attendances: $attendances");
       emit(AttendanceLoaded(attendances));
     } catch (e) {
-      print("Exception: $e");
       emit(AttendanceError(e.toString()));
     }
   }

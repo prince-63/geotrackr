@@ -35,13 +35,11 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
-      print(jsonEncode(responseData['data']['employee']));
       // Cache employee details
       prefs.setString(
           'employeeDetails', jsonEncode(responseData['data']['employee']));
       return Employee.fromJson(responseData['data']['employee']);
     } else {
-      print(jsonDecode(response.body));
       throw Exception('Failed to get employee details');
     }
   }
@@ -70,14 +68,12 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
-      print(jsonEncode(responseData['data']['employee']));
       // First clear the cache
       prefs.remove('employeeDetails');
       prefs.setString(
           'employeeDetails', jsonEncode(responseData['data']['employee']));
       return Employee.fromJson(responseData['data']['employee']);
     } else {
-      print(jsonDecode(response.body));
       throw Exception('Failed to update employee details');
     }
   }
@@ -105,7 +101,6 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
     if (response.statusCode == 200) {
       return jsonDecode(await response.stream.bytesToString())['message'];
     } else {
-      print(jsonDecode(await response.stream.bytesToString()));
       throw Exception('Failed to upload profile image');
     }
   }

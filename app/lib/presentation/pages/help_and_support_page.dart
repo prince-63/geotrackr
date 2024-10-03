@@ -75,7 +75,7 @@ class HelpAndSupportPage extends StatelessWidget {
                       child: CustomButton(
                         text: 'Email us',
                         onPressed: () {
-                          _launchURL('mailto:support@geotrackr.com');
+                          _launchURL('mailto:prince08833@gmail.com');
                         },
                       ),
                     ),
@@ -85,7 +85,7 @@ class HelpAndSupportPage extends StatelessWidget {
                       child: CustomButton(
                         text: 'Visit our website',
                         onPressed: () {
-                          _launchURL('https://geotrackr.com');
+                          _launchURL('https://geotrackr.tech');
                         },
                       ),
                     ),
@@ -95,7 +95,7 @@ class HelpAndSupportPage extends StatelessWidget {
                       child: CustomButton(
                         text: 'Call us',
                         onPressed: () {
-                          _launchURL('tel:+6289296197');
+                          _launchURL('tel:6289296197');
                         },
                       ),
                     ),
@@ -105,7 +105,7 @@ class HelpAndSupportPage extends StatelessWidget {
                       child: CustomButton(
                         text: 'Chat with us',
                         onPressed: () {
-                          _launchURL('whatsapp://send?phone=+6289296197');
+                          _launchURL('whatsapp://send?phone=6289296197');
                         },
                       ),
                     ),

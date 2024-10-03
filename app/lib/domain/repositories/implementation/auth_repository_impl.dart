@@ -24,10 +24,8 @@ class AuthRepositoryImpl implements AuthRepository {
       final String token = responseData['data']['token'];
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', token);
-      print(responseData['data']['employee']);
       return Employee.fromJson(responseData['data']['employee']);
     } else {
-      print(jsonDecode(response.body));
       throw Exception('Failed to login');
     }
   }

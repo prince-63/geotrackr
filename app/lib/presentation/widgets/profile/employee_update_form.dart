@@ -87,7 +87,6 @@ class _EmployeeUpdateFormState extends State<EmployeeUpdateForm> {
                   });
                   return Container();
                 } else if (state is EmployeeUpdateError) {
-                  print('Error: ${state.message}');
                   return Text('Error: ${state.message}');
                 } else {
                   return Container();

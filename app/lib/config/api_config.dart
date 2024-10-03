@@ -3,7 +3,7 @@
 class ApiConfig {
   //========================== Base Url ==========================//
   /// The base URL for the API.
-  static const String baseUrl = 'http://192.168.0.186:8000/api/v1/office';
+  static const String baseUrl = 'https://geotrackr-server.onrender.com/api/v1/office';
 
   //========================== Employee Endpoints ==========================//
   /// Endpoint for employee login.
