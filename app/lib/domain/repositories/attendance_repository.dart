@@ -16,4 +16,8 @@ abstract class AttendanceRepository {
   /// Loads the attendance records.
   /// Returns a list of [Attendance] objects.
   Future<List<Attendance>> loadAttendances();
+
+  /// Load the attendance record for the current day.
+  /// Returns an [Attendance] object.
+  Future<Attendance> loadTodayAttendance();
 }

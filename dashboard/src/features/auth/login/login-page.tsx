@@ -8,6 +8,7 @@ import Typography from '../../../components/general/typography';
 import { Link } from 'react-router-dom';
 import LogoForPages from '../../../components/general/logo-pages';
 import { useUserContext } from '../../../hooks/use-user-context';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login: React.FC = () => {
   const [officeEmail, setOfficeEmail] = useState('');
@@ -26,7 +27,14 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await login(officeEmail, officePassword);
+    const response = await login(officeEmail, officePassword);
+
+    if (response.error) {
+      toast.error(response.error);
+      return;
+    }
+
+    toast.success(response.message);
     navigate('/dashboard');
   };
 
@@ -89,6 +97,18 @@ const Login: React.FC = () => {
           </Typography>
         </div>
       </FormContainer>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

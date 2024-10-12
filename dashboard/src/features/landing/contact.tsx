@@ -7,13 +7,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import SectionHeader from '../../components/data-display/section-header';
 import Typography from '../../components/general/typography';
 import Button from '../../components/general/button';
+import { sendMessage } from '../../api-services/contact-service';
 
 const Contact: React.FC = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = nameRef.current?.value;
     const email = emailRef.current?.value;
@@ -25,7 +26,13 @@ const Contact: React.FC = () => {
     if (!email.includes('@') || !email.includes('.')) {
       return toast.error('Please enter a valid email address');
     }
-    return toast.success('Message sent successfully!');
+
+    const response = await sendMessage({ name, email, message });
+
+    if (response.error) {
+      return toast.error(response.error);
+    }
+    return toast.success(response.success);
   };
 
   return (
@@ -81,7 +88,7 @@ const Contact: React.FC = () => {
                     variant="body1"
                     className="text-gray-800 dark:text-white"
                   >
-                    contact@geotrackr.tech
+                    prince08833@gmail.com
                   </Typography>
                 </li>
                 <li className="flex items-center">

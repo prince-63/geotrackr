@@ -60,7 +60,7 @@ const Support: React.FC = () => {
                 any issues or questions.
               </p>
               <a
-                href="mailto:support@geotrackr.com"
+                href="mailto:prince08833@gmail.com"
                 className="inline-block bg-blue-600 dark:bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-300"
               >
                 Email Support

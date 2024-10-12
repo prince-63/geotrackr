@@ -3,9 +3,9 @@ import errorResponseHandler from '../../handlers/error-response-handlers.js';
 import responseHandler from '../../handlers/response-handler.js';
 
 const checkIn = async (req, res) => {
-  const checkInLocationLatitude = req.body.checkInLocationLatitude;
-  const checkInLocationLongitude = req.body.checkInLocationLongitude;
+  const { checkInLocationLatitude, checkInLocationLongitude } = req.body;
   const employeeId = req.employee.employeeId;
+
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
 

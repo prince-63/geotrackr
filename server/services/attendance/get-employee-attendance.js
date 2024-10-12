@@ -8,6 +8,7 @@ const getEmployeeAttendance = async (req, res) => {
   const attendances = await prisma.attendances.findMany({
     where: {
       employeeId,
+      status: 'CHECKED_OUT',
     },
     select: {
       attendanceId: true,

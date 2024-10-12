@@ -38,14 +38,16 @@ class Attendance {
       attendanceId:
           json['attendanceId'], // The unique identifier from the JSON map.
       date: DateTime.parse(json['date']), // The date from the JSON map.
-      checkInTime: DateTime.parse(
-          json['checkInTime']), // The check-in time from the JSON map.
+      checkInTime: json['checkInTime'] != null
+          ? DateTime.parse(json['checkInTime'])
+          : DateTime.now(), // The check-in time from the JSON map.
       checkInLocationLongitude: json[
           'checkInLocationLongitude'], // The check-in longitude from the JSON map.
       checkInLocationLatitude: json[
           'checkInLocationLatitude'], // The check-in latitude from the JSON map.
-      checkOutTime: DateTime.parse(
-          json['checkOutTime']), // The check-out time from the JSON map.
+      checkOutTime: json['checkOutTime'] != null
+          ? DateTime.parse(json['checkOutTime'])
+          : DateTime.now(), // The check-out time from the JSON map.
       checkOutLocationLongitude: json[
           'checkOutLocationLongitude'], // The check-out longitude from the JSON map.
       checkOutLocationLatitude: json[

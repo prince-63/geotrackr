@@ -88,18 +88,6 @@ class GeoTrackrDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: Text(
-              'Settings',
-              style: TextStyle(
-                color: textColor,
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.help),
             title: Text(
               'Help & Support',

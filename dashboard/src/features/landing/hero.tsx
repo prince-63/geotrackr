@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { hero_content as content } from '../../lib/data';
 import Button from '../../components/general/button';
 import Typography from '../../components/general/typography';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,7 +56,10 @@ const Hero = () => {
           {content[currentSlide].description}
         </Typography>
         <div>
-          <Button className="bg-black text-gray-100 font-semibold py-3 px-4 mt-4 rounded-lg shadow-lg hover:bg-gray-900 transition-colors duration-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+          <Button
+            onClick={() => navigate('/login')}
+            className="bg-black text-gray-100 font-semibold py-3 px-4 mt-4 rounded-lg shadow-lg hover:bg-gray-900 transition-colors duration-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+          >
             Get Started
           </Button>
         </div>

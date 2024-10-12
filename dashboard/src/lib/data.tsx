@@ -35,6 +35,24 @@ export const dashboard_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
   },
 ];
 
+export const master_admin_sidebar_link: DASHBOARD_SIDEBAR_LINKS_TYPE = [
+  {
+    title: 'Dashboard',
+    icon: BarChart,
+    link: '/master-admin/dashboard',
+  },
+  {
+    title: 'Office',
+    icon: User,
+    link: '/master-admin/offices',
+  },
+  {
+    title: 'Logout',
+    icon: LogOut,
+    link: '/master-admin/logout',
+  }
+];
+
 export const NAV_LINKS = [
   {
     label: 'Home',

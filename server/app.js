@@ -10,6 +10,7 @@ import officeRoutes from './routes/office-routes.js';
 import authRoutes from './routes/auth-routes.js';
 import employeeRoutes from './routes/employee-routes.js';
 import attendanceRoutes from './routes/attendance-routes.js';
+import contactRoutes from './routes/contact-routes.js';
 
 EventEmitter.defaultMaxListeners = 20;
 
@@ -45,6 +46,7 @@ app.use(`/api/${version}/office`, authRoutes);
 app.use(`/api/${version}/office`, officeRoutes);
 app.use(`/api/${version}/office`, employeeRoutes);
 app.use(`/api/${version}/office/employee`, attendanceRoutes);
+app.use(`/api/${version}/contact`, contactRoutes);
 app.use(globalErrorHandler);
 
 // testing

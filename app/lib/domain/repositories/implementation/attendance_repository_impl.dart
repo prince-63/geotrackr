@@ -60,8 +60,8 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
           'Authorization': 'Bearer $token',
         },
         body: jsonEncode({
-          'checkInLocationLongitude': longitude,
-          'checkInLocationLatitude': latitude,
+          'checkOutLocationLongitude': longitude,
+          'checkOutLocationLatitude': latitude,
         }),
       );
 
@@ -98,13 +98,39 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
         final List<dynamic> data = responseBody['data']['attendances'];
         List<Attendance> attendances =
             data.map((e) => Attendance.fromJson(e)).toList();
-        print("Attendances: $attendances");
         return attendances;
       } else {
         throw Exception('Failed to load attendances');
       }
     } catch (e) {
       throw Exception('Failed to load attendances');
+    }
+  }
+
+  @override
+  Future<Attendance> loadTodayAttendance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    try {
+      final response = await http.get(
+        Uri.parse(ApiConfig.getTodayAttendance),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        final attendanceData = responseBody['data']['attendances'];
+
+        return Attendance.fromJson(attendanceData);
+      } else {
+        throw Exception('No attendance record found for today');
+      }
+    } catch (e) {
+      throw Exception('Failed to load today\'s attendance: $e');
     }
   }
 }

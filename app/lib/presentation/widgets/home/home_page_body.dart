@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geotrackr/presentation/blocs/attendance/load_today_attendance_bloc.dart';
 import 'package:geotrackr/presentation/blocs/attendance/office_check_in_bloc.dart';
 import 'package:geotrackr/presentation/blocs/attendance/office_check_out_bloc.dart';
 import 'package:geotrackr/presentation/blocs/attendance/remote_check_in_bloc.dart';
@@ -28,6 +29,19 @@ class _HomePageBodyState extends State<HomePageBody> {
 
     final officeCheckInBloc = context.read<OfficeCheckInBloc?>();
     final remoteCheckInBloc = context.read<RemoteCheckInBloc?>();
+    final loadTodayAttendanceBloc = context.read<LoadTodayAttendanceBloc?>();
+
+    loadTodayAttendanceBloc?.stream.listen((state) {
+      if (state is LoadTodayAttendanceLoaded) {
+        setState(() {
+          isCheckedIn = state.attendance.status == 'CHECKED_IN' ||
+              state.attendance.status == 'CHECKED_OUT';
+          isCheckedOut = state.attendance.status == 'CHECKED_OUT';
+        });
+      }
+    });
+
+    loadTodayAttendanceBloc?.load();
 
     if (officeCheckInBloc != null) {
       officeCheckInBloc.stream.listen((state) {

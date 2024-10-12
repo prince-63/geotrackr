@@ -4,7 +4,6 @@ import SignupPage from './features/auth/signup/signup-page';
 import ProfilePage from './features/profile/profile-page';
 import HelpPage from './features/help/help-page';
 import DashboardPage from './features/dashboard/dashboard-page';
-import WorkPage from './features/work/work-page';
 import EmployeesPage from './features/employees/employees-page';
 import SettingsPage from './features/settings/settings-page';
 import ProtectedRoute from './protected-route';
@@ -18,6 +17,10 @@ import Careers from './features/careers/careers';
 import Notices from './features/notices/notices';
 import Support from './features/support/support';
 import ContactUs from './features/contact_us/contact_us';
+import MasterAdminSideBarLayout from './features/master_admin/sidebar-layout';
+import OfficesPage from './features/master_admin/offices';
+import MasterAdminDashboardPage from './features/master_admin/dashboard-page';
+import LogoutPage from './features/master_admin/logout-page';
 
 function App() {
   return (
@@ -50,18 +53,17 @@ function App() {
             path="employees"
             element={<ProtectedRoute element={<EmployeesPage />} />}
           />
-          {/* <Route
-            path="employee-profile"
-            element={<EmployeeProfile employeeId={'t4785353'} />}
-          /> */}
-          <Route
-            path="work"
-            element={<ProtectedRoute element={<WorkPage />} />}
-          />
           <Route
             path="settings"
             element={<ProtectedRoute element={<SettingsPage />} />}
           />
+        </Route>
+
+        <Route path="master-admin" element={<MasterAdminSideBarLayout />}>
+          <Route path="dashboard" element={<MasterAdminDashboardPage />} />
+
+          <Route path="offices" element={<OfficesPage />} />
+          <Route path="logout" element={<LogoutPage />} />
         </Route>
       </Routes>
     </Router>

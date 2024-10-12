@@ -26,7 +26,6 @@ class AuthRepositoryImpl implements AuthRepository {
       prefs.setString('token', token);
       return Employee.fromJson(responseData['data']['employee']);
     } else {
-      print(jsonDecode(response.body));
       throw Exception('Failed to login');
     }
   }

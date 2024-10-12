@@ -34,15 +34,13 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   }, [token]);
 
   const login = async (officeEmail: string, officePassword: string) => {
-    try {
-      const token = await officeLogin({ officeEmail, officePassword });
-      setToken(token);
-      setUserStatus('online');
-    } catch (error) {
-      console.error('Login failed', error);
-      setToken(null);
-      setUserStatus('offline');
+    const response = await officeLogin({ officeEmail, officePassword });
+    if (response.error) {
+      return response;
     }
+    setToken(response.token);
+    setUserStatus('online');
+    return response;
   };
 
   const signup = async (
@@ -50,19 +48,20 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     officeEmail: string,
     officePassword: string
   ) => {
-    try {
-      const token = await officeSignup({
-        officeName,
-        officeEmail,
-        officePassword,
-      });
-      setToken(token);
-      setUserStatus('online');
-    } catch (error) {
-      console.error('Signup failed', error);
-      setToken(null);
-      setUserStatus('offline');
+    const response = await officeSignup({
+      officeName,
+      officeEmail,
+      officePassword,
+    });
+
+    if (response.error) {
+      return { error: response.error };
     }
+
+    setToken(response.token);
+    setUserStatus('online');
+
+    return { message: response.message };
   };
 
   const logout = async () => {

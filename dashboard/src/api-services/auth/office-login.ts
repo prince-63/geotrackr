@@ -18,11 +18,15 @@ const officeLogin = async ({
   console.log(response);
 
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    const errorBody = await response.json();
+    return { error: errorBody.message };
   }
 
   const responseBody = await response.json();
-  return responseBody.data.token;
+  return {
+    token: responseBody['data']['token'],
+    message: responseBody.message,
+  };
 };
 
 export default officeLogin;
