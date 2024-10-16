@@ -20,21 +20,39 @@
 - **Geolocation API:** Google Maps API
 
 <!-- display image docs/image/name.png here -->
-<div style="display: flex; flex-wrap: wrap; justify-content: center;"> 
-   <img src="/docs/images/Screenshot_20240918_080747 1.png" style="max-width: 100%; height: auto; margin: 5px;">
-   <img src="/docs/images/Screenshot_20240918_080756 1.png" style="max-width: 100%; height: auto; margin: 5px;">
-   <img src="/docs/images/Screenshot_20240918_080803 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-items: center;"> 
+   <div>
+      <img src="/docs/images/Screenshot_20240918_080747 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
+   <div>
+      <img src="/docs/images/Screenshot_20240918_080756 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
+   <div>
+      <img src="/docs/images/Screenshot_20240918_080803 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center;"> 
-   <img src="/docs/images/Screenshot_20240918_080806 1.png" style="max-width: 100%; height: auto; margin: 5px;">
-   <img src="/docs/images/Screenshot_20240918_080817 1.png" style="max-width: 100%; height: auto; margin: 5px;">
-   <img src="/docs/images/Screenshot_20240918_081028 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-items: center;"> 
+   <div>
+      <img src="/docs/images/Screenshot_20240918_080806 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
+   <div>
+      <img src="/docs/images/Screenshot_20240918_080817 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
+   <div>
+      <img src="/docs/images/Screenshot_20240918_081028 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center;"> 
-   <img src="/docs/images/Screenshot_20240918_081040 1.png" style="max-width: 100%; height: auto; margin: 5px;">
-   <img src="/docs/images/Screenshot_20240918_081048 1.png" style="max-width: 100%; height: auto; margin: 5px;">
-   <img src="/docs/images/Screenshot_20240918_081621 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-items: center;"> 
+   <div>
+      <img src="/docs/images/Screenshot_20240918_081040 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
+   <div>
+      <img src="/docs/images/Screenshot_20240918_081048 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
+   <div>
+      <img src="/docs/images/Screenshot_20240918_081621 1.png" style="max-width: 100%; height: auto; margin: 5px;">
+   </div>
 </div>
 
