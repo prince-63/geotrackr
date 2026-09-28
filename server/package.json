@@ -15,7 +15,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^7.10.0",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.5.1",
     "cors": "^2.8.5",
