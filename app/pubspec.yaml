@@ -33,7 +33,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   http: ^1.2.2
   another_flushbar: ^1.10.28
-  path_provider: ^2.1.5
+  path_provider: ^2.1.6
   geolocator: ^14.0.2
   shared_preferences: ^2.4.0
   local_auth: ^2.3.0
