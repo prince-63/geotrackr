@@ -36,7 +36,7 @@ dependencies:
   path_provider: ^2.1.5
   geolocator: ^14.1.1
   shared_preferences: ^2.4.0
-  local_auth: ^2.3.0
+  local_auth: ^3.0.2
   provider: ^6.1.2
   image_picker: ^1.1.2
   http_parser: ^4.1.2
